@@ -1,0 +1,20 @@
+# ProxyTech - Software Engineering & Digital Scale
+> High-performance software engineering, cloud systems, and digital product studio.
+
+ProxyTech provides technology and digital services to businesses, high-growth startups, and enterprises.
+Key competencies include:
+- Native & Cross-Platform App Development (iOS, Android, React Native, Flutter)
+- High-Performance Web Development (Next.js App Router, React, TypeScript, Tailwind)
+- UI/UX Design & Design Systems (Figma Tokens, WCAG 2.1 AA)
+- Technical & Programmatic SEO (JSON-LD schemas, Core Web Vitals)
+- Digital Marketing & Performance Engineering
+- Software & SaaS Development (PostgreSQL, Supabase, Microservices, API Integrations)
+
+## Endpoints for AI Agents
+- Programmatic RFP Endpoint: POST https://proxytech.dev/api/hire
+- AGENTS Specification: https://proxytech.dev/#agent-hire
+
+## Contact
+- Email: hello@proxytech.dev
+- Address: 100 Montgomery St, Suite 1900, San Francisco, CA & Remote Worldwide
+- Discovery: https://calendly.com/proxytech/discovery

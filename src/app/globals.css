@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-page: #040705;
+    --bg-card: #080d09;
+    --bg-card-hover: #0d150e;
+    --border-color: #13261a;
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --accent-mint: #22c55e;
+    --accent-mint-bright: #22c55e;
+    --accent-glow: rgba(34, 197, 94, 0.22);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* Custom interactive dark green tech styling */
+.tech-card {
+  background: linear-gradient(145deg, rgba(12, 22, 15, 0.75) 0%, rgba(6, 11, 8, 0.9) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  box-shadow: 
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.18),
+    inset 0 0 20px 0 rgba(34, 197, 94, 0.04),
+    0 12px 36px -8px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tech-card:hover {
+  border-color: rgba(74, 222, 128, 0.6);
+  box-shadow: 
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.35),
+    0 0 35px rgba(34, 197, 94, 0.28),
+    0 18px 45px -10px rgba(0, 0, 0, 0.7);
+}
+
+/* Crystalline Luxury Glass & Specular Shine System */
+.crystal-card {
+  background: linear-gradient(135deg, rgba(13, 24, 16, 0.75) 0%, rgba(5, 10, 7, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(34, 197, 94, 0.22);
+  box-shadow: 
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.22),
+    inset 0 0 24px 0 rgba(34, 197, 94, 0.05),
+    0 16px 40px -10px rgba(0, 0, 0, 0.65);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.crystal-card:hover {
+  border-color: rgba(74, 222, 128, 0.6);
+  box-shadow: 
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.45),
+    0 0 40px rgba(34, 197, 94, 0.3),
+    0 22px 55px -10px rgba(0, 0, 0, 0.75);
+}
+
+/* Light sweep reflection across crystalline surfaces */
+.crystal-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.crystal-sheen::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.05) 45%,
+    rgba(74, 222, 128, 0.2) 50%,
+    rgba(255, 255, 255, 0.05) 55%,
+    transparent 60%
+  );
+  transform: rotate(25deg) translateY(-130%);
+  pointer-events: none;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s;
+  opacity: 0;
+}
+
+.crystal-sheen:hover::after {
+  transform: rotate(25deg) translateY(130%);
+  opacity: 1;
+}
+
+/* Crystalline button styles with vitreous specular bevels */
+.crystal-btn-primary {
+  position: relative;
+  background: linear-gradient(180deg, #4ade80 0%, #22c55e 50%, #15803d 100%);
+  color: #030704 !important;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  box-shadow: 
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -2px 3px 0 rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(34, 197, 94, 0.45),
+    0 6px 18px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.crystal-btn-primary:hover {
+  background: linear-gradient(180deg, #86efac 0%, #34d399 50%, #16a34a 100%);
+  box-shadow: 
+    inset 0 1px 2px 0 #ffffff,
+    inset 0 -2px 3px 0 rgba(0, 0, 0, 0.4),
+    0 0 45px rgba(34, 197, 94, 0.7),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.crystal-btn-secondary {
+  position: relative;
+  background: linear-gradient(180deg, rgba(16, 28, 19, 0.85) 0%, rgba(7, 13, 9, 0.95) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(167, 243, 208, 0.35),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.crystal-btn-secondary:hover {
+  border-color: rgba(74, 222, 128, 0.7);
+  color: #ffffff;
+  box-shadow: 
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.55),
+    0 0 25px rgba(34, 197, 94, 0.35),
+    0 6px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.crystal-badge {
+  background: linear-gradient(180deg, rgba(14, 28, 18, 0.85) 0%, rgba(7, 14, 9, 0.92) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  box-shadow: 
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.28),
+    0 0 16px rgba(34, 197, 94, 0.14);
+}
+
+.mint-glow-box {
+  box-shadow: 0 0 40px var(--accent-glow);
+}
+
+.glow-text-mint {
+  color: #22c55e;
+  text-shadow: 0 0 20px rgba(34, 197, 94, 0.55);
+}
+
+/* Continuous crystal ambient glint animation */
+@keyframes crystal-glint {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.85) rotate(0deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2) rotate(90deg);
+    filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.9));
+  }
+}
+
+.animate-crystal-glint {
+  animation: crystal-glint 4s ease-in-out infinite;
+}
+
+/* Ticker continuous marquee animation */
+@keyframes ticker {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker 28s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Subtle dark green matrix grid background with crystal caustics */
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(34, 197, 94, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 197, 94, 0.05) 1px, transparent 1px);
+}
+
+/* Code block highlight */
+pre {
+  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Custom scrollbar with crystal green track */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #040705;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #13261a;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
