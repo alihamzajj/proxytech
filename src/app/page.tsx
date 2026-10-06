@@ -13,6 +13,7 @@ import FAQSection from '@/components/FAQSection';
 import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
 import { Shield, Cpu, Lock, Zap } from 'lucide-react';
+import { ScrollSection, ScrollWatermark, ScrollCard } from '@/components/ScrollAnimations';
 
 export default function HomePage() {
   const whyChooseUs = [
@@ -49,8 +50,10 @@ export default function HomePage() {
       {/* 3. Services Overview */}
       <ServicesSection />
 
-      {/* 4. Why Choose ProxyTech */}
-      <section id="about" className="py-24 bg-[#060907] border-t border-[#13261a] relative overflow-hidden">
+      {/* 4. Why Choose ProxyTech with Scroll Progress & Watermark */}
+      <ScrollSection id="about" className="py-24 bg-[#060907] border-t border-[#13261a] relative overflow-hidden">
+        <ScrollWatermark text="DISCIPLINE" direction="left" speed={95} className="top-12 opacity-25" />
+
         {/* Subtle radial ambient glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#22c55e]/5 rounded-full blur-[140px] pointer-events-none" />
 
@@ -77,40 +80,43 @@ export default function HomePage() {
                 "OWASP_&_RLS_COMPLIANT",
               ];
               return (
-                <div
+                <ScrollCard
                   key={idx}
-                  className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group"
+                  delay={idx * 0.06}
+                  className="h-full"
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)] group-hover:scale-110 transition-transform">
-                        <Icon className="w-5 h-5" />
+                  <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-10 h-10 rounded-lg bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)] group-hover:scale-110 transition-transform">
+                          <Icon className="w-5 h-5" />
+                        </div>
+                        <span className="text-[10px] font-mono crystal-badge px-2.5 py-0.5 rounded-full text-[#4ade80] font-semibold">
+                          {tags[idx]}
+                        </span>
                       </div>
-                      <span className="text-[10px] font-mono crystal-badge px-2.5 py-0.5 rounded-full text-[#4ade80] font-semibold">
-                        {tags[idx]}
+
+                      <h3 className="text-base font-bold text-white group-hover:text-[#4ade80] transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2.5 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
+                        {item.description}
+                      </p>
+                    </div>
+                    <div className="mt-6 pt-3 border-t border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-300 font-medium">
+                      <span>STANDARD // 0{idx + 1}</span>
+                      <span className="text-[#4ade80] flex items-center gap-1 font-bold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
+                        VERIFIED
                       </span>
                     </div>
-
-                    <h3 className="text-base font-bold text-white group-hover:text-[#4ade80] transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2.5 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
-                      {item.description}
-                    </p>
                   </div>
-                  <div className="mt-6 pt-3 border-t border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-300 font-medium">
-                    <span>STANDARD // 0{idx + 1}</span>
-                    <span className="text-[#4ade80] flex items-center gap-1 font-bold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
-                      VERIFIED
-                    </span>
-                  </div>
-                </div>
+                </ScrollCard>
               );
             })}
           </div>
         </div>
-      </section>
+      </ScrollSection>
 
       {/* 5. Featured Case Studies */}
       <CaseStudiesSection />
@@ -139,8 +145,10 @@ export default function HomePage() {
       {/* 13. High-Converting Call to Action Banner */}
       <CTASection />
 
-      {/* 14. Integrated Contact Form Section */}
-      <section id="contact" className="py-20 bg-[#040705] border-t border-[#13261a] relative overflow-hidden">
+      {/* 14. Integrated Contact Form Section with ScrollSection & Watermark */}
+      <ScrollSection id="contact" className="py-20 bg-[#040705] border-t border-[#13261a] relative overflow-hidden">
+        <ScrollWatermark text="COMMISSION" direction="right" speed={80} className="top-8 opacity-25" />
+
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
           <div className="text-center space-y-3">
             <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
@@ -149,18 +157,18 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
               Let&apos;s Build Something Extraordinary
             </h2>
-            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+            <p className="text-slate-100 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
               Fill in your architectural requirements and timeline. Senior engineers review every submission within 24 hours.
             </p>
           </div>
 
           <div className="rounded-3xl crystal-card crystal-sheen p-6 sm:p-10">
-            <Suspense fallback={<div className="p-12 text-center text-neutral-400 font-mono text-xs">Loading inquiry form...</div>}>
+            <Suspense fallback={<div className="p-12 text-center text-slate-200 font-mono text-xs">Loading inquiry form...</div>}>
               <ContactForm />
             </Suspense>
           </div>
         </div>
-      </section>
+      </ScrollSection>
     </div>
   );
 }

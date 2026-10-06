@@ -1,8 +1,11 @@
 'use client';
 
+import { useRef } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, Calendar, Sparkles, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, Calendar, ShieldCheck } from 'lucide-react';
+import { motion, useScroll, useSpring, useTransform, useReducedMotion } from 'framer-motion';
 import { COMPANY_INFO } from '@/lib/data';
+import { ScrollWatermark, ScrollSection } from './ScrollAnimations';
 
 interface CTASectionProps {
   headline?: string;
@@ -13,14 +16,36 @@ export default function CTASection({
   headline = "Ready to ship production software without compromise?",
   subheadline = "Skip bloated agency meetings, junior handoffs, and architectural shortcuts. Partner directly with senior staff engineers and ship your next deployment with institutional rigor.",
 }: CTASectionProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start 90%', 'center center'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 26,
+    restDelta: 0.001,
+  });
+
+  const scale = useTransform(smoothProgress, [0, 1], [0.93, 1]);
+  const y = useTransform(smoothProgress, [0, 1], [40, 0]);
+  const opacity = useTransform(smoothProgress, [0, 0.8], [0.5, 1]);
+
   return (
-    <section className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden">
+    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden">
+      <ScrollWatermark text="DEPLOYMENT" direction="left" speed={90} className="top-8 opacity-25" />
+
       {/* Background radial phosphor glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#22c55e]/10 via-transparent to-transparent pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="rounded-3xl crystal-card crystal-sheen p-8 sm:p-14 text-center space-y-6 relative overflow-hidden border border-[#13261a]">
-          
+      <div ref={containerRef} className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
+          style={shouldReduceMotion ? undefined : { scale, y, opacity }}
+          className="rounded-3xl crystal-card crystal-sheen p-8 sm:p-14 text-center space-y-6 relative overflow-hidden border border-[#13261a] transform-gpu"
+        >
           {/* Top capacity indicator */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full crystal-badge text-xs font-mono text-[#22c55e]">
             <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-ping" />
@@ -66,9 +91,8 @@ export default function CTASection({
             <span>•</span>
             <span>100% Intellectual Property Ownership</span>
           </div>
-
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </ScrollSection>
   );
 }

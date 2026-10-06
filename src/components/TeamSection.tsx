@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Mail, ArrowUpRight, ShieldCheck, UserCheck } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 import { TEAM_MEMBERS } from '@/lib/data';
+import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 
 interface TeamSectionProps {
   limit?: number;
@@ -15,8 +16,10 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
   const members = limit ? TEAM_MEMBERS.slice(0, limit) : TEAM_MEMBERS;
 
   return (
-    <section className="py-24 bg-[#040705] border-t border-[#13261a] relative" id="team">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="team">
+      <ScrollWatermark text="ARCHITECTS" direction="right" speed={85} className="top-12 opacity-25" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#13261a]">
@@ -44,105 +47,107 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
           )}
         </div>
 
-        {/* Team Members Grid */}
+        {/* Team Members Grid with Scroll-Driven Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {members.map((member) => (
-            <div
+          {members.map((member, idx) => (
+            <ScrollCard
               key={member.id}
-              className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 hover:border-[#22c55e]/60"
+              delay={idx * 0.08}
+              className="h-full"
             >
-              <div>
-                {/* Avatar and Experience Badge */}
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-[#13261a] group-hover:border-[#22c55e]/70 shadow-[0_0_20px_rgba(34,197,94,0.18)] transition-all shrink-0">
-                    <Image
-                      src={member.avatar}
-                      alt={member.name}
-                      fill
-                      sizes="64px"
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-bold text-white group-hover:text-[#4ade80] transition-colors">
-                      <Link href={`/team/${member.slug}`}>
-                        {member.name}
-                      </Link>
-                    </h3>
-                    <p className="text-xs text-[#4ade80] font-mono mt-0.5 font-bold">{member.role}</p>
-                    <div className="flex items-center gap-1.5 mt-1 text-xs font-mono text-slate-200 font-medium">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#22c55e]" />
-                      <span>{member.experienceYears} Years Exp • {member.projectsCount} Shipped</span>
+              <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 hover:border-[#22c55e]/60">
+                <div>
+                  {/* Avatar and Experience Badge */}
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-[#13261a] group-hover:border-[#22c55e]/70 shadow-[0_0_20px_rgba(34,197,94,0.18)] transition-all shrink-0">
+                      <Image
+                        src={member.avatar}
+                        alt={member.name}
+                        fill
+                        sizes="64px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold text-white group-hover:text-[#4ade80] transition-colors">
+                        <Link href={`/team/${member.slug}`}>
+                          {member.name}
+                        </Link>
+                      </h3>
+                      <p className="text-xs text-[#4ade80] font-mono mt-0.5 font-bold">{member.role}</p>
+                      <div className="flex items-center gap-1.5 mt-1 text-xs font-mono text-slate-200 font-medium">
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#22c55e]" />
+                        <span>{member.experienceYears} Years Exp • {member.projectsCount} Shipped</span>
+                      </div>
                     </div>
                   </div>
+
+                  {/* Short Bio */}
+                  <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-sans line-clamp-3 font-normal">
+                    {member.bio}
+                  </p>
+
+                  {/* Skills tags */}
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {member.skills.slice(0, 4).map((skill, sIdx) => (
+                      <span
+                        key={sIdx}
+                        className="text-xs font-mono px-2.5 py-1 rounded crystal-badge text-slate-100 font-medium"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Short Bio */}
-                <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-sans line-clamp-3 font-normal">
-                  {member.bio}
-                </p>
-
-                {/* Skills tags */}
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {member.skills.slice(0, 4).map((skill, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className="text-xs font-mono px-2.5 py-1 rounded crystal-badge text-slate-100 font-medium"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Socials & Profile Link */}
-              <div className="mt-6 pt-4 border-t border-[#13261a] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  {member.socials.github && (
+                {/* Socials & Profile Link */}
+                <div className="mt-6 pt-4 border-t border-[#13261a] flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    {member.socials.github && (
+                      <a
+                        href={member.socials.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
+                        aria-label={`${member.name} GitHub`}
+                      >
+                        <GithubIcon className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    {member.socials.linkedin && (
+                      <a
+                        href={member.socials.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
+                        aria-label={`${member.name} LinkedIn`}
+                      >
+                        <LinkedinIcon className="w-3.5 h-3.5" />
+                      </a>
+                    )}
                     <a
-                      href={member.socials.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={`mailto:${member.socials.email}`}
                       className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
-                      aria-label={`${member.name} GitHub`}
+                      aria-label={`Email ${member.name}`}
                     >
-                      <GithubIcon className="w-3.5 h-3.5" />
+                      <Mail className="w-3.5 h-3.5" />
                     </a>
-                  )}
-                  {member.socials.linkedin && (
-                    <a
-                      href={member.socials.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
-                      aria-label={`${member.name} LinkedIn`}
-                    >
-                      <LinkedinIcon className="w-3.5 h-3.5" />
-                    </a>
-                  )}
-                  <a
-                    href={`mailto:${member.socials.email}`}
-                    className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
-                    aria-label={`Email ${member.name}`}
+                  </div>
+
+                  <Link
+                    href={`/team/${member.slug}`}
+                    className="text-xs font-mono font-bold text-[#4ade80] hover:text-white flex items-center gap-1 transition-colors"
                   >
-                    <Mail className="w-3.5 h-3.5" />
-                  </a>
+                    <span>Dossier</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
-
-                <Link
-                  href={`/team/${member.slug}`}
-                  className="text-xs font-mono font-bold text-[#4ade80] hover:text-white flex items-center gap-1 transition-colors"
-                >
-                  <span>Dossier</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </Link>
               </div>
-
-            </div>
+            </ScrollCard>
           ))}
         </div>
 
       </div>
-    </section>
+    </ScrollSection>
   );
 }

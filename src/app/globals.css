@@ -245,3 +245,31 @@ pre {
   box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
 }
 
+/* Lenis smooth scrolling rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* 3D perspective context for scroll-driven tilts */
+.perspective-container {
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+

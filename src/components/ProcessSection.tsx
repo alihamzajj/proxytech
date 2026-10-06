@@ -1,7 +1,10 @@
 'use client';
 
+import { useRef } from 'react';
 import { GitBranch, Terminal, ShieldAlert, Rocket, ArrowRight, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
+import { motion, useScroll, useSpring, useTransform, useReducedMotion } from 'framer-motion';
+import { ScrollSection, ScrollWatermark } from './ScrollAnimations';
 
 const steps = [
   {
@@ -43,12 +46,28 @@ const steps = [
 ];
 
 export default function ProcessSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start 85%', 'end 50%'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 25,
+    restDelta: 0.001,
+  });
+
   return (
-    <section className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="process">
+    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="process">
+      <ScrollWatermark text="EXECUTION" direction="right" speed={100} className="top-12 opacity-25" />
+
       {/* Background radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#22c55e]/5 blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative">
+      <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
@@ -64,66 +83,29 @@ export default function ProcessSection() {
           </p>
         </div>
 
-        {/* 4 Process Steps Grid */}
+        {/* Scroll Progress Connecting Beam (Desktop) */}
+        {!shouldReduceMotion && (
+          <div className="hidden lg:block relative h-1 bg-[#13261a] rounded-full mx-6 -mb-10 overflow-hidden">
+            <motion.div
+              style={{ scaleX: smoothProgress }}
+              className="h-full bg-gradient-to-r from-[#22c55e] via-[#4ade80] to-[#22c55e] origin-left shadow-[0_0_12px_rgba(34,197,94,0.8)]"
+            />
+          </div>
+        )}
+
+        {/* 4 Process Steps Grid with Scroll-Driven Elevation */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
           {steps.map((step, idx) => {
             const Icon = step.icon;
             return (
-              <div
+              <ProcessStepCard
                 key={step.step}
-                className="relative rounded-2xl crystal-card crystal-sheen p-6 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1"
-              >
-                <div>
-                  {/* Step Code & Step Number */}
-                  <div className="flex items-center justify-between mb-5">
-                    <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2.5 py-1 rounded-md">
-                      {step.code}
-                    </span>
-                    <div className="w-10 h-10 rounded-xl bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/60 flex items-center justify-center text-neutral-300 group-hover:text-[#4ade80] shadow-[0_0_15px_rgba(34,197,94,0.12)] transition-colors">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  {/* Step Index Watermark */}
-                  <div className="font-mono text-3xl font-extrabold text-neutral-600/80 group-hover:text-[#22c55e]/60 transition-colors">
-                    {step.step}
-                  </div>
-
-                  <h3 className="text-lg font-bold text-white mt-1 group-hover:text-[#4ade80] transition-colors">
-                    {step.title}
-                  </h3>
-
-                  <p className="mt-1 text-xs font-mono text-[#4ade80] font-semibold">
-                    {step.tagline}
-                  </p>
-
-                  <p className="mt-3 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
-                    {step.description}
-                  </p>
-
-                  {/* Key Deliverables */}
-                  <div className="mt-5 pt-4 border-t border-[#13261a] space-y-2">
-                    <div className="text-xs font-mono uppercase tracking-wider text-white font-bold">
-                      Phase Gate Deliverables:
-                    </div>
-                    {step.deliverables.map((d, dIdx) => (
-                      <div key={dIdx} className="flex items-center gap-2 text-xs text-slate-100">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0" />
-                        <span>{d}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Bottom Milestone Status */}
-                <div className="mt-6 pt-4 border-t border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-300">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
-                    <span className="text-white font-semibold">Milestone {step.step}</span>
-                  </div>
-                  <span className="text-[#4ade80] font-bold">100% Deterministic</span>
-                </div>
-              </div>
+                step={step}
+                idx={idx}
+                Icon={Icon}
+                progress={smoothProgress}
+                shouldReduceMotion={shouldReduceMotion}
+              />
             );
           })}
         </div>
@@ -147,6 +129,86 @@ export default function ProcessSection() {
         </div>
 
       </div>
-    </section>
+    </ScrollSection>
+  );
+}
+
+function ProcessStepCard({
+  step,
+  idx,
+  Icon,
+  progress,
+  shouldReduceMotion,
+}: {
+  step: (typeof steps)[0];
+  idx: number;
+  Icon: React.ElementType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  progress: any;
+  shouldReduceMotion: boolean | null;
+}) {
+  const startThreshold = idx * 0.18;
+  const endThreshold = Math.min(1, startThreshold + 0.35);
+
+  const y = useTransform(progress, [startThreshold, endThreshold], [40, 0]);
+  const scale = useTransform(progress, [startThreshold, endThreshold], [0.95, 1]);
+  const opacity = useTransform(progress, [startThreshold, endThreshold], [0.35, 1]);
+
+  return (
+    <motion.div
+      style={shouldReduceMotion ? undefined : { y, scale, opacity }}
+      className="relative rounded-2xl crystal-card crystal-sheen p-6 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 transform-gpu"
+    >
+      <div>
+        {/* Step Code & Step Number */}
+        <div className="flex items-center justify-between mb-5">
+          <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2.5 py-1 rounded-md">
+            {step.code}
+          </span>
+          <div className="w-10 h-10 rounded-xl bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/60 flex items-center justify-center text-neutral-300 group-hover:text-[#4ade80] shadow-[0_0_15px_rgba(34,197,94,0.12)] transition-colors">
+            <Icon className="w-5 h-5" />
+          </div>
+        </div>
+
+        {/* Step Index Watermark */}
+        <div className="font-mono text-3xl font-extrabold text-neutral-600/80 group-hover:text-[#22c55e]/60 transition-colors">
+          {step.step}
+        </div>
+
+        <h3 className="text-lg font-bold text-white mt-1 group-hover:text-[#4ade80] transition-colors">
+          {step.title}
+        </h3>
+
+        <p className="mt-1 text-xs font-mono text-[#4ade80] font-semibold">
+          {step.tagline}
+        </p>
+
+        <p className="mt-3 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
+          {step.description}
+        </p>
+
+        {/* Key Deliverables */}
+        <div className="mt-5 pt-4 border-t border-[#13261a] space-y-2">
+          <div className="text-xs font-mono uppercase tracking-wider text-white font-bold">
+            Phase Gate Deliverables:
+          </div>
+          {step.deliverables.map((d, dIdx) => (
+            <div key={dIdx} className="flex items-center gap-2 text-xs text-slate-100">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0" />
+              <span>{d}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Milestone Status */}
+      <div className="mt-6 pt-4 border-t border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-300">
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
+          <span className="text-white font-semibold">Milestone {step.step}</span>
+        </div>
+        <span className="text-[#4ade80] font-bold">100% Deterministic</span>
+      </div>
+    </motion.div>
   );
 }

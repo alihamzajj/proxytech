@@ -1,28 +1,71 @@
 'use client';
 
+import { useRef } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 import AsciiSphere from './AsciiSphere';
+import { ScrollWatermark } from './ScrollAnimations';
 
 export default function HeroSection() {
+  const containerRef = useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Scroll tracking from hero start to exit
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  // Scroll-linked transformations (Aspen Search style)
+  const heroCardScale = useTransform(smoothProgress, [0, 1], [1, 0.96]);
+  const heroCardY = useTransform(smoothProgress, [0, 1], [0, -40]);
+  const heroCardOpacity = useTransform(smoothProgress, [0, 0.85, 1], [1, 0.9, 0.65]);
+  const sphereY = useTransform(smoothProgress, [0, 1], [0, 45]);
+  const sphereRotate = useTransform(smoothProgress, [0, 1], [0, 8]);
+  const bgGlowY = useTransform(smoothProgress, [0, 1], [0, 90]);
+
   return (
-    <section id="home" className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden bg-grid-pattern">
-      {/* Background ambient radial glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#22c55e]/5 rounded-full blur-[140px] pointer-events-none -z-10" />
+    <section
+      ref={containerRef}
+      id="home"
+      className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden bg-grid-pattern"
+    >
+      <ScrollWatermark text="ENGINEERING" speed={120} className="top-12 opacity-30" />
+
+      {/* Background ambient radial glow with scroll parallax */}
+      <motion.div
+        style={shouldReduceMotion ? undefined : { y: bgGlowY }}
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#22c55e]/5 rounded-full blur-[140px] pointer-events-none -z-10"
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Unified Hero Container Card with Crystalline Glass & Sheen */}
-        <div className="relative rounded-3xl crystal-card crystal-sheen p-8 sm:p-12 lg:p-16 transition-all duration-300 overflow-hidden">
-          
+        {/* Unified Hero Container Card with Scroll-Driven Scale & Parallax */}
+        <motion.div
+          style={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  scale: heroCardScale,
+                  y: heroCardY,
+                  opacity: heroCardOpacity,
+                }
+          }
+          className="relative rounded-3xl crystal-card crystal-sheen p-8 sm:p-12 lg:p-16 transition-all duration-300 overflow-hidden transform-gpu"
+        >
           {/* Subtle corner phosphor & crystal glow */}
           <div className="absolute -top-24 -right-24 w-80 h-80 bg-[#22c55e]/15 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#22c55e]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
             {/* Left Content Column */}
             <div className="lg:col-span-8 space-y-6 sm:space-y-7">
-              
               {/* Status pill badge with live ping & crystal bevel */}
               <div className="flex flex-wrap items-center gap-3">
                 <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full crystal-badge text-xs font-mono">
@@ -48,7 +91,7 @@ export default function HeroSection() {
                   <br />
                   Built for measurable business impact.
                 </h1>
-                
+
                 {/* Technical terminal tag */}
                 <p className="text-xs sm:text-sm font-mono text-[#4ade80] uppercase tracking-widest flex items-center gap-2 font-semibold">
                   <span className="text-[#22c55e] font-extrabold">&gt;</span>
@@ -106,19 +149,26 @@ export default function HeroSection() {
                   <span>Sub-40ms edge response</span>
                 </div>
               </div>
-
             </div>
 
-            {/* Right Side: ASCII Graphic Visual (Matching Reference Image 1) */}
+            {/* Right Side: ASCII Graphic Visual with Parallax Float */}
             <div className="lg:col-span-4 flex items-center justify-center">
-              <div className="relative group">
+              <motion.div
+                style={
+                  shouldReduceMotion
+                    ? undefined
+                    : {
+                        y: sphereY,
+                        rotate: sphereRotate,
+                      }
+                }
+                className="relative group transform-gpu"
+              >
                 <AsciiSphere className="p-4 sm:p-8" />
-              </div>
+              </motion.div>
             </div>
-
           </div>
-
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ChevronDown, HelpCircle, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 import { FAQS } from '@/lib/data';
+import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 
 interface FAQSectionProps {
   customFaqs?: { question: string; answer: string }[];
@@ -27,8 +28,10 @@ export default function FAQSection({
   };
 
   return (
-    <section className="py-24 bg-[#040705] border-t border-[#13261a] relative" id="faq">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="faq">
+      <ScrollWatermark text="GOVERNANCE" direction="left" speed={80} className="top-12 opacity-25" />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
         
         {/* Header */}
         <div className="text-center space-y-3">
@@ -44,43 +47,42 @@ export default function FAQSection({
           </p>
         </div>
 
-        {/* Accordion List */}
+        {/* Accordion List with ScrollCard Elevations */}
         <div className="space-y-3.5">
           {items.map((item, idx) => {
             const isOpen = openIndex === idx;
 
             return (
-              <div
-                key={item.id}
-                className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] transition-all overflow-hidden"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggle(idx)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 transition-colors cursor-pointer"
-                  aria-expanded={isOpen}
-                >
-                  <span className="text-sm sm:text-base font-semibold text-white flex items-center gap-3">
-                    <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2 py-0.5 rounded">
-                      0{idx + 1}
-                    </span>
-                    <span className="group-hover:text-[#4ade80] transition-colors">{item.question}</span>
-                  </span>
-                  <div
-                    className={`w-8 h-8 rounded-lg bg-[#040705] border border-[#13261a] flex items-center justify-center text-slate-200 shrink-0 transition-all duration-200 ${
-                      isOpen ? 'rotate-180 text-[#4ade80] border-[#22c55e]/60 shadow-[0_0_10px_rgba(34,197,94,0.3)]' : ''
-                    }`}
+              <ScrollCard key={item.id} delay={idx * 0.04}>
+                <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] transition-all overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => toggle(idx)}
+                    className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 transition-colors cursor-pointer group"
+                    aria-expanded={isOpen}
                   >
-                    <ChevronDown className="w-4 h-4" />
-                  </div>
-                </button>
+                    <span className="text-sm sm:text-base font-semibold text-white flex items-center gap-3">
+                      <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2 py-0.5 rounded">
+                        0{idx + 1}
+                      </span>
+                      <span className="group-hover:text-[#4ade80] transition-colors">{item.question}</span>
+                    </span>
+                    <div
+                      className={`w-8 h-8 rounded-lg bg-[#040705] border border-[#13261a] flex items-center justify-center text-slate-200 shrink-0 transition-all duration-200 ${
+                        isOpen ? 'rotate-180 text-[#4ade80] border-[#22c55e]/60 shadow-[0_0_10px_rgba(34,197,94,0.3)]' : ''
+                      }`}
+                    >
+                      <ChevronDown className="w-4 h-4" />
+                    </div>
+                  </button>
 
-                {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 pt-2 text-sm text-slate-100 font-sans leading-relaxed border-t border-[#13261a]">
-                    <p>{item.answer}</p>
-                  </div>
-                )}
-              </div>
+                  {isOpen && (
+                    <div className="px-5 sm:px-6 pb-6 pt-2 text-sm text-slate-100 font-sans leading-relaxed border-t border-[#13261a]">
+                      <p>{item.answer}</p>
+                    </div>
+                  )}
+                </div>
+              </ScrollCard>
             );
           })}
         </div>
@@ -95,6 +97,6 @@ export default function FAQSection({
         </div>
 
       </div>
-    </section>
+    </ScrollSection>
   );
 }

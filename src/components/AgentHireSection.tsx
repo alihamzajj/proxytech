@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Terminal, Copy, Check, Send, Sparkles, ExternalLink, Cpu, Code2 } from 'lucide-react';
+import { Terminal, Copy, Check, Send, Sparkles } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
-import ScrollReveal from './ScrollReveal';
+import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 
 export default function AgentHireSection() {
   const [copied, setCopied] = useState(false);
@@ -60,16 +60,17 @@ Content-Type: application/json
   };
 
   return (
-    <section className="py-20 bg-[#07080a] border-t border-[#1f242f] relative overflow-hidden" id="agent-hire">
+    <ScrollSection className="py-20 bg-[#07080a] border-t border-[#1f242f] relative overflow-hidden" id="agent-hire">
+      <ScrollWatermark text="AUTONOMOUS" direction="right" speed={85} className="top-10 opacity-25" />
+
       {/* Background ambient dark green glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#22c55e]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
         
-        {/* Main Agent Interface Hero Box (Matching the user reference image) */}
+        {/* Main Agent Interface Hero Box */}
         <div className="rounded-3xl crystal-card crystal-sheen p-8 sm:p-12 relative overflow-hidden transition-all duration-300">
-          
-          {/* Faint ASCII corner texture like in reference */}
+          {/* Faint ASCII corner texture */}
           <div className="absolute -top-3 -left-3 font-mono text-[10px] text-[#22c55e]/20 select-none pointer-events-none leading-none tracking-widest hidden md:block">
             {`^..^..##@@\n#*###*@@\n*@***@@\n0000004+\n++++++\nIIIII`}
           </div>
@@ -86,7 +87,7 @@ Content-Type: application/json
               </p>
             </div>
 
-            {/* Right Action Pills (Matching reference buttons) */}
+            {/* Right Action Pills */}
             <div className="flex flex-wrap items-center gap-2.5 shrink-0">
               <span className="crystal-badge px-3.5 py-1.5 rounded-full text-xs font-mono text-white font-semibold">
                 MCP
@@ -109,60 +110,54 @@ Content-Type: application/json
           </div>
         </div>
 
-        {/* 4 Large Dark-Green Stat Cards (Matching the reference grid) */}
+        {/* 4 Large Dark-Green Stat Cards with Scroll-Driven Elevations */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          
-          <ScrollReveal
-            delay={0.05}
-            className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group"
-          >
-            <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
-              <AnimatedCounter value={140} suffix="+" />
+          <ScrollCard delay={0.05} className="h-full">
+            <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
+              <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
+                <AnimatedCounter value={140} suffix="+" />
+              </div>
+              <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
+                production platforms deployed &amp; catalogued
+              </div>
             </div>
-            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
-              production platforms deployed &amp; catalogued
-            </div>
-          </ScrollReveal>
+          </ScrollCard>
 
-          <ScrollReveal
-            delay={0.12}
-            className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group"
-          >
-            <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
-              <AnimatedCounter value={6} />
+          <ScrollCard delay={0.1} className="h-full">
+            <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
+              <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
+                <AnimatedCounter value={6} />
+              </div>
+              <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
+                core engineering modules &amp; agent skills
+              </div>
             </div>
-            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
-              core engineering modules &amp; agent skills
-            </div>
-          </ScrollReveal>
+          </ScrollCard>
 
-          <ScrollReveal
-            delay={0.19}
-            className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group"
-          >
-            <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
-              <AnimatedCounter value={99.98} decimals={2} suffix="%" />
+          <ScrollCard delay={0.15} className="h-full">
+            <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
+              <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
+                <AnimatedCounter value={99.98} decimals={2} suffix="%" />
+              </div>
+              <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
+                /telemetry • verified production uptime SLA
+              </div>
             </div>
-            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
-              /telemetry • verified production uptime SLA
-            </div>
-          </ScrollReveal>
+          </ScrollCard>
 
-          <ScrollReveal
-            delay={0.26}
-            className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group"
-          >
-            <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
-              <AnimatedCounter value={38} suffix="ms" />
+          <ScrollCard delay={0.2} className="h-full">
+            <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
+              <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
+                <AnimatedCounter value={38} suffix="ms" />
+              </div>
+              <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
+                /api/hire • sub-40ms programmatic intake latency
+              </div>
             </div>
-            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
-              /api/hire • sub-40ms programmatic intake latency
-            </div>
-          </ScrollReveal>
-
+          </ScrollCard>
         </div>
 
-        {/* Small subtitle notice matching screenshot */}
+        {/* Small subtitle notice */}
         <div className="text-xs font-mono text-slate-300 px-1 font-medium">
           48 unique capabilities found across all engineering pods. The protocol above highlights programmatic endpoints for autonomous LLMs and CI/CD agents.
         </div>
@@ -216,6 +211,6 @@ Content-Type: application/json
         </div>
 
       </div>
-    </section>
+    </ScrollSection>
   );
 }

@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight, TrendingUp, Cpu, Layers, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight, TrendingUp, Cpu, Layers } from 'lucide-react';
 import { PROJECTS } from '@/lib/data';
+import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 
 export default function CaseStudiesSection() {
   const [activeCategory, setActiveCategory] = useState<string>('All');
@@ -15,8 +16,10 @@ export default function CaseStudiesSection() {
     : PROJECTS.filter((p) => p.category === activeCategory);
 
   return (
-    <section className="py-24 bg-[#040705] border-t border-[#13261a] relative" id="projects">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="projects">
+      <ScrollWatermark text="ARCHITECTURES" direction="left" speed={95} className="top-12 opacity-25" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
         
         {/* Header and Category Pills */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#13261a]">
@@ -52,96 +55,98 @@ export default function CaseStudiesSection() {
           </div>
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid with Scroll-Driven Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {filteredProjects.map((project) => (
-            <div
+          {filteredProjects.map((project, idx) => (
+            <ScrollCard
               key={project.id}
-              className="rounded-2xl crystal-card crystal-sheen overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 hover:border-[#22c55e]/60"
+              delay={idx * 0.08}
+              className="h-full"
             >
-              {/* Image banner with overlay */}
-              <div className="relative h-64 w-full overflow-hidden bg-[#040705] border-b border-[#13261a]">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-[#040705]/50 to-transparent" />
-                
-                {/* Category & Industry Badge */}
-                <div className="absolute top-4 left-4 flex gap-2">
-                  <span className="px-2.5 py-1 rounded-md bg-[#040705]/90 border border-[#13261a] text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
-                    {project.category}
-                  </span>
-                  <span className="px-2.5 py-1 rounded-md bg-[#040705]/90 border border-[#13261a] text-xs font-mono text-slate-200 backdrop-blur-md font-medium">
-                    {project.clientIndustry}
-                  </span>
-                </div>
-
-                {/* Verified Production Pill */}
-                <div className="absolute top-4 right-4">
-                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#040705]/90 border border-[#22c55e]/40 text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
-                    <span>IN PRODUCTION</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card Body */}
-              <div className="p-6 sm:p-7 space-y-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#4ade80] transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="mt-2 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
-                    {project.tagline}
-                  </p>
+              <div className="h-full rounded-2xl crystal-card crystal-sheen overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 hover:border-[#22c55e]/60">
+                {/* Image banner with overlay */}
+                <div className="relative h-64 w-full overflow-hidden bg-[#040705] border-b border-[#13261a]">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-[#040705]/50 to-transparent" />
                   
-                  {/* Performance Metrics Row */}
-                  <div className="mt-5 grid grid-cols-2 gap-2.5">
-                    {project.metrics.slice(0, 2).map((m, mIdx) => (
-                      <div
-                        key={mIdx}
-                        className="p-3 rounded-xl bg-[#040705] border border-[#13261a] flex flex-col justify-center space-y-1 group-hover:border-[#22c55e]/30 transition-colors"
-                      >
-                        <span className="text-xs font-mono text-slate-200 uppercase tracking-wider font-medium">{m.label}</span>
-                        <span className="text-lg font-mono font-extrabold text-[#4ade80]">{m.value}</span>
-                      </div>
-                    ))}
+                  {/* Category & Industry Badge */}
+                  <div className="absolute top-4 left-4 flex gap-2">
+                    <span className="px-2.5 py-1 rounded-md bg-[#040705]/90 border border-[#13261a] text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
+                      {project.category}
+                    </span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#040705]/90 border border-[#13261a] text-xs font-mono text-slate-200 backdrop-blur-md font-medium">
+                      {project.clientIndustry}
+                    </span>
                   </div>
 
-                  {/* Tech stack badges */}
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {project.technologies.slice(0, 5).map((tech, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="text-xs font-mono px-2.5 py-1 rounded crystal-badge text-slate-100 font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                  {/* Verified Production Pill */}
+                  <div className="absolute top-4 right-4">
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#040705]/90 border border-[#22c55e]/40 text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
+                      <span>IN PRODUCTION</span>
+                    </div>
                   </div>
                 </div>
 
-                {/* Footer Action */}
-                <div className="pt-4 border-t border-[#13261a] flex items-center justify-between mt-4">
-                  <span className="text-xs font-mono text-slate-300 flex items-center gap-1.5">
-                    <TrendingUp className="w-3.5 h-3.5 text-[#22c55e]" />
-                    <span>Timeline: <strong className="text-white">{project.timeline}</strong></span>
-                  </span>
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#4ade80] hover:text-white transition-colors"
-                  >
-                    <span>Read Architectural Breakdown</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </Link>
+                {/* Card Body */}
+                <div className="p-6 sm:p-7 space-y-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#4ade80] transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="mt-2 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
+                      {project.tagline}
+                    </p>
+                    
+                    {/* Performance Metrics Row */}
+                    <div className="mt-5 grid grid-cols-2 gap-2.5">
+                      {project.metrics.slice(0, 2).map((m, mIdx) => (
+                        <div
+                          key={mIdx}
+                          className="p-3 rounded-xl bg-[#040705] border border-[#13261a] flex flex-col justify-center space-y-1 group-hover:border-[#22c55e]/30 transition-colors"
+                        >
+                          <span className="text-xs font-mono text-slate-200 uppercase tracking-wider font-medium">{m.label}</span>
+                          <span className="text-lg font-mono font-extrabold text-[#4ade80]">{m.value}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Tech stack badges */}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {project.technologies.slice(0, 5).map((tech, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="text-xs font-mono px-2.5 py-1 rounded crystal-badge text-slate-100 font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Footer Action */}
+                  <div className="pt-4 border-t border-[#13261a] flex items-center justify-between mt-4">
+                    <span className="text-xs font-mono text-slate-300 flex items-center gap-1.5">
+                      <TrendingUp className="w-3.5 h-3.5 text-[#22c55e]" />
+                      <span>Timeline: <strong className="text-white">{project.timeline}</strong></span>
+                    </span>
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#4ade80] hover:text-white transition-colors"
+                    >
+                      <span>Read Architectural Breakdown</span>
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </Link>
+                  </div>
                 </div>
               </div>
-
-            </div>
+            </ScrollCard>
           ))}
         </div>
 
@@ -158,6 +163,6 @@ export default function CaseStudiesSection() {
         </div>
 
       </div>
-    </section>
+    </ScrollSection>
   );
 }

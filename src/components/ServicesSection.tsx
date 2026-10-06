@@ -9,12 +9,12 @@ import {
   BarChart3, 
   Cpu, 
   ArrowRight, 
-  CheckCircle2,
-  ShieldCheck,
-  Zap
+  CheckCircle2, 
+  ShieldCheck, 
+  Zap 
 } from 'lucide-react';
 import { SERVICES } from '@/lib/data';
-import ScrollReveal from './ScrollReveal';
+import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 
 const iconMap: Record<string, React.ElementType> = {
   Smartphone,
@@ -36,8 +36,10 @@ const serviceHighlights: Record<string, { sla: string; guarantee: string }> = {
 
 export default function ServicesSection() {
   return (
-    <section className="py-24 bg-[#040705] border-t border-[#13261a] relative" id="services">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="services">
+      <ScrollWatermark text="CAPABILITIES" direction="left" speed={90} className="top-12 opacity-25" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
         
         {/* Section Heading */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#13261a]">
@@ -63,16 +65,16 @@ export default function ServicesSection() {
           </Link>
         </div>
 
-        {/* 6 Services Grid */}
+        {/* 6 Services Grid with Scroll-Driven Card Physics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {SERVICES.map((service, idx) => {
             const Icon = iconMap[service.iconName] || Globe;
             const highlight = serviceHighlights[service.id] || { sla: 'ENTERPRISE SLA', guarantee: 'PRODUCTION READY' };
 
             return (
-              <ScrollReveal
+              <ScrollCard
                 key={service.id}
-                delay={idx * 0.07}
+                delay={idx * 0.05}
                 className="h-full"
               >
                 <div className="group h-full relative rounded-2xl crystal-card crystal-sheen p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#22c55e]/60">
@@ -149,7 +151,7 @@ export default function ServicesSection() {
                     </Link>
                   </div>
                 </div>
-              </ScrollReveal>
+              </ScrollCard>
             );
           })}
         </div>
@@ -169,6 +171,6 @@ export default function ServicesSection() {
         </div>
 
       </div>
-    </section>
+    </ScrollSection>
   );
 }

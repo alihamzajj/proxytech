@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import AsciiCursorCanvas from '@/components/AsciiCursorCanvas';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
 import CrystalShineOverlay from '@/components/CrystalShineOverlay';
+import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -146,13 +147,15 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#040705] text-[#f3f4f6] selection:bg-[#22c55e] selection:text-[#040705] relative">
-        <CrystalShineOverlay />
-        <ScrollProgressBar />
-        <AsciiCursorCanvas />
-        <AnnouncementTicker />
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SmoothScrollProvider>
+          <CrystalShineOverlay />
+          <ScrollProgressBar />
+          <AsciiCursorCanvas />
+          <AnnouncementTicker />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

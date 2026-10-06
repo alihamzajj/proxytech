@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Layers, Server, Smartphone, Cloud, Cpu, Sparkles } from 'lucide-react';
+import { Layers, Server, Smartphone, Cloud, Sparkles } from 'lucide-react';
+import { ScrollSection, ScrollWatermark } from './ScrollAnimations';
 
 interface TechCategory {
   id: string;
@@ -75,8 +76,10 @@ export default function TechStackTicker() {
   const currentCategory = techCategories.find((c) => c.id === activeTab) || techCategories[0];
 
   return (
-    <section className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden">
+      <ScrollWatermark text="INFRASTRUCTURE" direction="left" speed={90} className="top-12 opacity-25" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -176,6 +179,6 @@ export default function TechStackTicker() {
         </div>
 
       </div>
-    </section>
+    </ScrollSection>
   );
 }
