@@ -14,6 +14,7 @@ import CTASection from '@/components/CTASection';
 import ContactForm from '@/components/ContactForm';
 import { Shield, Cpu, Lock, Zap } from 'lucide-react';
 import { ScrollSection, ScrollWatermark, ScrollCard } from '@/components/ScrollAnimations';
+import ScrollVelocityMarquee from '@/components/ScrollVelocityMarquee';
 
 export default function HomePage() {
   const whyChooseUs = [
@@ -49,6 +50,12 @@ export default function HomePage() {
 
       {/* 3. Services Overview */}
       <ServicesSection />
+
+      {/* Kinetic Velocity Marquee Band 1 (Aspen Search Style) */}
+      <ScrollVelocityMarquee
+        text="SUB-40MS EDGE LATENCY // INSTITUTIONAL SECURITY // ZERO JUNIOR DELEGATION // 100% IP OWNERSHIP"
+        speed={320}
+      />
 
       {/* 4. Why Choose ProxyTech with Scroll Progress & Watermark */}
       <ScrollSection id="about" className="py-24 bg-[#060907] border-t border-[#13261a] relative overflow-hidden">
@@ -121,6 +128,13 @@ export default function HomePage() {
 
       {/* 5. Featured Case Studies */}
       <CaseStudiesSection />
+
+      {/* Kinetic Velocity Marquee Band 2 (Reverse Scrub) */}
+      <ScrollVelocityMarquee
+        text="NEXT.JS 16 // SUPABASE // POSTGRESQL RLS // TYPESCRIPT // TAILWIND V4 // AWS CLOUD // TURBOPACK"
+        reverse={true}
+        speed={340}
+      />
 
       {/* 6. Tools We Ship With */}
       <TechStackTicker />
