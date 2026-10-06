@@ -18,35 +18,38 @@ export default function HeroSection() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 90,
+    damping: 26,
     restDelta: 0.001,
   });
 
-  // Scroll-linked transformations (Aspen Search style)
-  const heroCardScale = useTransform(smoothProgress, [0, 1], [1, 0.96]);
-  const heroCardY = useTransform(smoothProgress, [0, 1], [0, -40]);
-  const heroCardOpacity = useTransform(smoothProgress, [0, 0.85, 1], [1, 0.9, 0.65]);
-  const sphereY = useTransform(smoothProgress, [0, 1], [0, 45]);
-  const sphereRotate = useTransform(smoothProgress, [0, 1], [0, 8]);
-  const bgGlowY = useTransform(smoothProgress, [0, 1], [0, 90]);
+  // Expressive scroll-linked transformations (Aspen Search style)
+  const heroCardScale = useTransform(smoothProgress, [0, 1], [1, 0.91]);
+  const heroCardY = useTransform(smoothProgress, [0, 1], [0, -75]);
+  const heroCardRotateX = useTransform(smoothProgress, [0, 1], [0, 3.5]);
+  const heroCardOpacity = useTransform(smoothProgress, [0, 0.8, 1], [1, 0.88, 0.6]);
+  
+  const sphereY = useTransform(smoothProgress, [0, 1], [0, 85]);
+  const sphereScale = useTransform(smoothProgress, [0, 1], [1, 1.15]);
+  const sphereRotate = useTransform(smoothProgress, [0, 1], [0, 16]);
+  const bgGlowY = useTransform(smoothProgress, [0, 1], [0, 140]);
 
   return (
     <section
       ref={containerRef}
       id="home"
-      className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden bg-grid-pattern"
+      className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden bg-grid-pattern perspective-container"
     >
-      <ScrollWatermark text="ENGINEERING" speed={120} className="top-12 opacity-30" />
+      <ScrollWatermark text="ENGINEERING" speed={180} className="top-10" />
 
       {/* Background ambient radial glow with scroll parallax */}
       <motion.div
         style={shouldReduceMotion ? undefined : { y: bgGlowY }}
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#22c55e]/5 rounded-full blur-[140px] pointer-events-none -z-10"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#22c55e]/10 rounded-full blur-[140px] pointer-events-none -z-10"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Unified Hero Container Card with Scroll-Driven Scale & Parallax */}
+        {/* Unified Hero Container Card with Expressive Scroll-Driven Scale & Parallax */}
         <motion.div
           style={
             shouldReduceMotion
@@ -54,10 +57,11 @@ export default function HeroSection() {
               : {
                   scale: heroCardScale,
                   y: heroCardY,
+                  rotateX: heroCardRotateX,
                   opacity: heroCardOpacity,
                 }
           }
-          className="relative rounded-3xl crystal-card crystal-sheen p-8 sm:p-12 lg:p-16 transition-all duration-300 overflow-hidden transform-gpu"
+          className="relative rounded-3xl crystal-card crystal-sheen p-8 sm:p-12 lg:p-16 transition-all duration-300 overflow-hidden transform-gpu shadow-2xl"
         >
           {/* Subtle corner phosphor & crystal glow */}
           <div className="absolute -top-24 -right-24 w-80 h-80 bg-[#22c55e]/15 rounded-full blur-3xl pointer-events-none" />
@@ -159,6 +163,7 @@ export default function HeroSection() {
                     ? undefined
                     : {
                         y: sphereY,
+                        scale: sphereScale,
                         rotate: sphereRotate,
                       }
                 }

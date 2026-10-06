@@ -112,7 +112,7 @@ Content-Type: application/json
 
         {/* 4 Large Dark-Green Stat Cards with Scroll-Driven Elevations */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          <ScrollCard delay={0.05} className="h-full">
+          <ScrollCard index={0} parallaxSpeed={30} className="h-full">
             <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
               <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
                 <AnimatedCounter value={140} suffix="+" />
@@ -123,7 +123,7 @@ Content-Type: application/json
             </div>
           </ScrollCard>
 
-          <ScrollCard delay={0.1} className="h-full">
+          <ScrollCard index={1} parallaxSpeed={30} className="h-full">
             <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
               <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
                 <AnimatedCounter value={6} />
@@ -134,7 +134,7 @@ Content-Type: application/json
             </div>
           </ScrollCard>
 
-          <ScrollCard delay={0.15} className="h-full">
+          <ScrollCard index={2} parallaxSpeed={30} className="h-full">
             <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
               <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
                 <AnimatedCounter value={99.98} decimals={2} suffix="%" />
@@ -145,7 +145,7 @@ Content-Type: application/json
             </div>
           </ScrollCard>
 
-          <ScrollCard delay={0.2} className="h-full">
+          <ScrollCard index={3} parallaxSpeed={30} className="h-full">
             <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
               <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
                 <AnimatedCounter value={38} suffix="ms" />

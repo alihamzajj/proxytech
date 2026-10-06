@@ -71,7 +71,8 @@ export default function PricingSection({ isFullPage = false }: PricingSectionPro
             return (
               <ScrollCard
                 key={plan.id}
-                delay={idx * 0.06}
+                index={idx}
+                parallaxSpeed={30}
                 className="h-full"
               >
                 <div

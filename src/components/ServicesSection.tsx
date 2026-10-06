@@ -74,7 +74,8 @@ export default function ServicesSection() {
             return (
               <ScrollCard
                 key={service.id}
-                delay={idx * 0.05}
+                index={idx}
+                parallaxSpeed={35}
                 className="h-full"
               >
                 <div className="group h-full relative rounded-2xl crystal-card crystal-sheen p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#22c55e]/60">

@@ -82,7 +82,8 @@ export default function HomePage() {
               return (
                 <ScrollCard
                   key={idx}
-                  delay={idx * 0.06}
+                  index={idx}
+                  parallaxSpeed={30}
                   className="h-full"
                 >
                   <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">

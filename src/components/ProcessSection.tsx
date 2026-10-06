@@ -147,12 +147,13 @@ function ProcessStepCard({
   progress: any;
   shouldReduceMotion: boolean | null;
 }) {
-  const startThreshold = idx * 0.18;
-  const endThreshold = Math.min(1, startThreshold + 0.35);
+  const startThreshold = idx * 0.15;
+  const peakThreshold = startThreshold + 0.25;
+  const endThreshold = Math.min(1, peakThreshold + 0.35);
 
-  const y = useTransform(progress, [startThreshold, endThreshold], [40, 0]);
-  const scale = useTransform(progress, [startThreshold, endThreshold], [0.95, 1]);
-  const opacity = useTransform(progress, [startThreshold, endThreshold], [0.35, 1]);
+  const y = useTransform(progress, [startThreshold, peakThreshold, endThreshold], [55, 0, -20]);
+  const scale = useTransform(progress, [startThreshold, peakThreshold, endThreshold], [0.92, 1, 0.98]);
+  const opacity = useTransform(progress, [startThreshold, peakThreshold, endThreshold], [0.35, 1, 0.7]);
 
   return (
     <motion.div

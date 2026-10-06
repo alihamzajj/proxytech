@@ -4,13 +4,13 @@ import { useRef, type ReactNode } from 'react';
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 
 /**
- * Watermark text that glides horizontally across the screen as user scrolls through the section.
- * Signature Aspen Search / luxury engineering style.
+ * Large Watermark typography that glides across the screen linked directly to scroll position.
+ * Prominently visible but refined (Aspen Search style).
  */
 export function ScrollWatermark({
   text,
   direction = 'left',
-  speed = 100,
+  speed = 160,
   className = '',
 }: {
   text: string;
@@ -27,8 +27,8 @@ export function ScrollWatermark({
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 90,
+    damping: 26,
     restDelta: 0.001,
   });
 
@@ -36,6 +36,12 @@ export function ScrollWatermark({
     smoothProgress,
     [0, 1],
     direction === 'left' ? [speed, -speed] : [-speed, speed]
+  );
+
+  const opacity = useTransform(
+    smoothProgress,
+    [0, 0.25, 0.75, 1],
+    [0.02, 0.07, 0.07, 0.02]
   );
 
   if (shouldReduceMotion) {
@@ -49,8 +55,8 @@ export function ScrollWatermark({
       aria-hidden="true"
     >
       <motion.div
-        style={{ x: xTransform }}
-        className="whitespace-nowrap text-[9vw] sm:text-[7vw] font-mono font-black uppercase tracking-tighter text-white/[0.025] leading-none text-center"
+        style={{ x: xTransform, opacity }}
+        className="whitespace-nowrap text-[12vw] sm:text-[9vw] font-mono font-black uppercase tracking-tight text-white leading-none text-center transform-gpu"
       >
         {text}
       </motion.div>
@@ -59,67 +65,103 @@ export function ScrollWatermark({
 }
 
 /**
- * Parallax wrapper that smoothly offsets its children at a different speed than page scroll.
+ * Continuous scroll-driven card physics (Aspen Search style):
+ * - Enters from bottom with lift, scale, and subtle 3D tilt
+ * - Actively scrubs through the viewport
+ * - Gently softens and tilts as it approaches the top exit
  */
-export function ParallaxItem({
+export function ScrollCard({
   children,
-  offset = 40,
   className = '',
+  index = 0,
+  parallaxSpeed = 30,
 }: {
   children: ReactNode;
-  offset?: number;
   className?: string;
+  index?: number;
+  parallaxSpeed?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
+  // Track the entire journey through the viewport
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
 
-  const yTransform = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [-offset, offset]
-  );
-
-  const smoothY = useSpring(yTransform, {
-    stiffness: 120,
-    damping: 30,
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 26,
     restDelta: 0.001,
   });
+
+  // Staggered column parallax: even items move slightly faster/differently than odd items
+  const staggeredOffset = (index % 2 === 0 ? 1 : -0.7) * parallaxSpeed;
+
+  // Active continuous transform mapping from enter -> center -> exit
+  const y = useTransform(
+    smoothProgress,
+    [0, 0.35, 0.65, 1],
+    [55 + staggeredOffset, 0, 0, -45 - staggeredOffset]
+  );
+
+  const scale = useTransform(
+    smoothProgress,
+    [0, 0.35, 0.7, 1],
+    [0.92, 1, 1, 0.95]
+  );
+
+  const opacity = useTransform(
+    smoothProgress,
+    [0, 0.25, 0.8, 1],
+    [0.4, 1, 1, 0.55]
+  );
+
+  const rotateX = useTransform(
+    smoothProgress,
+    [0, 0.35, 0.7, 1],
+    [5, 0, 0, -4]
+  );
 
   if (shouldReduceMotion) {
     return <div className={className}>{children}</div>;
   }
 
   return (
-    <motion.div ref={ref} style={{ y: smoothY }} className={className}>
-      {children}
-    </motion.div>
+    <div className="perspective-container h-full">
+      <motion.div
+        ref={ref}
+        style={{
+          y,
+          scale,
+          opacity,
+          rotateX,
+        }}
+        className={`transform-gpu h-full ${className}`}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }
 
 /**
- * Scroll-driven card entrance that scales, raises, and slightly rotates
- * naturally as the card travels through the viewport.
+ * Headline & Title text that continuously scrubs and scales with scroll progress
  */
-export function ScrollCard({
+export function ScrollScrubText({
   children,
   className = '',
-  delay = 0,
 }: {
   children: ReactNode;
   className?: string;
-  delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start 92%', 'start 65%'],
+    offset: ['start 95%', 'end 30%'],
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
@@ -128,32 +170,22 @@ export function ScrollCard({
     restDelta: 0.001,
   });
 
-  const opacity = useTransform(smoothProgress, [0, 1], [0.35, 1]);
-  const y = useTransform(smoothProgress, [0, 1], [45, 0]);
-  const scale = useTransform(smoothProgress, [0, 1], [0.96, 1]);
+  const y = useTransform(smoothProgress, [0, 0.6, 1], [30, 0, -15]);
+  const scale = useTransform(smoothProgress, [0, 0.5, 1], [0.95, 1.01, 0.98]);
 
   if (shouldReduceMotion) {
     return <div className={className}>{children}</div>;
   }
 
   return (
-    <motion.div
-      ref={ref}
-      style={{
-        opacity,
-        y,
-        scale,
-      }}
-      className={className}
-    >
+    <motion.div ref={ref} style={{ y, scale }} className={`transform-gpu ${className}`}>
       {children}
     </motion.div>
   );
 }
 
 /**
- * Section container that subtly scales down when leaving and expands when entering,
- * matching high-end Aspen Search page pacing.
+ * Section container that dynamically scales and glides with continuous scroll progress
  */
 export function ScrollSection({
   children,
@@ -172,17 +204,23 @@ export function ScrollSection({
     offset: ['start end', 'end start'],
   });
 
-  // Scale in on enter, stable in middle, subtle shrink on exit
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 28,
+    restDelta: 0.001,
+  });
+
+  // Scale in on enter, full at center, scale out on leave
   const scale = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    [0.985, 1, 1, 0.985]
+    smoothProgress,
+    [0, 0.25, 0.75, 1],
+    [0.96, 1, 1, 0.96]
   );
-  
+
   const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.9, 1],
-    [0.85, 1, 1, 0.85]
+    smoothProgress,
+    [0, 0.15, 0.85, 1],
+    [0.75, 1, 1, 0.75]
   );
 
   if (shouldReduceMotion) {

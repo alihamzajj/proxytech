@@ -11,12 +11,12 @@ export default function StatsSection() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 90%', 'center center'],
+    offset: ['start end', 'end start'],
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 28,
+    stiffness: 90,
+    damping: 26,
     restDelta: 0.001,
   });
 
@@ -110,9 +110,9 @@ function StatCardItem({
   offset: number;
   shouldReduceMotion: boolean | null;
 }) {
-  const y = useTransform(progress, [0, 1], [offset, 0]);
-  const opacity = useTransform(progress, [0, 0.9], [0.3, 1]);
-  const scale = useTransform(progress, [0, 1], [0.94, 1]);
+  const y = useTransform(progress, [0, 0.35, 0.65, 1], [offset + 40, 0, 0, -offset - 30]);
+  const opacity = useTransform(progress, [0, 0.25, 0.75, 1], [0.35, 1, 1, 0.55]);
+  const scale = useTransform(progress, [0, 0.35, 0.7, 1], [0.93, 1, 1, 0.95]);
 
   return (
     <motion.div

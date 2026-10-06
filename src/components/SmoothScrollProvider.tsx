@@ -5,38 +5,36 @@ import Lenis from 'lenis';
 
 export default function SmoothScrollProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
-    // Respect user's accessibility preferences
+    // Check user's motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       return;
     }
 
+    // Force html scroll-behavior to auto so browser does not compete with Lenis
+    document.documentElement.style.scrollBehavior = 'auto';
+    document.body.style.scrollBehavior = 'auto';
+
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // smooth exponential curve
+      duration: 1.25,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.95,
-      touchMultiplier: 1.1,
-      infinite: false,
+      wheelMultiplier: 1.1,
+      touchMultiplier: 1.2,
+      syncTouch: false,
+      autoRaf: true,
+      anchors: true,
     });
 
-    // Expose lenis instance to window for programmatic scroll calls
     (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
-
-    // Smoothly scroll to internal #hash links
+    // Smooth scroll internal anchor links
     const handleAnchorClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement).closest('a');
       if (!target) return;
-      
+
       const href = target.getAttribute('href');
       if (href && (href.startsWith('#') || href.startsWith('/#'))) {
         const hash = href.startsWith('/#') ? href.substring(1) : href;
@@ -45,8 +43,8 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
           if (el) {
             e.preventDefault();
             lenis.scrollTo(el as HTMLElement, {
-              offset: -70,
-              duration: 1.25,
+              offset: -75,
+              duration: 1.3,
             });
             window.history.pushState(null, '', hash);
           }
@@ -57,7 +55,6 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
     document.addEventListener('click', handleAnchorClick);
 
     return () => {
-      cancelAnimationFrame(rafId);
       document.removeEventListener('click', handleAnchorClick);
       lenis.destroy();
       delete (window as unknown as { __lenis?: Lenis }).__lenis;

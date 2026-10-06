@@ -60,7 +60,8 @@ export default function CaseStudiesSection() {
           {filteredProjects.map((project, idx) => (
             <ScrollCard
               key={project.id}
-              delay={idx * 0.08}
+              index={idx}
+              parallaxSpeed={40}
               className="h-full"
             >
               <div className="h-full rounded-2xl crystal-card crystal-sheen overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 hover:border-[#22c55e]/60">

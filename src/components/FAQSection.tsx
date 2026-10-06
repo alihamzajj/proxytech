@@ -53,7 +53,7 @@ export default function FAQSection({
             const isOpen = openIndex === idx;
 
             return (
-              <ScrollCard key={item.id} delay={idx * 0.04}>
+              <ScrollCard key={item.id} index={idx} parallaxSpeed={20}>
                 <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] transition-all overflow-hidden">
                   <button
                     type="button"
