@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 import AsciiSphere from './AsciiSphere';
-import { ScrollWatermark } from './ScrollAnimations';
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -40,7 +39,6 @@ export default function HeroSection() {
       id="home"
       className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden bg-grid-pattern perspective-container"
     >
-      <ScrollWatermark text="ENGINEERING" speed={180} className="top-10" />
 
       {/* Background ambient radial glow with scroll parallax */}
       <motion.div

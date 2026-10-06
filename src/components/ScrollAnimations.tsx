@@ -7,61 +7,25 @@ import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'fr
  * Large Watermark typography that glides across the screen linked directly to scroll position.
  * Prominently visible but refined (Aspen Search style).
  */
+/**
+ * ScrollWatermark disabled to prevent ghost text clipping and visual clutter.
+ */
 export function ScrollWatermark({
-  text,
-  direction = 'left',
-  speed = 160,
-  className = '',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  text: _text,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  direction: _direction = 'left',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  speed: _speed = 160,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  className: _className = '',
 }: {
   text: string;
   direction?: 'left' | 'right';
   speed?: number;
   className?: string;
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const shouldReduceMotion = useReducedMotion();
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 26,
-    restDelta: 0.001,
-  });
-
-  const xTransform = useTransform(
-    smoothProgress,
-    [0, 1],
-    direction === 'left' ? [speed, -speed] : [-speed, speed]
-  );
-
-  const opacity = useTransform(
-    smoothProgress,
-    [0, 0.25, 0.75, 1],
-    [0.02, 0.07, 0.07, 0.02]
-  );
-
-  if (shouldReduceMotion) {
-    return null;
-  }
-
-  return (
-    <div
-      ref={containerRef}
-      className={`absolute inset-x-0 pointer-events-none select-none overflow-hidden z-0 ${className}`}
-      aria-hidden="true"
-    >
-      <motion.div
-        style={{ x: xTransform, opacity }}
-        className="whitespace-nowrap text-[12vw] sm:text-[9vw] font-mono font-black uppercase tracking-tight text-white leading-none text-center transform-gpu"
-      >
-        {text}
-      </motion.div>
-    </div>
-  );
+  return null;
 }
 
 /**
