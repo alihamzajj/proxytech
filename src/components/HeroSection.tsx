@@ -37,7 +37,7 @@ export default function HeroSection() {
     <section
       ref={containerRef}
       id="home"
-      className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden bg-grid-pattern perspective-container"
+      className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden perspective-container"
     >
 
       {/* Background ambient radial glow with scroll parallax */}
