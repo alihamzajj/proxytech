@@ -359,14 +359,16 @@ CREATE POLICY "Allow All Pricing" ON pricing_plans FOR ALL USING (true);
       <header className="sticky top-0 z-40 bg-[#060807]/90 backdrop-blur-md border-b border-[#13261a]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2.5">
-              <ProxyTechLogo className="w-7 h-7 text-[#22c55e]" />
-              <span className="font-bold text-white tracking-tight">ProxyTech</span>
+            <Link href="/" className="flex items-center gap-3 group">
+              <ProxyTechLogo iconOnly className="shrink-0" />
+              <div className="flex items-baseline gap-2">
+                <span className="font-bold text-white tracking-tight text-lg group-hover:text-[#4ade80] transition-colors">ProxyTech</span>
+                <span className="text-xs font-mono text-neutral-500 font-normal">/</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#13261a] border border-[#22c55e]/30 text-[#4ade80]">
+                  ADMIN_PORTAL
+                </span>
+              </div>
             </Link>
-            <span className="text-neutral-600">/</span>
-            <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#13261a] border border-[#22c55e]/30 text-[#4ade80]">
-              ADMIN_PORTAL
-            </span>
           </div>
 
           <div className="flex items-center gap-4">

@@ -55,7 +55,7 @@ export default function AdminLoginPage() {
           {/* Header */}
           <div className="text-center space-y-3">
             <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-[#0b140e] border border-[#22c55e]/30 mb-2">
-              <ProxyTechLogo className="w-8 h-8 text-[#22c55e]" />
+              <ProxyTechLogo iconOnly />
             </div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#13261a]/70 border border-[#22c55e]/30 text-[11px] font-mono text-[#4ade80]">
               <ShieldCheck className="w-3.5 h-3.5 text-[#22c55e]" />
