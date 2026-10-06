@@ -90,6 +90,12 @@ export default function Footer() {
               <li><Link href="/about" className="hover:text-[#4ade80] transition-colors">About ProxyTech</Link></li>
               <li><Link href="/team" className="hover:text-[#4ade80] transition-colors">Engineering Team</Link></li>
               <li><Link href="/contact" className="hover:text-[#4ade80] transition-colors">Start Project / RFP</Link></li>
+              <li>
+                <Link href="/admin" className="text-neutral-400 hover:text-[#4ade80] transition-colors inline-flex items-center gap-1.5 pt-1">
+                  <span>Owner Admin</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#13261a] border border-[#22c55e]/30 text-[#4ade80]">Portal</span>
+                </Link>
+              </li>
             </ul>
           </div>
 

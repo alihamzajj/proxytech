@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PROJECTS, PROCESS_STEPS } from '@/lib/data';
+import { getAllProjects, getProjectBySlug } from '@/lib/data-store';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CTASection from '@/components/CTASection';
 import { 
@@ -20,13 +21,16 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
-  return PROJECTS.map((p) => ({ slug: p.slug }));
+  const allProjects = await getAllProjects();
+  return allProjects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return { title: 'Project Not Found' };
@@ -48,13 +52,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
-  const project = PROJECTS.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();
   }
 
-  const nextProject = PROJECTS.find((p) => p.slug !== project.slug) || PROJECTS[0];
+  const allProjects = await getAllProjects();
+  const nextProject = allProjects.find((p) => p.slug !== project.slug) || allProjects[0];
 
   return (
     <div className="min-h-screen py-12 space-y-16">

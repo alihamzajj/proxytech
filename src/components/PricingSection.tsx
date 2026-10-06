@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { CheckCircle2, ArrowRight, Sparkles, Clock, ShieldCheck } from 'lucide-react';
 import { PRICING_PLANS } from '@/lib/data';
+import { PricingPlan } from '@/lib/types';
 import { formatCurrency } from '@/lib/utils';
 import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 
@@ -13,6 +14,18 @@ interface PricingSectionProps {
 
 export default function PricingSection({ isFullPage = false }: PricingSectionProps) {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
+  const [plans, setPlans] = useState<PricingPlan[]>(PRICING_PLANS);
+
+  useEffect(() => {
+    fetch('/api/pricing')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.plans)) {
+          setPlans(data.plans);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <ScrollSection className={`py-24 ${isFullPage ? 'bg-transparent' : 'bg-[#060807] border-t border-[#13261a]'} relative overflow-hidden`} id="pricing">
@@ -65,7 +78,7 @@ export default function PricingSection({ isFullPage = false }: PricingSectionPro
 
         {/* Pricing Cards Grid with Scroll-Driven Elevations */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-          {PRICING_PLANS.map((plan, idx) => {
+          {plans.map((plan, idx) => {
             const price = billingCycle === 'yearly' ? plan.yearlyPrice : plan.monthlyPrice;
 
             return (

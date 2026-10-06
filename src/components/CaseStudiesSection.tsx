@@ -1,19 +1,32 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight, TrendingUp, Cpu, Layers } from 'lucide-react';
 import { PROJECTS } from '@/lib/data';
+import { ProjectCaseStudy } from '@/lib/types';
 import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 
 export default function CaseStudiesSection() {
   const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [projectsList, setProjectsList] = useState<ProjectCaseStudy[]>(PROJECTS);
   const categories = ['All', 'SaaS', 'Mobile App', 'E-Commerce', 'AI & Automation'];
 
+  useEffect(() => {
+    fetch('/api/projects')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.projects)) {
+          setProjectsList(data.projects);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const filteredProjects = activeCategory === 'All'
-    ? PROJECTS
-    : PROJECTS.filter((p) => p.category === activeCategory);
+    ? projectsList
+    : projectsList.filter((p) => p.category === activeCategory);
 
   return (
     <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="projects">
