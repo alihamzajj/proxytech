@@ -87,7 +87,7 @@ export default function TechStackTicker() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
             Battle-Tested Architecture. <span className="text-[#22c55e]">Zero Technical Debt.</span>
           </h2>
-          <p className="text-neutral-400 text-xs sm:text-sm font-mono max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-100 text-sm max-w-2xl mx-auto leading-relaxed font-sans">
             Strict TypeScript contracts, deterministic cloud deployments, and sub-40ms edge performance selected for maximum operational stability.
           </p>
         </div>
@@ -104,7 +104,7 @@ export default function TechStackTicker() {
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono transition-all cursor-pointer ${
                   isActive
                     ? 'crystal-btn-primary shadow-[0_0_20px_rgba(34,197,94,0.3)] font-bold'
-                    : 'crystal-btn-secondary text-neutral-300 hover:text-white'
+                    : 'crystal-btn-secondary text-slate-200 hover:text-white'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -118,15 +118,15 @@ export default function TechStackTicker() {
         <div className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-8 border border-[#13261a] max-w-5xl mx-auto transition-all">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b border-[#13261a] gap-3">
             <div>
-              <div className="text-xs font-mono text-[#22c55e] flex items-center gap-2">
+              <div className="text-xs font-mono text-[#4ade80] font-bold flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-ping" />
                 <span>ACTIVE STACK // {currentCategory.label.toUpperCase()}</span>
               </div>
-              <p className="text-sm text-neutral-300 mt-1 font-sans">
+              <p className="text-base text-slate-100 mt-1 font-sans font-medium">
                 {currentCategory.description}
               </p>
             </div>
-            <div className="crystal-badge px-3 py-1.5 rounded-lg text-[11px] font-mono text-neutral-400 self-start sm:self-auto">
+            <div className="crystal-badge px-3 py-1.5 rounded-lg text-xs font-mono text-[#4ade80] font-bold self-start sm:self-auto">
               100% PRODUCTION VERIFIED
             </div>
           </div>
@@ -139,15 +139,15 @@ export default function TechStackTicker() {
                 className="p-4 rounded-xl bg-[#040705] border border-[#13261a] hover:border-[#22c55e]/60 flex items-center justify-between transition-all group hover:shadow-[0_0_15px_rgba(34,197,94,0.12)]"
               >
                 <div className="space-y-1">
-                  <div className="text-sm font-bold text-white group-hover:text-[#22c55e] transition-colors flex items-center gap-2">
+                  <div className="text-sm font-bold text-white group-hover:text-[#4ade80] transition-colors flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
                     <span>{tool.name}</span>
                   </div>
-                  <div className="text-[10px] font-mono text-neutral-400">
+                  <div className="text-xs font-mono text-slate-300">
                     {tool.tag}
                   </div>
                 </div>
-                <div className="font-mono text-[10px] text-[#22c55e] crystal-badge px-2 py-0.5 rounded">
+                <div className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2 py-0.5 rounded">
                   TIER_1
                 </div>
               </div>
@@ -156,20 +156,20 @@ export default function TechStackTicker() {
         </div>
 
         {/* Global Standard Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] font-mono text-neutral-400 pt-4">
-          <div className="flex items-center gap-2 crystal-badge px-3 py-1 rounded-full">
+        <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-slate-200 font-medium pt-4">
+          <div className="flex items-center gap-2 crystal-badge px-3.5 py-1.5 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
             <span>TypeScript 5.8+ Strict Mode</span>
           </div>
-          <div className="flex items-center gap-2 crystal-badge px-3 py-1 rounded-full">
+          <div className="flex items-center gap-2 crystal-badge px-3.5 py-1.5 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
             <span>Zero Unpatched Vulnerabilities</span>
           </div>
-          <div className="flex items-center gap-2 crystal-badge px-3 py-1 rounded-full">
+          <div className="flex items-center gap-2 crystal-badge px-3.5 py-1.5 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
             <span>PostgreSQL Row Level Security</span>
           </div>
-          <div className="flex items-center gap-2 crystal-badge px-3 py-1 rounded-full">
+          <div className="flex items-center gap-2 crystal-badge px-3.5 py-1.5 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
             <span>Core Web Vitals 95+ Average</span>
           </div>

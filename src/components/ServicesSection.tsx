@@ -49,14 +49,14 @@ export default function ServicesSection() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
               Full-Spectrum Engineering & <span className="text-[#22c55e]">Cloud Systems</span>
             </h2>
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
               We operate as your dedicated principal technology partner. Every capability is executed by veteran staff engineers, designers, and systems architects focused on measurable business outcomes.
             </p>
           </div>
 
           <Link
             href="/services"
-            className="crystal-btn-secondary px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-[#22c55e] hover:text-white flex items-center gap-2 self-start md:self-auto group"
+            className="crystal-btn-secondary px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-[#4ade80] hover:text-white flex items-center gap-2 self-start md:self-auto group"
           >
             <span>Explore All 6 Specifications</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -83,39 +83,39 @@ export default function ServicesSection() {
                         <Icon className="w-6 h-6" />
                       </div>
                       <div className="flex flex-col items-end gap-1">
-                        <span className="font-mono text-[10px] text-[#22c55e] font-semibold crystal-badge px-2.5 py-0.5 rounded-full">
+                        <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2.5 py-0.5 rounded-full">
                           MOD-0{idx + 1}
                         </span>
-                        <span className="font-mono text-[9px] text-neutral-400">
+                        <span className="font-mono text-[10px] text-slate-300 font-semibold">
                           {highlight.guarantee}
                         </span>
                       </div>
                     </div>
 
                     {/* Title & Description */}
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#22c55e] transition-colors">
+                    <h3 className="text-xl font-bold text-white group-hover:text-[#4ade80] transition-colors">
                       {service.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                    <p className="mt-2 text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">
                       {service.shortDescription}
                     </p>
 
                     {/* SLA Pill */}
-                    <div className="mt-4 p-2 rounded-lg bg-[#040705] border border-[#13261a] flex items-center justify-between text-[10px] font-mono">
-                      <span className="text-neutral-400 flex items-center gap-1.5">
+                    <div className="mt-4 p-2.5 rounded-lg bg-[#040705] border border-[#13261a] flex items-center justify-between text-xs font-mono">
+                      <span className="text-slate-200 flex items-center gap-1.5 font-medium">
                         <ShieldCheck className="w-3.5 h-3.5 text-[#22c55e]" />
                         <span>SLA TARGET:</span>
                       </span>
-                      <span className="text-[#22c55e] font-bold">{highlight.sla}</span>
+                      <span className="text-[#4ade80] font-bold">{highlight.sla}</span>
                     </div>
 
                     {/* Key Deliverables Bullet Preview */}
                     <div className="mt-4 pt-4 border-t border-[#13261a] space-y-2">
-                      <div className="text-[11px] font-mono text-neutral-300 uppercase tracking-wider font-semibold">
+                      <div className="text-xs font-mono text-white uppercase tracking-wider font-bold">
                         Core Architecture:
                       </div>
                       {service.problemsSolved.slice(0, 2).map((item, i) => (
-                        <div key={i} className="flex items-start gap-2 text-xs text-neutral-300">
+                        <div key={i} className="flex items-start gap-2 text-xs text-slate-100">
                           <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0 mt-0.5" />
                           <span className="line-clamp-2">{item}</span>
                         </div>
@@ -127,7 +127,7 @@ export default function ServicesSection() {
                       {service.tags.slice(0, 3).map((tag, tIdx) => (
                         <span
                           key={tIdx}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded crystal-badge text-neutral-300"
+                          className="text-xs font-mono px-2.5 py-0.5 rounded crystal-badge text-slate-100 font-medium"
                         >
                           {tag}
                         </span>
@@ -137,12 +137,12 @@ export default function ServicesSection() {
 
                   {/* Footer Action Link */}
                   <div className="mt-6 pt-4 border-t border-[#13261a] flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-neutral-400">
-                      Cadence: <span className="text-neutral-200">{service.timeline}</span>
+                    <span className="text-xs font-mono text-slate-300">
+                      Cadence: <span className="text-white font-semibold">{service.timeline}</span>
                     </span>
                     <Link
                       href={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#22c55e] hover:text-[#4ade80] transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#4ade80] hover:text-white transition-colors"
                     >
                       <span>Review Specs</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -155,14 +155,14 @@ export default function ServicesSection() {
         </div>
 
         {/* Section Guarantee Footer */}
-        <div className="p-4 sm:p-6 rounded-2xl crystal-card crystal-sheen border border-[#13261a] flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-300">
+        <div className="p-4 sm:p-6 rounded-2xl crystal-card crystal-sheen border border-[#13261a] flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-100 font-medium">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#22c55e]" />
             <span>INSTITUTIONAL GUARANTEE: All codebases covered by mutual NDA, 100% IP ownership transfer, and automated CI/CD suites.</span>
           </div>
           <Link
             href="/#contact"
-            className="text-[#22c55e] hover:underline font-bold whitespace-nowrap"
+            className="text-[#4ade80] hover:underline font-bold whitespace-nowrap"
           >
             Request Custom SOW ↗
           </Link>

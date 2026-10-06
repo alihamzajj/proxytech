@@ -35,7 +35,7 @@ export default function HeroSection() {
                   <span className="text-white font-medium tracking-wider">ACCEPTING Q4 / Q1 COMMISSIONS</span>
                 </div>
 
-                <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#040705]/80 border border-[#13261a] text-[11px] font-mono text-neutral-400">
+                <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#040705]/90 border border-[#13261a] text-xs font-mono text-neutral-200 font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
                   <span>LATENCY: 14MS // EDG-SF1</span>
                 </div>
@@ -43,21 +43,21 @@ export default function HeroSection() {
 
               {/* Main Headline */}
               <div className="space-y-3">
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.12]">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
                   Engineered for <span className="text-[#22c55e] drop-shadow-[0_0_25px_rgba(34,197,94,0.5)]">scale.</span>
                   <br />
                   Built for measurable business impact.
                 </h1>
                 
                 {/* Technical terminal tag */}
-                <p className="text-xs sm:text-sm font-mono text-neutral-400 uppercase tracking-widest flex items-center gap-2">
-                  <span className="text-[#22c55e] font-bold">&gt;</span>
+                <p className="text-xs sm:text-sm font-mono text-[#4ade80] uppercase tracking-widest flex items-center gap-2 font-semibold">
+                  <span className="text-[#22c55e] font-extrabold">&gt;</span>
                   <span>$ GIT COMMIT -M &quot;PRODUCTION-GRADE CLOUD ARCHITECTURES&quot;</span>
                 </p>
               </div>
 
               {/* High-Impact Technical agency positioning */}
-              <p className="text-base sm:text-lg text-neutral-300 max-w-2xl leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-100 max-w-2xl leading-relaxed">
                 We architect and deploy mission-critical software systems, high-concurrency cloud infrastructure, and AI-native web platforms. Shipped with zero junior handoffs, sub-second latency, and institutional security.
               </p>
 
@@ -65,7 +65,7 @@ export default function HeroSection() {
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <Link
                   href="#contact"
-                  className="crystal-btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-mono text-sm tracking-wide cursor-pointer"
+                  className="crystal-btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-mono text-sm tracking-wide cursor-pointer font-bold"
                 >
                   <span>Start a Project</span>
                   <ArrowUpRight className="w-4 h-4" />
@@ -73,14 +73,14 @@ export default function HeroSection() {
 
                 <Link
                   href="#services"
-                  className="crystal-btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-mono text-sm tracking-wide cursor-pointer"
+                  className="crystal-btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-mono text-sm tracking-wide cursor-pointer text-white font-semibold"
                 >
                   <span>Explore Services</span>
                 </Link>
 
                 <Link
                   href="#agent-hire"
-                  className="crystal-btn-secondary inline-flex items-center gap-2 px-4 py-3 text-xs font-mono text-[#22c55e]"
+                  className="crystal-btn-secondary inline-flex items-center gap-2 px-4 py-3 text-xs font-mono text-[#4ade80] font-semibold"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
                   <span>AGENT-READY • POST /api/hire ↗</span>
@@ -88,7 +88,7 @@ export default function HeroSection() {
               </div>
 
               {/* Sub-card engineering guarantees */}
-              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono text-neutral-300 border-t border-[#13261a]">
+              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono text-slate-100 border-t border-[#13261a] font-medium">
                 <div className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0" />
                   <span>Zero junior handoffs</span>

@@ -81,26 +81,26 @@ Content-Type: application/json
                 This agency is also an <br className="hidden sm:inline" />
                 <span className="text-[#22c55e] [text-shadow:0_0_20px_rgba(34,197,94,0.45)]">interface for agents.</span>
               </h2>
-              <p className="text-sm sm:text-base text-neutral-300 leading-relaxed font-sans">
+              <p className="text-sm sm:text-base text-slate-100 leading-relaxed font-sans">
                 Connect over MCP or REST so an agent can evaluate evidence, inspect services and availability, or submit a project brief — without having to interpret the visual interface.
               </p>
             </div>
 
             {/* Right Action Pills (Matching reference buttons) */}
             <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-              <span className="crystal-badge px-3.5 py-1.5 rounded-full text-xs font-mono text-neutral-300">
+              <span className="crystal-badge px-3.5 py-1.5 rounded-full text-xs font-mono text-white font-semibold">
                 MCP
               </span>
-              <span className="crystal-badge px-3.5 py-1.5 rounded-full text-xs font-mono text-neutral-300">
+              <span className="crystal-badge px-3.5 py-1.5 rounded-full text-xs font-mono text-white font-semibold">
                 Agent Skills
               </span>
-              <span className="crystal-badge px-3.5 py-1.5 rounded-full text-xs font-mono text-neutral-300">
+              <span className="crystal-badge px-3.5 py-1.5 rounded-full text-xs font-mono text-white font-semibold">
                 OpenAPI
               </span>
               <button
                 type="button"
                 onClick={copyCode}
-                className="crystal-btn-secondary inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono text-[#22c55e] transition-all cursor-pointer"
+                className="crystal-btn-secondary inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-mono text-[#4ade80] font-bold transition-all cursor-pointer"
               >
                 <span>/api/hire</span>
                 <span className="text-[10px]">↗</span>
@@ -119,7 +119,7 @@ Content-Type: application/json
             <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
               <AnimatedCounter value={140} suffix="+" />
             </div>
-            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-neutral-400">
+            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
               production platforms deployed &amp; catalogued
             </div>
           </ScrollReveal>
@@ -131,7 +131,7 @@ Content-Type: application/json
             <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
               <AnimatedCounter value={6} />
             </div>
-            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-neutral-400">
+            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
               core engineering modules &amp; agent skills
             </div>
           </ScrollReveal>
@@ -143,7 +143,7 @@ Content-Type: application/json
             <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
               <AnimatedCounter value={99.98} decimals={2} suffix="%" />
             </div>
-            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-neutral-400">
+            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
               /telemetry • verified production uptime SLA
             </div>
           </ScrollReveal>
@@ -155,7 +155,7 @@ Content-Type: application/json
             <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
               <AnimatedCounter value={38} suffix="ms" />
             </div>
-            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-neutral-400">
+            <div className="mt-4 pt-4 border-t border-[#13261a] text-xs font-mono text-slate-200 font-medium">
               /api/hire • sub-40ms programmatic intake latency
             </div>
           </ScrollReveal>
@@ -163,7 +163,7 @@ Content-Type: application/json
         </div>
 
         {/* Small subtitle notice matching screenshot */}
-        <div className="text-xs font-mono text-neutral-500 px-1">
+        <div className="text-xs font-mono text-slate-300 px-1 font-medium">
           48 unique capabilities found across all engineering pods. The protocol above highlights programmatic endpoints for autonomous LLMs and CI/CD agents.
         </div>
 
@@ -172,13 +172,13 @@ Content-Type: application/json
           <div className="flex items-center justify-between px-5 py-3.5 bg-[#040705] border-b border-[#13261a]">
             <div className="flex items-center gap-2">
               <Terminal className="w-4 h-4 text-[#22c55e]" />
-              <span className="font-mono text-xs text-neutral-200">AGENTS.md • Programmatic Intake Protocol Specification</span>
+              <span className="font-mono text-xs text-white font-bold">AGENTS.md • Programmatic Intake Protocol Specification</span>
             </div>
             <div className="flex items-center gap-2.5">
               <button
                 type="button"
                 onClick={copyCode}
-                className="crystal-btn-secondary inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-neutral-300 hover:text-white transition-colors cursor-pointer"
+                className="crystal-btn-secondary inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-slate-100 hover:text-white transition-colors cursor-pointer font-medium"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-[#22c55e]" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy'}</span>
@@ -195,7 +195,7 @@ Content-Type: application/json
             </div>
           </div>
 
-          <div className="p-5 sm:p-6 overflow-x-auto text-xs font-mono text-neutral-300 leading-relaxed bg-[#030504]">
+          <div className="p-5 sm:p-6 overflow-x-auto text-xs font-mono text-slate-100 leading-relaxed bg-[#030504]">
             <pre>
               <code>{agentsMarkdown}</code>
             </pre>

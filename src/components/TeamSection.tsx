@@ -28,7 +28,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
               The ProxyTech <span className="text-[#22c55e]">Engineering Pod</span>
             </h2>
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
               We never pawn your software off to junior contractors. You collaborate directly with veteran system architects, frontend specialists, and product designers.
             </p>
           </div>
@@ -36,7 +36,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
           {showAllLink && (
             <Link
               href="/team"
-              className="crystal-btn-secondary px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-[#22c55e] hover:text-white flex items-center gap-2 self-start md:self-auto group"
+              className="crystal-btn-secondary px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-[#4ade80] hover:text-white flex items-center gap-2 self-start md:self-auto group"
             >
               <span>View Full Team Roster</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -64,13 +64,13 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
                     />
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-white group-hover:text-[#22c55e] transition-colors">
+                    <h3 className="text-base font-bold text-white group-hover:text-[#4ade80] transition-colors">
                       <Link href={`/team/${member.slug}`}>
                         {member.name}
                       </Link>
                     </h3>
-                    <p className="text-xs text-[#22c55e] font-mono mt-0.5 font-semibold">{member.role}</p>
-                    <div className="flex items-center gap-1.5 mt-1 text-[10px] font-mono text-neutral-400">
+                    <p className="text-xs text-[#4ade80] font-mono mt-0.5 font-bold">{member.role}</p>
+                    <div className="flex items-center gap-1.5 mt-1 text-xs font-mono text-slate-200 font-medium">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#22c55e]" />
                       <span>{member.experienceYears} Years Exp • {member.projectsCount} Shipped</span>
                     </div>
@@ -78,7 +78,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
                 </div>
 
                 {/* Short Bio */}
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans line-clamp-3">
+                <p className="text-xs sm:text-sm text-slate-100 leading-relaxed font-sans line-clamp-3 font-normal">
                   {member.bio}
                 </p>
 
@@ -87,7 +87,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
                   {member.skills.slice(0, 4).map((skill, sIdx) => (
                     <span
                       key={sIdx}
-                      className="text-[10px] font-mono px-2.5 py-1 rounded crystal-badge text-neutral-300"
+                      className="text-xs font-mono px-2.5 py-1 rounded crystal-badge text-slate-100 font-medium"
                     >
                       {skill}
                     </span>
@@ -103,7 +103,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
                       href={member.socials.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-lg text-neutral-400 hover:text-[#22c55e] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
+                      className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
                       aria-label={`${member.name} GitHub`}
                     >
                       <GithubIcon className="w-3.5 h-3.5" />
@@ -114,7 +114,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
                       href={member.socials.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-lg text-neutral-400 hover:text-[#22c55e] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
+                      className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
                       aria-label={`${member.name} LinkedIn`}
                     >
                       <LinkedinIcon className="w-3.5 h-3.5" />
@@ -122,7 +122,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
                   )}
                   <a
                     href={`mailto:${member.socials.email}`}
-                    className="p-2 rounded-lg text-neutral-400 hover:text-[#22c55e] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
+                    className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
                     aria-label={`Email ${member.name}`}
                   >
                     <Mail className="w-3.5 h-3.5" />
@@ -131,7 +131,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
 
                 <Link
                   href={`/team/${member.slug}`}
-                  className="text-xs font-mono font-bold text-[#22c55e] hover:text-[#4ade80] flex items-center gap-1 transition-colors"
+                  className="text-xs font-mono font-bold text-[#4ade80] hover:text-white flex items-center gap-1 transition-colors"
                 >
                   <span>Dossier</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />

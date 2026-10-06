@@ -32,22 +32,22 @@ export default function Footer() {
               <ProxyTechLogo />
             </Link>
 
-            <p className="text-xs text-neutral-300 max-w-sm leading-relaxed">
+            <p className="text-xs text-slate-100 max-w-sm leading-relaxed">
               High-velocity software engineering, cloud systems, and digital product studio. We help high-growth ventures build and scale mission-critical applications with zero technical debt.
             </p>
 
             {/* Live Operational Status */}
-            <div className="crystal-badge inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-mono text-neutral-300">
+            <div className="crystal-badge inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono text-white font-semibold">
               <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
               <span>All Systems Operational • 99.98% SLA</span>
             </div>
 
             {/* Newsletter form */}
             <div className="pt-2 max-w-sm space-y-2">
-              <span className="text-[11px] font-mono text-neutral-200 uppercase tracking-wider block font-semibold">
+              <span className="text-xs font-mono text-white uppercase tracking-wider block font-bold">
                 Technical Dispatch Newsletter
               </span>
-              <p className="text-[11px] text-neutral-400">
+              <p className="text-xs text-slate-300">
                 Monthly engineering deep dives on Next.js, PostgreSQL scaling, and systems architecture.
               </p>
               
@@ -58,7 +58,7 @@ export default function Footer() {
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="engineer@company.com"
                   required
-                  className="bg-[#020403] border border-[#13261a] focus:border-[#22c55e] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] rounded-xl px-3.5 py-2 text-xs text-white placeholder-neutral-500 flex-1 outline-none font-mono transition-all"
+                  className="bg-[#020403] border border-[#13261a] focus:border-[#22c55e] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] rounded-xl px-3.5 py-2 text-xs text-white placeholder-neutral-400 flex-1 outline-none font-mono transition-all"
                 />
                 <button
                   type="submit"
@@ -69,7 +69,7 @@ export default function Footer() {
               </form>
               
               {newsletterStatus === 'success' && (
-                <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#22c55e]">
+                <div className="flex items-center gap-1.5 text-xs font-mono text-[#4ade80] font-semibold">
                   <Check className="w-3.5 h-3.5" />
                   <span>Subscribed! Check your inbox for issue #01.</span>
                 </div>
@@ -79,29 +79,29 @@ export default function Footer() {
 
           {/* Column 2: Navigation */}
           <div className="space-y-3 font-mono">
-            <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Navigation
             </h4>
-            <ul className="space-y-2 text-xs text-neutral-300">
-              <li><Link href="/" className="hover:text-[#22c55e] transition-colors">Home</Link></li>
-              <li><Link href="/services" className="hover:text-[#22c55e] transition-colors">Services Hub</Link></li>
-              <li><Link href="/pricing" className="hover:text-[#22c55e] transition-colors">Pricing & Pods</Link></li>
-              <li><Link href="/projects" className="hover:text-[#22c55e] transition-colors">Case Studies</Link></li>
-              <li><Link href="/about" className="hover:text-[#22c55e] transition-colors">About ProxyTech</Link></li>
-              <li><Link href="/team" className="hover:text-[#22c55e] transition-colors">Engineering Team</Link></li>
-              <li><Link href="/contact" className="hover:text-[#22c55e] transition-colors">Start Project / RFP</Link></li>
+            <ul className="space-y-2 text-xs text-slate-200 font-medium">
+              <li><Link href="/" className="hover:text-[#4ade80] transition-colors">Home</Link></li>
+              <li><Link href="/services" className="hover:text-[#4ade80] transition-colors">Services Hub</Link></li>
+              <li><Link href="/pricing" className="hover:text-[#4ade80] transition-colors">Pricing & Pods</Link></li>
+              <li><Link href="/projects" className="hover:text-[#4ade80] transition-colors">Case Studies</Link></li>
+              <li><Link href="/about" className="hover:text-[#4ade80] transition-colors">About ProxyTech</Link></li>
+              <li><Link href="/team" className="hover:text-[#4ade80] transition-colors">Engineering Team</Link></li>
+              <li><Link href="/contact" className="hover:text-[#4ade80] transition-colors">Start Project / RFP</Link></li>
             </ul>
           </div>
 
           {/* Column 3: Services */}
           <div className="space-y-3 font-mono">
-            <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Services
             </h4>
-            <ul className="space-y-2 text-xs text-neutral-300">
+            <ul className="space-y-2 text-xs text-slate-200 font-medium">
               {SERVICES.map((s) => (
                 <li key={s.id}>
-                  <Link href={`/services/${s.slug}`} className="hover:text-[#22c55e] transition-colors">
+                  <Link href={`/services/${s.slug}`} className="hover:text-[#4ade80] transition-colors">
                     {s.title}
                   </Link>
                 </li>
@@ -111,23 +111,23 @@ export default function Footer() {
 
           {/* Column 4: Contact & Socials */}
           <div className="space-y-3 font-mono">
-            <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
               Headquarters
             </h4>
-            <div className="space-y-2 text-xs text-neutral-300">
+            <div className="space-y-2 text-xs text-slate-200 font-medium">
               <p>{COMPANY_INFO.address}</p>
-              <p>Email: <a href={`mailto:${COMPANY_INFO.email}`} className="text-[#22c55e] hover:underline">{COMPANY_INFO.email}</a></p>
+              <p>Email: <a href={`mailto:${COMPANY_INFO.email}`} className="text-[#4ade80] hover:underline font-semibold">{COMPANY_INFO.email}</a></p>
               <p>Phone: {COMPANY_INFO.phone}</p>
             </div>
 
             <div className="pt-2">
-              <h5 className="text-[11px] text-white uppercase tracking-wider mb-2">Connect</h5>
+              <h5 className="text-xs text-white uppercase tracking-wider mb-2 font-bold">Connect</h5>
               <div className="flex gap-2">
                 <a
                   href={COMPANY_INFO.socials.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-neutral-300 hover:text-[#22c55e] transition-colors"
+                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-slate-200 hover:text-[#4ade80] transition-colors"
                   aria-label="ProxyTech GitHub"
                 >
                   <GithubIcon className="w-3.5 h-3.5" />
@@ -136,7 +136,7 @@ export default function Footer() {
                   href={COMPANY_INFO.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-neutral-300 hover:text-[#22c55e] transition-colors"
+                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-slate-200 hover:text-[#4ade80] transition-colors"
                   aria-label="ProxyTech LinkedIn"
                 >
                   <LinkedinIcon className="w-3.5 h-3.5" />
@@ -145,14 +145,14 @@ export default function Footer() {
                   href={COMPANY_INFO.socials.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-neutral-300 hover:text-[#22c55e] transition-colors"
+                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-slate-200 hover:text-[#4ade80] transition-colors"
                   aria-label="ProxyTech Twitter"
                 >
                   <TwitterXIcon className="w-3.5 h-3.5" />
                 </a>
                 <a
                   href={`mailto:${COMPANY_INFO.email}`}
-                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-neutral-300 hover:text-[#22c55e] transition-colors"
+                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-slate-200 hover:text-[#4ade80] transition-colors"
                   aria-label="Email ProxyTech"
                 >
                   <Mail className="w-3.5 h-3.5" />
@@ -164,20 +164,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom Legal & Copyright Bar */}
-        <div className="pt-8 border-t border-[#13261a] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-400">
+        <div className="pt-8 border-t border-[#13261a] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-300">
           <div>
             &copy; {new Date().getFullYear()} {COMPANY_INFO.legalName}. All rights reserved.
           </div>
 
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-neutral-200 transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <span>•</span>
-            <Link href="/terms" className="hover:text-neutral-200 transition-colors">Terms of Service</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
             <span>•</span>
-            <Link href="/#agent-hire" className="hover:text-[#22c55e] transition-colors font-bold">AGENTS.md</Link>
+            <Link href="/#agent-hire" className="hover:text-[#4ade80] transition-colors font-bold">AGENTS.md</Link>
           </div>
 
-          <div className="text-[11px] text-neutral-400">
+          <div className="text-xs text-slate-300">
             Engineered with Next.js 16 • Supabase • Tailwind CSS
           </div>
         </div>

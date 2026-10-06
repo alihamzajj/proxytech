@@ -35,7 +35,7 @@ export default function StatsSection() {
               Institutional-grade reliability. Proven results.
             </h2>
           </div>
-          <p className="text-xs font-mono text-neutral-400 max-w-sm">
+          <p className="text-xs font-mono text-slate-200 max-w-sm">
             Zero vanity metrics. Every metric backed by production telemetry and verified client deployments.
           </p>
         </ScrollReveal>
@@ -56,10 +56,10 @@ export default function StatsSection() {
                 />
               </div>
               <div className="mt-4 pt-4 border-t border-[#13261a] space-y-1">
-                <div className="text-sm font-semibold text-neutral-200">
+                <div className="text-sm font-bold text-white">
                   {stat.label}
                 </div>
-                <div className="text-xs text-neutral-400 leading-relaxed font-mono">
+                <div className="text-xs text-slate-200 leading-relaxed font-sans">
                   {stat.desc}
                 </div>
               </div>
@@ -69,7 +69,7 @@ export default function StatsSection() {
 
         {/* Trusted By Client Strip */}
         <ScrollReveal delay={0.2} className="pt-6 border-t border-[#13261a]">
-          <div className="text-[11px] font-mono text-neutral-400 uppercase tracking-widest text-center mb-6">
+          <div className="text-xs font-mono text-neutral-200 uppercase tracking-widest text-center mb-6 font-semibold">
             TRUSTED BY PRODUCT LEADERS ACROSS CRITICAL INDUSTRIES
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -78,9 +78,9 @@ export default function StatsSection() {
                 key={idx}
                 className="p-3.5 rounded-xl crystal-card crystal-sheen flex flex-col items-center justify-center text-center transition-all group"
               >
-                <span className="font-semibold text-xs text-neutral-200 group-hover:text-white transition-colors">{item.name}</span>
-                <span className="text-[10px] text-neutral-400 font-mono mt-0.5">{item.type}</span>
-                <span className="text-[9px] font-mono text-[#22c55e] crystal-badge px-2 py-0.5 rounded-full mt-2">
+                <span className="font-bold text-xs text-white group-hover:text-[#4ade80] transition-colors">{item.name}</span>
+                <span className="text-[11px] text-slate-300 font-mono mt-0.5">{item.type}</span>
+                <span className="text-[10px] font-mono text-[#4ade80] font-semibold crystal-badge px-2.5 py-0.5 rounded-full mt-2">
                   {item.tag}
                 </span>
               </div>

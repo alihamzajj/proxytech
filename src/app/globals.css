@@ -6,11 +6,11 @@
     --bg-card: #080d09;
     --bg-card-hover: #0d150e;
     --border-color: #13261a;
-    --text-main: #f3f4f6;
-    --text-muted: #9ca3af;
+    --text-main: #f8fafc;
+    --text-muted: #cbd5e1;
     --accent-mint: #22c55e;
-    --accent-mint-bright: #22c55e;
-    --accent-glow: rgba(34, 197, 94, 0.22);
+    --accent-mint-bright: #4ade80;
+    --accent-glow: rgba(34, 197, 94, 0.25);
   }
 }
 
@@ -18,12 +18,16 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
   color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background-color: var(--bg-page);
   color: var(--text-main);
   overflow-x: hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
 /* Custom interactive dark green tech styling */

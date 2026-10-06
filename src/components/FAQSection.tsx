@@ -39,7 +39,7 @@ export default function FAQSection({
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
             {title}
           </h2>
-          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+          <p className="text-slate-100 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
             {subtitle}
           </p>
         </div>
@@ -61,14 +61,14 @@ export default function FAQSection({
                   aria-expanded={isOpen}
                 >
                   <span className="text-sm sm:text-base font-semibold text-white flex items-center gap-3">
-                    <span className="font-mono text-xs text-[#22c55e] crystal-badge px-2 py-0.5 rounded">
+                    <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2 py-0.5 rounded">
                       0{idx + 1}
                     </span>
-                    <span className="group-hover:text-[#22c55e] transition-colors">{item.question}</span>
+                    <span className="group-hover:text-[#4ade80] transition-colors">{item.question}</span>
                   </span>
                   <div
-                    className={`w-8 h-8 rounded-lg bg-[#040705] border border-[#13261a] flex items-center justify-center text-neutral-400 shrink-0 transition-all duration-200 ${
-                      isOpen ? 'rotate-180 text-[#22c55e] border-[#22c55e]/60 shadow-[0_0_10px_rgba(34,197,94,0.3)]' : ''
+                    className={`w-8 h-8 rounded-lg bg-[#040705] border border-[#13261a] flex items-center justify-center text-slate-200 shrink-0 transition-all duration-200 ${
+                      isOpen ? 'rotate-180 text-[#4ade80] border-[#22c55e]/60 shadow-[0_0_10px_rgba(34,197,94,0.3)]' : ''
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -76,7 +76,7 @@ export default function FAQSection({
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-6 pt-2 text-xs sm:text-sm text-neutral-300 font-sans leading-relaxed border-t border-[#13261a]">
+                  <div className="px-5 sm:px-6 pb-6 pt-2 text-sm text-slate-100 font-sans leading-relaxed border-t border-[#13261a]">
                     <p>{item.answer}</p>
                   </div>
                 )}
@@ -86,10 +86,10 @@ export default function FAQSection({
         </div>
 
         {/* Bottom prompt */}
-        <div className="p-4 rounded-xl crystal-card border border-[#13261a] text-center text-xs font-mono text-neutral-400 flex items-center justify-center gap-2">
+        <div className="p-4 rounded-xl crystal-card border border-[#13261a] text-center text-xs font-mono text-slate-200 font-medium flex items-center justify-center gap-2">
           <MessageSquare className="w-4 h-4 text-[#22c55e]" />
           <span>Have an architectural question not addressed here?</span>
-          <Link href="/#contact" className="text-[#22c55e] hover:underline font-bold">
+          <Link href="/#contact" className="text-[#4ade80] hover:underline font-bold">
             Chat with an engineer ↗
           </Link>
         </div>

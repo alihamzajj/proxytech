@@ -31,7 +31,7 @@ export default function CTASection({
             {headline}
           </h2>
 
-          <p className="text-sm sm:text-base text-neutral-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-100 max-w-2xl mx-auto leading-relaxed">
             {subheadline}
           </p>
 
@@ -49,14 +49,14 @@ export default function CTASection({
               href={COMPANY_INFO.socials.calendly}
               target="_blank"
               rel="noopener noreferrer"
-              className="crystal-btn-secondary inline-flex items-center gap-2 px-7 py-4 font-mono text-xs tracking-wide font-semibold rounded-xl text-neutral-200 hover:text-white"
+              className="crystal-btn-secondary inline-flex items-center gap-2 px-7 py-4 font-mono text-xs tracking-wide font-semibold rounded-xl text-white hover:text-[#4ade80]"
             >
               <Calendar className="w-4 h-4 text-[#22c55e]" />
               <span>Book 15-Min Discovery Call</span>
             </a>
           </div>
 
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-neutral-400">
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-slate-200 font-medium">
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-3.5 h-3.5 text-[#22c55e]" />
               <span>Mutual NDA Included</span>

@@ -62,7 +62,7 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
               Elite Engineering Discipline. Zero Agency Bureaucracy.
             </h2>
-            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
               We operate as an embedded principal engineering squad. No middle management bloat, no junior delegate handoffs, and 100% transparent delivery metrics.
             </p>
           </div>
@@ -86,22 +86,22 @@ export default function HomePage() {
                       <div className="w-10 h-10 rounded-lg bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)] group-hover:scale-110 transition-transform">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <span className="text-[9px] font-mono crystal-badge px-2 py-0.5 rounded-full text-[#22c55e]">
+                      <span className="text-[10px] font-mono crystal-badge px-2.5 py-0.5 rounded-full text-[#4ade80] font-semibold">
                         {tags[idx]}
                       </span>
                     </div>
 
-                    <h3 className="text-base font-bold text-white group-hover:text-[#22c55e] transition-colors">
+                    <h3 className="text-base font-bold text-white group-hover:text-[#4ade80] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="mt-2.5 text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">
+                    <p className="mt-2.5 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
                       {item.description}
                     </p>
                   </div>
-                  <div className="mt-6 pt-3 border-t border-[#13261a] flex items-center justify-between text-[10px] font-mono text-neutral-500">
+                  <div className="mt-6 pt-3 border-t border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-300 font-medium">
                     <span>STANDARD // 0{idx + 1}</span>
-                    <span className="text-[#22c55e] flex items-center gap-1">
-                      <span className="w-1 h-1 rounded-full bg-[#22c55e]" />
+                    <span className="text-[#4ade80] flex items-center gap-1 font-bold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e]" />
                       VERIFIED
                     </span>
                   </div>

@@ -97,28 +97,28 @@ export default function ContactForm() {
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
           Commission an <span className="text-[#22c55e]">Engineering Sprint</span>
         </h2>
-        <p className="text-xs sm:text-sm text-neutral-300 font-sans leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-100 font-sans leading-relaxed">
           Detail your architectural requirements, performance targets, and launch timeframe. Every brief is assessed directly by senior staff engineers.
         </p>
       </div>
 
       {/* Success Banner */}
       {status.type === 'success' && (
-        <div className="mb-6 p-4 rounded-xl bg-[#22c55e]/10 border border-[#22c55e]/40 text-[#22c55e] flex items-start gap-3 text-xs font-mono">
+        <div className="mb-6 p-4 rounded-xl bg-[#22c55e]/10 border border-[#22c55e]/40 text-[#4ade80] flex items-start gap-3 text-xs font-mono">
           <CheckCircle2 className="w-5 h-5 shrink-0 text-[#22c55e]" />
           <div>
-            <div className="font-bold text-sm">Project Brief Received Successfully</div>
-            <div className="mt-1 text-neutral-200">{status.message}</div>
+            <div className="font-bold text-sm text-white">Project Brief Received Successfully</div>
+            <div className="mt-1 text-slate-100">{status.message}</div>
           </div>
         </div>
       )}
 
       {/* Error Banner */}
       {status.type === 'error' && (
-        <div className="mb-6 p-4 rounded-xl bg-red-950/30 border border-red-500/50 text-red-300 flex items-start gap-3 text-xs font-mono">
+        <div className="mb-6 p-4 rounded-xl bg-red-950/30 border border-red-500/50 text-red-200 flex items-start gap-3 text-xs font-mono">
           <AlertCircle className="w-5 h-5 shrink-0 text-red-400" />
           <div>
-            <div className="font-bold">Transmission Notice</div>
+            <div className="font-bold text-white">Transmission Notice</div>
             <div className="mt-1">{status.message}</div>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Name */}
           <div className="space-y-1.5">
-            <label className="text-xs font-mono text-neutral-300 block">
+            <label className="text-xs font-mono text-white font-semibold block">
               Full Name <span className="text-[#22c55e]">*</span>
             </label>
             <input
@@ -139,13 +139,13 @@ export default function ContactForm() {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="e.g. Alex Mercer"
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
 
           {/* Email */}
           <div className="space-y-1.5">
-            <label className="text-xs font-mono text-neutral-300 block">
+            <label className="text-xs font-mono text-white font-semibold block">
               Work Email <span className="text-[#22c55e]">*</span>
             </label>
             <input
@@ -154,7 +154,7 @@ export default function ContactForm() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="alex@company.com"
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
         </div>
@@ -162,7 +162,7 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Phone */}
           <div className="space-y-1.5">
-            <label className="text-xs font-mono text-neutral-300 block">
+            <label className="text-xs font-mono text-slate-200 font-medium block">
               Direct Phone / WhatsApp (Optional)
             </label>
             <input
@@ -170,13 +170,13 @@ export default function ContactForm() {
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               placeholder="+1 (555) 000-0000"
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
 
           {/* Company */}
           <div className="space-y-1.5">
-            <label className="text-xs font-mono text-neutral-300 block">
+            <label className="text-xs font-mono text-slate-200 font-medium block">
               Organization / Startup
             </label>
             <input
@@ -184,7 +184,7 @@ export default function ContactForm() {
               value={formData.company}
               onChange={(e) => setFormData({ ...formData, company: e.target.value })}
               placeholder="ApexFlow Technologies"
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {/* Service Required */}
           <div className="space-y-1.5">
-            <label className="text-xs font-mono text-neutral-300 block">
+            <label className="text-xs font-mono text-white font-semibold block">
               Core Discipline Needed
             </label>
             <select
@@ -213,7 +213,7 @@ export default function ContactForm() {
 
           {/* Budget */}
           <div className="space-y-1.5">
-            <label className="text-xs font-mono text-neutral-300 block">
+            <label className="text-xs font-mono text-white font-semibold block">
               Target Capital Allocation
             </label>
             <select
@@ -232,7 +232,7 @@ export default function ContactForm() {
 
         {/* Project Description */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-neutral-300 block">
+          <label className="text-xs font-mono text-white font-semibold block">
             System Specs, Problem Statement & Deadlines <span className="text-[#22c55e]">*</span>
           </label>
           <textarea
@@ -241,18 +241,18 @@ export default function ContactForm() {
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             placeholder="Share what you are building, target user concurrency, existing stack, and upcoming milestones..."
-            className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-3 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)] resize-y"
+            className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-3 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)] resize-y"
           />
         </div>
 
         {/* Preferred contact channel */}
         <div className="space-y-1.5">
-          <label className="text-xs font-mono text-neutral-300 block">
+          <label className="text-xs font-mono text-white font-semibold block">
             Preferred Response Protocol
           </label>
           <div className="flex gap-4">
             {['email', 'slack', 'phone'].map((channel) => (
-              <label key={channel} className="flex items-center gap-2 cursor-pointer text-xs font-mono text-neutral-400 hover:text-white">
+              <label key={channel} className="flex items-center gap-2 cursor-pointer text-xs font-mono text-slate-200 hover:text-white font-medium">
                 <input
                   type="radio"
                   name="preferred_contact"
@@ -268,7 +268,7 @@ export default function ContactForm() {
         </div>
 
         {/* Institutional Trust Badges */}
-        <div className="p-3 rounded-xl bg-[#040705] border border-[#13261a] flex items-center justify-between text-[11px] font-mono text-neutral-400">
+        <div className="p-3.5 rounded-xl bg-[#040705] border border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-200 font-medium">
           <span className="flex items-center gap-1.5">
             <Lock className="w-3.5 h-3.5 text-[#22c55e]" />
             <span>Mutual NDA Guaranteed</span>
@@ -302,13 +302,13 @@ export default function ContactForm() {
 
         {/* Direct Calendly Alternative */}
         <div className="pt-4 border-t border-[#13261a] text-center">
-          <p className="text-xs font-mono text-neutral-400">
+          <p className="text-xs font-mono text-slate-300">
             Need an immediate architectural evaluation?{' '}
             <a
               href={COMPANY_INFO.socials.calendly}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#22c55e] hover:underline inline-flex items-center gap-1 font-semibold"
+              className="text-[#4ade80] hover:underline inline-flex items-center gap-1 font-bold"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Book a 15-Minute Technical Discovery on Calendly ↗</span>

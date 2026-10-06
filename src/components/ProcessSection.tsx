@@ -59,7 +59,7 @@ export default function ProcessSection() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
             From Architectural Blueprint to <span className="text-[#22c55e]">Production-Grade</span> Scale
           </h2>
-          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
             Predictable delivery, zero junior delegation. We combine high-velocity sprint cadence with institutional engineering rigor to take your mission-critical software live on schedule.
           </p>
         </div>
@@ -76,38 +76,38 @@ export default function ProcessSection() {
                 <div>
                   {/* Step Code & Step Number */}
                   <div className="flex items-center justify-between mb-5">
-                    <span className="font-mono text-[11px] text-[#22c55e] crystal-badge px-2.5 py-1 rounded-md">
+                    <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2.5 py-1 rounded-md">
                       {step.code}
                     </span>
-                    <div className="w-10 h-10 rounded-xl bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/60 flex items-center justify-center text-neutral-400 group-hover:text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.12)] transition-colors">
+                    <div className="w-10 h-10 rounded-xl bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/60 flex items-center justify-center text-neutral-300 group-hover:text-[#4ade80] shadow-[0_0_15px_rgba(34,197,94,0.12)] transition-colors">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
 
                   {/* Step Index Watermark */}
-                  <div className="font-mono text-3xl font-extrabold text-neutral-700/60 group-hover:text-[#22c55e]/40 transition-colors">
+                  <div className="font-mono text-3xl font-extrabold text-neutral-600/80 group-hover:text-[#22c55e]/60 transition-colors">
                     {step.step}
                   </div>
 
-                  <h3 className="text-lg font-bold text-white mt-1 group-hover:text-[#22c55e] transition-colors">
+                  <h3 className="text-lg font-bold text-white mt-1 group-hover:text-[#4ade80] transition-colors">
                     {step.title}
                   </h3>
 
-                  <p className="mt-1 text-xs font-mono text-[#22c55e]/80">
+                  <p className="mt-1 text-xs font-mono text-[#4ade80] font-semibold">
                     {step.tagline}
                   </p>
 
-                  <p className="mt-3 text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans">
+                  <p className="mt-3 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
                     {step.description}
                   </p>
 
                   {/* Key Deliverables */}
                   <div className="mt-5 pt-4 border-t border-[#13261a] space-y-2">
-                    <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-400">
+                    <div className="text-xs font-mono uppercase tracking-wider text-white font-bold">
                       Phase Gate Deliverables:
                     </div>
                     {step.deliverables.map((d, dIdx) => (
-                      <div key={dIdx} className="flex items-center gap-2 text-xs text-neutral-300">
+                      <div key={dIdx} className="flex items-center gap-2 text-xs text-slate-100">
                         <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0" />
                         <span>{d}</span>
                       </div>
@@ -116,12 +116,12 @@ export default function ProcessSection() {
                 </div>
 
                 {/* Bottom Milestone Status */}
-                <div className="mt-6 pt-4 border-t border-[#13261a] flex items-center justify-between text-[11px] font-mono text-neutral-400">
+                <div className="mt-6 pt-4 border-t border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-300">
                   <div className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
-                    <span className="text-neutral-300">Milestone {step.step}</span>
+                    <span className="text-white font-semibold">Milestone {step.step}</span>
                   </div>
-                  <span className="text-[#22c55e] font-semibold">100% Deterministic</span>
+                  <span className="text-[#4ade80] font-bold">100% Deterministic</span>
                 </div>
               </div>
             );
@@ -134,7 +134,7 @@ export default function ProcessSection() {
             <span className="w-3 h-3 rounded-full bg-[#22c55e] animate-ping" />
             <div>
               <p className="text-sm font-bold text-white">Ready to scope your engineering roadmap?</p>
-              <p className="text-xs text-neutral-400 font-mono">Principal engineers available for sprint onboarding this month.</p>
+              <p className="text-xs text-slate-200 font-sans">Principal engineers available for sprint onboarding this month.</p>
             </div>
           </div>
           <Link
