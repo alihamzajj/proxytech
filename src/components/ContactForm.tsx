@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Send, CheckCircle2, AlertCircle, Loader2, Calendar } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, Loader2, Calendar, ShieldCheck, Clock, Lock } from 'lucide-react';
 import { submitContactLead } from '@/lib/supabase';
 import { SERVICES, COMPANY_INFO } from '@/lib/data';
 
@@ -29,11 +29,11 @@ export default function ContactForm() {
   });
 
   const budgetOptions = [
-    '< $5,000 (Advisory / Small Audit)',
-    '$5,000 - $10,000 (Sprint Prototype)',
-    '$10,000 - $25,000 (MVP / Full Feature)',
-    '$25,000 - $50,000 (Multi-Tenant System)',
-    '$50,000+ (Dedicated Engineering Pod)',
+    '< $5,000 (Advisory / Architecture Audit)',
+    '$5,000 - $10,000 (Sprint Prototype / MVP Spec)',
+    '$10,000 - $25,000 (Full-Stack Feature / MVP Build)',
+    '$25,000 - $50,000 (High-Concurrency Cloud Platform)',
+    '$50,000+ (Dedicated Monthly Engineering Pod)',
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -86,19 +86,19 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="rounded-2xl bg-[#13151b] border border-[#1f242f] p-6 sm:p-10 shadow-2xl relative">
+    <div className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-10 shadow-2xl relative border border-[#13261a]">
       
       {/* Top Header */}
-      <div className="mb-8 space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0c0d10] border border-[#22c55e]/30 text-xs font-mono text-[#22c55e]">
-          <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
-          <span>DIRECT ARCHITECT REVIEW</span>
+      <div className="mb-8 space-y-3">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-mono text-[#22c55e]">
+          <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-ping" />
+          <span>DIRECT PRINCIPAL REVIEW // SLA: &lt; 2 HOURS</span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-          Start a Project Conversation
+          Commission an <span className="text-[#22c55e]">Engineering Sprint</span>
         </h2>
-        <p className="text-xs sm:text-sm text-neutral-400 font-sans leading-relaxed">
-          Tell us about your product goals, architectural constraints, and desired timelines. We review every brief and reply within 24 hours.
+        <p className="text-xs sm:text-sm text-neutral-300 font-sans leading-relaxed">
+          Detail your architectural requirements, performance targets, and launch timeframe. Every brief is assessed directly by senior staff engineers.
         </p>
       </div>
 
@@ -107,7 +107,7 @@ export default function ContactForm() {
         <div className="mb-6 p-4 rounded-xl bg-[#22c55e]/10 border border-[#22c55e]/40 text-[#22c55e] flex items-start gap-3 text-xs font-mono">
           <CheckCircle2 className="w-5 h-5 shrink-0 text-[#22c55e]" />
           <div>
-            <div className="font-bold text-sm">Brief Transmitted Successfully</div>
+            <div className="font-bold text-sm">Project Brief Received Successfully</div>
             <div className="mt-1 text-neutral-200">{status.message}</div>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function ContactForm() {
         <div className="mb-6 p-4 rounded-xl bg-red-950/30 border border-red-500/50 text-red-300 flex items-start gap-3 text-xs font-mono">
           <AlertCircle className="w-5 h-5 shrink-0 text-red-400" />
           <div>
-            <div className="font-bold">Submission Notice</div>
+            <div className="font-bold">Transmission Notice</div>
             <div className="mt-1">{status.message}</div>
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function ContactForm() {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="e.g. Alex Mercer"
-              className="w-full bg-[#0c0d10] border border-[#1f242f] focus:border-[#22c55e] rounded-lg px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-colors"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
 
@@ -154,7 +154,7 @@ export default function ContactForm() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="alex@company.com"
-              className="w-full bg-[#0c0d10] border border-[#1f242f] focus:border-[#22c55e] rounded-lg px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-colors"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
         </div>
@@ -163,28 +163,28 @@ export default function ContactForm() {
           {/* Phone */}
           <div className="space-y-1.5">
             <label className="text-xs font-mono text-neutral-300 block">
-              Phone / WhatsApp (Optional)
+              Direct Phone / WhatsApp (Optional)
             </label>
             <input
               type="tel"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               placeholder="+1 (555) 000-0000"
-              className="w-full bg-[#0c0d10] border border-[#1f242f] focus:border-[#22c55e] rounded-lg px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-colors"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
 
           {/* Company */}
           <div className="space-y-1.5">
             <label className="text-xs font-mono text-neutral-300 block">
-              Company / Venture
+              Organization / Startup
             </label>
             <input
               type="text"
               value={formData.company}
               onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-              placeholder="NextWave Technologies"
-              className="w-full bg-[#0c0d10] border border-[#1f242f] focus:border-[#22c55e] rounded-lg px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-colors"
+              placeholder="ApexFlow Technologies"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
         </div>
@@ -193,12 +193,12 @@ export default function ContactForm() {
           {/* Service Required */}
           <div className="space-y-1.5">
             <label className="text-xs font-mono text-neutral-300 block">
-              Service Required
+              Core Discipline Needed
             </label>
             <select
               value={formData.service}
               onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-              className="w-full bg-[#0c0d10] border border-[#1f242f] focus:border-[#22c55e] rounded-lg px-4 py-2.5 text-xs text-white outline-none font-mono transition-colors"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             >
               {SERVICES.map((s) => (
                 <option key={s.id} value={s.title}>
@@ -214,12 +214,12 @@ export default function ContactForm() {
           {/* Budget */}
           <div className="space-y-1.5">
             <label className="text-xs font-mono text-neutral-300 block">
-              Estimated Budget Range
+              Target Capital Allocation
             </label>
             <select
               value={formData.budget}
               onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-              className="w-full bg-[#0c0d10] border border-[#1f242f] focus:border-[#22c55e] rounded-lg px-4 py-2.5 text-xs text-white outline-none font-mono transition-colors"
+              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             >
               {budgetOptions.map((opt, i) => (
                 <option key={i} value={opt}>
@@ -233,22 +233,22 @@ export default function ContactForm() {
         {/* Project Description */}
         <div className="space-y-1.5">
           <label className="text-xs font-mono text-neutral-300 block">
-            Project Description & Requirements <span className="text-[#22c55e]">*</span>
+            System Specs, Problem Statement & Deadlines <span className="text-[#22c55e]">*</span>
           </label>
           <textarea
             required
             rows={4}
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            placeholder="Please share what you are building, existing tech stack (if any), target launch date, and key engineering challenges..."
-            className="w-full bg-[#0c0d10] border border-[#1f242f] focus:border-[#22c55e] rounded-lg px-4 py-3 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-colors resize-y"
+            placeholder="Share what you are building, target user concurrency, existing stack, and upcoming milestones..."
+            className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-3 text-xs text-white placeholder-neutral-500 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)] resize-y"
           />
         </div>
 
         {/* Preferred contact channel */}
         <div className="space-y-1.5">
           <label className="text-xs font-mono text-neutral-300 block">
-            Preferred Response Method
+            Preferred Response Protocol
           </label>
           <div className="flex gap-4">
             {['email', 'slack', 'phone'].map((channel) => (
@@ -267,21 +267,33 @@ export default function ContactForm() {
           </div>
         </div>
 
+        {/* Institutional Trust Badges */}
+        <div className="p-3 rounded-xl bg-[#040705] border border-[#13261a] flex items-center justify-between text-[11px] font-mono text-neutral-400">
+          <span className="flex items-center gap-1.5">
+            <Lock className="w-3.5 h-3.5 text-[#22c55e]" />
+            <span>Mutual NDA Guaranteed</span>
+          </span>
+          <span className="flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#22c55e]" />
+            <span>100% Code & IP Transfer</span>
+          </span>
+        </div>
+
         {/* Submit Button */}
         <div className="pt-2">
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 px-6 rounded-lg bg-[#22c55e] text-[#0c0d10] font-mono text-xs font-semibold hover:bg-[#4ade80] hover:shadow-[0_0_25px_rgba(34,197,94,0.35)] transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+            className="w-full py-4 px-6 rounded-xl crystal-btn-primary font-mono text-xs font-bold transition-all flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer shadow-[0_0_25px_rgba(34,197,94,0.3)]"
           >
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Transmitting Project Brief...</span>
+                <span>Transmitting Project Brief to Architects...</span>
               </>
             ) : (
               <>
-                <span>Submit Project Brief</span>
+                <span>Submit Technical RFP & Commission Sprint</span>
                 <Send className="w-3.5 h-3.5" />
               </>
             )}
@@ -289,9 +301,9 @@ export default function ContactForm() {
         </div>
 
         {/* Direct Calendly Alternative */}
-        <div className="pt-4 border-t border-[#1f242f] text-center">
+        <div className="pt-4 border-t border-[#13261a] text-center">
           <p className="text-xs font-mono text-neutral-400">
-            Prefer an immediate conversation?{' '}
+            Need an immediate architectural evaluation?{' '}
             <a
               href={COMPANY_INFO.socials.calendly}
               target="_blank"

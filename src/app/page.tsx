@@ -50,41 +50,60 @@ export default function HomePage() {
       <ServicesSection />
 
       {/* 4. Why Choose ProxyTech */}
-      <section id="about" className="py-20 bg-[#0c0d10] border-t border-[#1f242f]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <section id="about" className="py-24 bg-[#060907] border-t border-[#13261a] relative overflow-hidden">
+        {/* Subtle radial ambient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#22c55e]/5 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
-              // WHY PARTNER WITH US
+              // THE PROXYTECH ADVANTAGE
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-              Engineering Excellence Without Agency Bureaucracy
+              Elite Engineering Discipline. Zero Agency Bureaucracy.
             </h2>
             <p className="text-neutral-400 text-sm sm:text-base leading-relaxed">
-              We operate more like an elite in-house staff engineering squad than an old-fashioned agency.
+              We operate as an embedded principal engineering squad. No middle management bloat, no junior delegate handoffs, and 100% transparent delivery metrics.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyChooseUs.map((item, idx) => {
               const Icon = item.icon;
+              const tags = [
+                "PRINCIPAL_LEVEL_ONLY",
+                "BI_WEEKLY_PROD_SHIPS",
+                "ZERO_VENDOR_LOCKIN",
+                "OWASP_&_RLS_COMPLIANT",
+              ];
               return (
                 <div
                   key={idx}
-                  className="rounded-2xl crystal-card crystal-sheen p-6 flex flex-col justify-between transition-all group"
+                  className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-lg bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] mb-4 shadow-[0_0_15px_rgba(34,197,94,0.15)] group-hover:scale-110 transition-transform">
-                      <Icon className="w-5 h-5" />
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)] group-hover:scale-110 transition-transform">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <span className="text-[9px] font-mono crystal-badge px-2 py-0.5 rounded-full text-[#22c55e]">
+                        {tags[idx]}
+                      </span>
                     </div>
+
                     <h3 className="text-base font-bold text-white group-hover:text-[#22c55e] transition-colors">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">
+                    <p className="mt-2.5 text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">
                       {item.description}
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-neutral-800 text-[10px] font-mono text-neutral-500">
-                    BENCHMARK STANDARD // 0{idx + 1}
+                  <div className="mt-6 pt-3 border-t border-[#13261a] flex items-center justify-between text-[10px] font-mono text-neutral-500">
+                    <span>STANDARD // 0{idx + 1}</span>
+                    <span className="text-[#22c55e] flex items-center gap-1">
+                      <span className="w-1 h-1 rounded-full bg-[#22c55e]" />
+                      VERIFIED
+                    </span>
                   </div>
                 </div>
               );

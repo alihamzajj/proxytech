@@ -168,17 +168,17 @@ Content-Type: application/json
         </div>
 
         {/* Code Editor Container */}
-        <div className="rounded-2xl border border-[#1f242f] bg-[#0c0d10] overflow-hidden shadow-2xl">
-          <div className="flex items-center justify-between px-5 py-3 bg-[#11141b] border-b border-[#1f242f]">
+        <div className="rounded-2xl border border-[#13261a] crystal-card overflow-hidden shadow-2xl">
+          <div className="flex items-center justify-between px-5 py-3.5 bg-[#040705] border-b border-[#13261a]">
             <div className="flex items-center gap-2">
               <Terminal className="w-4 h-4 text-[#22c55e]" />
-              <span className="font-mono text-xs text-neutral-300">AGENTS.md • Programmatic Intake Specification</span>
+              <span className="font-mono text-xs text-neutral-200">AGENTS.md • Programmatic Intake Protocol Specification</span>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               <button
                 type="button"
                 onClick={copyCode}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#0c0d10] border border-neutral-800 hover:border-[#22c55e] text-xs font-mono text-neutral-300 hover:text-white transition-colors cursor-pointer"
+                className="crystal-btn-secondary inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono text-neutral-300 hover:text-white transition-colors cursor-pointer"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-[#22c55e]" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy'}</span>
@@ -187,15 +187,15 @@ Content-Type: application/json
                 type="button"
                 onClick={testHireEndpoint}
                 disabled={testingApi}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#22c55e] text-[#0c0d10] text-xs font-mono font-semibold hover:bg-[#4ade80] transition-colors disabled:opacity-50 cursor-pointer"
+                className="crystal-btn-primary inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold transition-colors disabled:opacity-50 cursor-pointer shadow-[0_0_15px_rgba(34,197,94,0.3)]"
               >
                 <Send className="w-3 h-3" />
-                <span>{testingApi ? 'Sending...' : 'Test Live'}</span>
+                <span>{testingApi ? 'Sending...' : 'Test Endpoint'}</span>
               </button>
             </div>
           </div>
 
-          <div className="p-4 sm:p-6 overflow-x-auto text-xs font-mono text-neutral-300 leading-relaxed bg-[#07090c]">
+          <div className="p-5 sm:p-6 overflow-x-auto text-xs font-mono text-neutral-300 leading-relaxed bg-[#030504]">
             <pre>
               <code>{agentsMarkdown}</code>
             </pre>
@@ -203,12 +203,12 @@ Content-Type: application/json
 
           {/* Test Live Response Panel */}
           {apiResponse && (
-            <div className="border-t border-[#1f242f] bg-[#050608] p-4 sm:p-6">
-              <div className="flex items-center gap-2 text-xs font-mono text-[#22c55e] mb-2">
+            <div className="border-t border-[#13261a] bg-[#040705] p-5 sm:p-6">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#22c55e] mb-2 font-bold">
                 <Sparkles className="w-4 h-4" />
                 <span>LIVE SERVER RESPONSE (HTTP 200 OK):</span>
               </div>
-              <pre className="p-3.5 rounded-lg bg-[#0e1117] border border-neutral-800 text-[11px] font-mono text-[#22c55e] overflow-x-auto">
+              <pre className="p-4 rounded-xl bg-[#020403] border border-[#13261a] text-[11px] font-mono text-[#22c55e] overflow-x-auto shadow-inner">
                 <code>{apiResponse}</code>
               </pre>
             </div>

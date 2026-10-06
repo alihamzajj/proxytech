@@ -20,7 +20,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#08090b] border-t border-[#1f242f] text-neutral-400 text-xs">
+    <footer className="bg-[#040705] border-t border-[#13261a] text-neutral-400 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
         
         {/* Top 4-Column Grid + Newsletter */}
@@ -32,7 +32,7 @@ export default function Footer() {
               <ProxyTechLogo />
             </Link>
 
-            <p className="text-xs text-neutral-400 max-w-sm leading-relaxed">
+            <p className="text-xs text-neutral-300 max-w-sm leading-relaxed">
               High-velocity software engineering, cloud systems, and digital product studio. We help high-growth ventures build and scale mission-critical applications with zero technical debt.
             </p>
 
@@ -44,10 +44,10 @@ export default function Footer() {
 
             {/* Newsletter form */}
             <div className="pt-2 max-w-sm space-y-2">
-              <span className="text-[11px] font-mono text-neutral-300 uppercase tracking-wider block">
+              <span className="text-[11px] font-mono text-neutral-200 uppercase tracking-wider block font-semibold">
                 Technical Dispatch Newsletter
               </span>
-              <p className="text-[11px] text-neutral-500">
+              <p className="text-[11px] text-neutral-400">
                 Monthly engineering deep dives on Next.js, PostgreSQL scaling, and systems architecture.
               </p>
               
@@ -58,11 +58,11 @@ export default function Footer() {
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder="engineer@company.com"
                   required
-                  className="bg-[#080d09] border border-[#13261a] focus:border-[#22c55e] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] rounded px-3 py-2 text-xs text-white placeholder-neutral-500 flex-1 outline-none font-mono"
+                  className="bg-[#020403] border border-[#13261a] focus:border-[#22c55e] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] rounded-xl px-3.5 py-2 text-xs text-white placeholder-neutral-500 flex-1 outline-none font-mono transition-all"
                 />
                 <button
                   type="submit"
-                  className="crystal-btn-primary px-3.5 py-2 rounded text-xs flex items-center justify-center"
+                  className="crystal-btn-primary px-4 py-2 rounded-xl text-xs flex items-center justify-center cursor-pointer shadow-[0_0_15px_rgba(34,197,94,0.3)]"
                 >
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
@@ -82,7 +82,7 @@ export default function Footer() {
             <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
               Navigation
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2 text-xs text-neutral-300">
               <li><Link href="/" className="hover:text-[#22c55e] transition-colors">Home</Link></li>
               <li><Link href="/services" className="hover:text-[#22c55e] transition-colors">Services Hub</Link></li>
               <li><Link href="/pricing" className="hover:text-[#22c55e] transition-colors">Pricing & Pods</Link></li>
@@ -98,7 +98,7 @@ export default function Footer() {
             <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
               Services
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2 text-xs text-neutral-300">
               {SERVICES.map((s) => (
                 <li key={s.id}>
                   <Link href={`/services/${s.slug}`} className="hover:text-[#22c55e] transition-colors">
@@ -114,7 +114,7 @@ export default function Footer() {
             <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
               Headquarters
             </h4>
-            <div className="space-y-2 text-xs text-neutral-400">
+            <div className="space-y-2 text-xs text-neutral-300">
               <p>{COMPANY_INFO.address}</p>
               <p>Email: <a href={`mailto:${COMPANY_INFO.email}`} className="text-[#22c55e] hover:underline">{COMPANY_INFO.email}</a></p>
               <p>Phone: {COMPANY_INFO.phone}</p>
@@ -127,7 +127,7 @@ export default function Footer() {
                   href={COMPANY_INFO.socials.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded bg-[#13151b] border border-[#1f242f] hover:border-[#22c55e] text-neutral-300 hover:text-white transition-colors"
+                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-neutral-300 hover:text-[#22c55e] transition-colors"
                   aria-label="ProxyTech GitHub"
                 >
                   <GithubIcon className="w-3.5 h-3.5" />
@@ -136,7 +136,7 @@ export default function Footer() {
                   href={COMPANY_INFO.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded bg-[#13151b] border border-[#1f242f] hover:border-[#22c55e] text-neutral-300 hover:text-white transition-colors"
+                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-neutral-300 hover:text-[#22c55e] transition-colors"
                   aria-label="ProxyTech LinkedIn"
                 >
                   <LinkedinIcon className="w-3.5 h-3.5" />
@@ -145,14 +145,14 @@ export default function Footer() {
                   href={COMPANY_INFO.socials.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded bg-[#13151b] border border-[#1f242f] hover:border-[#22c55e] text-neutral-300 hover:text-white transition-colors"
+                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-neutral-300 hover:text-[#22c55e] transition-colors"
                   aria-label="ProxyTech Twitter"
                 >
                   <TwitterXIcon className="w-3.5 h-3.5" />
                 </a>
                 <a
                   href={`mailto:${COMPANY_INFO.email}`}
-                  className="p-2 rounded bg-[#13151b] border border-[#1f242f] hover:border-[#22c55e] text-neutral-300 hover:text-white transition-colors"
+                  className="p-2 rounded-lg bg-[#020403] border border-[#13261a] hover:border-[#22c55e] text-neutral-300 hover:text-[#22c55e] transition-colors"
                   aria-label="Email ProxyTech"
                 >
                   <Mail className="w-3.5 h-3.5" />
@@ -164,20 +164,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom Legal & Copyright Bar */}
-        <div className="pt-8 border-t border-[#1f242f] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-500">
+        <div className="pt-8 border-t border-[#13261a] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-neutral-400">
           <div>
             &copy; {new Date().getFullYear()} {COMPANY_INFO.legalName}. All rights reserved.
           </div>
 
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-neutral-300 transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="hover:text-neutral-200 transition-colors">Privacy Policy</Link>
             <span>•</span>
-            <Link href="/terms" className="hover:text-neutral-300 transition-colors">Terms of Service</Link>
+            <Link href="/terms" className="hover:text-neutral-200 transition-colors">Terms of Service</Link>
             <span>•</span>
-            <Link href="/#agent-hire" className="hover:text-[#22c55e] transition-colors">AGENTS.md</Link>
+            <Link href="/#agent-hire" className="hover:text-[#22c55e] transition-colors font-bold">AGENTS.md</Link>
           </div>
 
-          <div className="text-[11px] text-neutral-500">
+          <div className="text-[11px] text-neutral-400">
             Engineered with Next.js 16 • Supabase • Tailwind CSS
           </div>
         </div>
