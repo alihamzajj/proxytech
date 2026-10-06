@@ -139,7 +139,7 @@ export default function ContactForm() {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="e.g. Alex Mercer"
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
 
@@ -154,7 +154,7 @@ export default function ContactForm() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="alex@company.com"
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
         </div>
@@ -170,7 +170,7 @@ export default function ContactForm() {
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               placeholder="+1 (555) 000-0000"
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
 
@@ -184,7 +184,7 @@ export default function ContactForm() {
               value={formData.company}
               onChange={(e) => setFormData({ ...formData, company: e.target.value })}
               placeholder="ApexFlow Technologies"
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             />
           </div>
         </div>
@@ -198,7 +198,7 @@ export default function ContactForm() {
             <select
               value={formData.service}
               onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             >
               {SERVICES.map((s) => (
                 <option key={s.id} value={s.title}>
@@ -219,7 +219,7 @@ export default function ContactForm() {
             <select
               value={formData.budget}
               onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-              className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+              className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
             >
               {budgetOptions.map((opt, i) => (
                 <option key={i} value={opt}>
@@ -241,7 +241,7 @@ export default function ContactForm() {
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             placeholder="Share what you are building, target user concurrency, existing stack, and upcoming milestones..."
-            className="w-full bg-[#040705] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-3 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)] resize-y"
+            className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-3 text-xs text-white placeholder-neutral-400 outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)] resize-y"
           />
         </div>
 
@@ -268,7 +268,7 @@ export default function ContactForm() {
         </div>
 
         {/* Institutional Trust Badges */}
-        <div className="p-3.5 rounded-xl bg-[#040705] border border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-200 font-medium">
+        <div className="p-3.5 rounded-xl bg-[#060807] border border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-200 font-medium">
           <span className="flex items-center gap-1.5">
             <Lock className="w-3.5 h-3.5 text-[#22c55e]" />
             <span>Mutual NDA Guaranteed</span>

@@ -16,7 +16,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
   const members = limit ? TEAM_MEMBERS.slice(0, limit) : TEAM_MEMBERS;
 
   return (
-    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="team">
+    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="team">
       <ScrollWatermark text="ARCHITECTS" direction="right" speed={85} className="top-12 opacity-25" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
@@ -109,7 +109,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
                         href={member.socials.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
+                        className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#060807] border border-transparent hover:border-[#13261a] transition-all"
                         aria-label={`${member.name} GitHub`}
                       >
                         <GithubIcon className="w-3.5 h-3.5" />
@@ -120,7 +120,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
                         href={member.socials.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
+                        className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#060807] border border-transparent hover:border-[#13261a] transition-all"
                         aria-label={`${member.name} LinkedIn`}
                       >
                         <LinkedinIcon className="w-3.5 h-3.5" />
@@ -128,7 +128,7 @@ export default function TeamSection({ limit, showAllLink = true }: TeamSectionPr
                     )}
                     <a
                       href={`mailto:${member.socials.email}`}
-                      className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#040705] border border-transparent hover:border-[#13261a] transition-all"
+                      className="p-2 rounded-lg text-slate-300 hover:text-[#4ade80] hover:bg-[#060807] border border-transparent hover:border-[#13261a] transition-all"
                       aria-label={`Email ${member.name}`}
                     >
                       <Mail className="w-3.5 h-3.5" />

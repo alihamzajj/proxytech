@@ -61,7 +61,7 @@ export default function ProcessSection() {
   });
 
   return (
-    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="process">
+    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="process">
       <ScrollWatermark text="EXECUTION" direction="right" speed={100} className="top-12 opacity-25" />
 
       {/* Background radial glow */}
@@ -166,7 +166,7 @@ function ProcessStepCard({
           <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2.5 py-1 rounded-md">
             {step.code}
           </span>
-          <div className="w-10 h-10 rounded-xl bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/60 flex items-center justify-center text-neutral-300 group-hover:text-[#4ade80] shadow-[0_0_15px_rgba(34,197,94,0.12)] transition-colors">
+          <div className="w-10 h-10 rounded-xl bg-[#060807] border border-[#13261a] group-hover:border-[#22c55e]/60 flex items-center justify-center text-neutral-300 group-hover:text-[#4ade80] shadow-[0_0_15px_rgba(34,197,94,0.12)] transition-colors">
             <Icon className="w-5 h-5" />
           </div>
         </div>

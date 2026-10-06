@@ -74,8 +74,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#040705]/85 backdrop-blur-xl border-b border-[#22c55e]/25 shadow-[0_8px_32px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.12)]'
-          : 'bg-[#040705]/65 backdrop-blur-md border-b border-[#13261a]/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]'
+          ? 'bg-[#060807]/85 backdrop-blur-xl border-b border-[#22c55e]/25 shadow-[0_8px_32px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.12)]'
+          : 'bg-[#060807]/65 backdrop-blur-md border-b border-[#13261a]/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -162,13 +162,13 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0c0d10] border-b border-[#1f242f] px-4 pt-3 pb-6 space-y-3">
+        <div className="md:hidden bg-[#080d09] border-b border-[#13261a] px-4 pt-3 pb-6 space-y-3">
           <div className="flex flex-col space-y-1">
             <Link
               href="/"
               onClick={(e) => scrollTo('home', e)}
               className={`px-3 py-2 text-sm font-mono rounded-md ${
-                pathname === '/' && activeSection === 'home' ? 'text-[#22c55e] bg-[#13151b]' : 'text-neutral-300'
+                pathname === '/' && activeSection === 'home' ? 'text-[#22c55e] bg-[#0d160f]' : 'text-neutral-300'
               }`}
             >
               Home
@@ -182,8 +182,8 @@ export default function Navbar() {
                   onClick={(e) => scrollTo(link.sectionId, e)}
                   className={`px-3 py-2 text-sm font-mono rounded-md ${
                     activeSection === link.sectionId
-                      ? 'text-[#22c55e] bg-[#13151b]'
-                      : 'text-neutral-300 hover:bg-[#13151b]'
+                      ? 'text-[#22c55e] bg-[#0d160f]'
+                      : 'text-neutral-300 hover:bg-[#0d160f]'
                   }`}
                 >
                   {link.name}

@@ -82,7 +82,7 @@ export default function HeroSection() {
                   <span className="text-white font-medium tracking-wider">ACCEPTING Q4 / Q1 COMMISSIONS</span>
                 </div>
 
-                <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#040705]/90 border border-[#13261a] text-xs font-mono text-neutral-200 font-medium">
+                <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#060807]/90 border border-[#13261a] text-xs font-mono text-neutral-200 font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
                   <span>LATENCY: 14MS // EDG-SF1</span>
                 </div>

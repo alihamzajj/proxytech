@@ -15,7 +15,7 @@ export default function PricingSection({ isFullPage = false }: PricingSectionPro
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
 
   return (
-    <ScrollSection className={`py-24 ${isFullPage ? 'bg-transparent' : 'bg-[#040705] border-t border-[#13261a]'} relative overflow-hidden`} id="pricing">
+    <ScrollSection className={`py-24 ${isFullPage ? 'bg-transparent' : 'bg-[#060807] border-t border-[#13261a]'} relative overflow-hidden`} id="pricing">
       <ScrollWatermark text="ENGAGEMENT" direction="right" speed={85} className="top-12 opacity-25" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
@@ -56,7 +56,7 @@ export default function PricingSection({ isFullPage = false }: PricingSectionPro
               }`}
             >
               <span>Annual Contract</span>
-              <span className="text-xs bg-[#040705] text-[#4ade80] border border-[#22c55e]/40 px-2 py-0.5 rounded-full font-bold">
+              <span className="text-xs bg-[#060807] text-[#4ade80] border border-[#22c55e]/40 px-2 py-0.5 rounded-full font-bold">
                 Save ~18%
               </span>
             </button>

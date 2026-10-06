@@ -76,7 +76,7 @@ export default function TechStackTicker() {
   const currentCategory = techCategories.find((c) => c.id === activeTab) || techCategories[0];
 
   return (
-    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden">
+    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden">
       <ScrollWatermark text="INFRASTRUCTURE" direction="left" speed={90} className="top-12 opacity-25" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
@@ -139,7 +139,7 @@ export default function TechStackTicker() {
             {currentCategory.tools.map((tool, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-xl bg-[#040705] border border-[#13261a] hover:border-[#22c55e]/60 flex items-center justify-between transition-all group hover:shadow-[0_0_15px_rgba(34,197,94,0.12)]"
+                className="p-4 rounded-xl bg-[#060807] border border-[#13261a] hover:border-[#22c55e]/60 flex items-center justify-between transition-all group hover:shadow-[0_0_15px_rgba(34,197,94,0.12)]"
               >
                 <div className="space-y-1">
                   <div className="text-sm font-bold text-white group-hover:text-[#4ade80] transition-colors flex items-center gap-2">

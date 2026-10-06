@@ -28,7 +28,7 @@ export default function FAQSection({
   };
 
   return (
-    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="faq">
+    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="faq">
       <ScrollWatermark text="GOVERNANCE" direction="left" speed={80} className="top-12 opacity-25" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
@@ -68,7 +68,7 @@ export default function FAQSection({
                       <span className="group-hover:text-[#4ade80] transition-colors">{item.question}</span>
                     </span>
                     <div
-                      className={`w-8 h-8 rounded-lg bg-[#040705] border border-[#13261a] flex items-center justify-center text-slate-200 shrink-0 transition-all duration-200 ${
+                      className={`w-8 h-8 rounded-lg bg-[#060807] border border-[#13261a] flex items-center justify-center text-slate-200 shrink-0 transition-all duration-200 ${
                         isOpen ? 'rotate-180 text-[#4ade80] border-[#22c55e]/60 shadow-[0_0_10px_rgba(34,197,94,0.3)]' : ''
                       }`}
                     >

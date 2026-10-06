@@ -58,7 +58,7 @@ export default function HomePage() {
       />
 
       {/* 4. Why Choose ProxyTech with Scroll Progress & Watermark */}
-      <ScrollSection id="about" className="py-24 bg-[#060907] border-t border-[#13261a] relative overflow-hidden">
+      <ScrollSection id="about" className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden">
         <ScrollWatermark text="DISCIPLINE" direction="left" speed={95} className="top-12 opacity-25" />
 
         {/* Subtle radial ambient glow */}
@@ -96,7 +96,7 @@ export default function HomePage() {
                   <div className="h-full rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group">
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 rounded-lg bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)] group-hover:scale-110 transition-transform">
+                        <div className="w-10 h-10 rounded-lg bg-[#060807] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)] group-hover:scale-110 transition-transform">
                           <Icon className="w-5 h-5" />
                         </div>
                         <span className="text-[10px] font-mono crystal-badge px-2.5 py-0.5 rounded-full text-[#4ade80] font-semibold">
@@ -161,7 +161,7 @@ export default function HomePage() {
       <CTASection />
 
       {/* 14. Integrated Contact Form Section with ScrollSection & Watermark */}
-      <ScrollSection id="contact" className="py-20 bg-[#040705] border-t border-[#13261a] relative overflow-hidden">
+      <ScrollSection id="contact" className="py-20 bg-[#060807] border-t border-[#13261a] relative overflow-hidden">
         <ScrollWatermark text="COMMISSION" direction="right" speed={80} className="top-8 opacity-25" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">

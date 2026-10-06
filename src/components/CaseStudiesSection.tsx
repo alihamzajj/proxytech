@@ -16,7 +16,7 @@ export default function CaseStudiesSection() {
     : PROJECTS.filter((p) => p.category === activeCategory);
 
   return (
-    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="projects">
+    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="projects">
       <ScrollWatermark text="ARCHITECTURES" direction="left" speed={95} className="top-12 opacity-25" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
@@ -66,7 +66,7 @@ export default function CaseStudiesSection() {
             >
               <div className="h-full rounded-2xl crystal-card crystal-sheen overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 hover:border-[#22c55e]/60">
                 {/* Image banner with overlay */}
-                <div className="relative h-64 w-full overflow-hidden bg-[#040705] border-b border-[#13261a]">
+                <div className="relative h-64 w-full overflow-hidden bg-[#060807] border-b border-[#13261a]">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -78,17 +78,17 @@ export default function CaseStudiesSection() {
                   
                   {/* Category & Industry Badge */}
                   <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="px-2.5 py-1 rounded-md bg-[#040705]/90 border border-[#13261a] text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
+                    <span className="px-2.5 py-1 rounded-md bg-[#060807]/90 border border-[#13261a] text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
                       {project.category}
                     </span>
-                    <span className="px-2.5 py-1 rounded-md bg-[#040705]/90 border border-[#13261a] text-xs font-mono text-slate-200 backdrop-blur-md font-medium">
+                    <span className="px-2.5 py-1 rounded-md bg-[#060807]/90 border border-[#13261a] text-xs font-mono text-slate-200 backdrop-blur-md font-medium">
                       {project.clientIndustry}
                     </span>
                   </div>
 
                   {/* Verified Production Pill */}
                   <div className="absolute top-4 right-4">
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#040705]/90 border border-[#22c55e]/40 text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#060807]/90 border border-[#22c55e]/40 text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
                       <span>IN PRODUCTION</span>
                     </div>
@@ -110,7 +110,7 @@ export default function CaseStudiesSection() {
                       {project.metrics.slice(0, 2).map((m, mIdx) => (
                         <div
                           key={mIdx}
-                          className="p-3 rounded-xl bg-[#040705] border border-[#13261a] flex flex-col justify-center space-y-1 group-hover:border-[#22c55e]/30 transition-colors"
+                          className="p-3 rounded-xl bg-[#060807] border border-[#13261a] flex flex-col justify-center space-y-1 group-hover:border-[#22c55e]/30 transition-colors"
                         >
                           <span className="text-xs font-mono text-slate-200 uppercase tracking-wider font-medium">{m.label}</span>
                           <span className="text-lg font-mono font-extrabold text-[#4ade80]">{m.value}</span>

@@ -37,7 +37,7 @@ export default function StatsSection() {
   ];
 
   return (
-    <ScrollSection className="py-20 border-y border-[#13261a] bg-[#040705] relative overflow-hidden">
+    <ScrollSection className="py-20 border-y border-[#13261a] bg-[#060807] relative overflow-hidden">
       <ScrollWatermark text="TELEMETRY" direction="right" speed={80} className="top-8 opacity-25" />
 
       <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">

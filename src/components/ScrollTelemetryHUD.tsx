@@ -66,7 +66,7 @@ export default function ScrollTelemetryHUD() {
       </div>
 
       {/* Mini Progress Pill */}
-      <div className="w-12 h-1.5 bg-[#040705] rounded-full overflow-hidden border border-[#13261a]">
+      <div className="w-12 h-1.5 bg-[#060807] rounded-full overflow-hidden border border-[#13261a]">
         <div
           className="h-full bg-gradient-to-r from-[#22c55e] to-[#4ade80] rounded-full transition-all duration-75 shadow-[0_0_8px_rgba(34,197,94,0.8)]"
           style={{ width: `${percent}%` }}
@@ -77,7 +77,7 @@ export default function ScrollTelemetryHUD() {
       <button
         type="button"
         onClick={scrollToTop}
-        className="w-7 h-7 rounded-full bg-[#040705] border border-[#13261a] hover:border-[#22c55e] flex items-center justify-center text-slate-200 hover:text-[#4ade80] transition-colors cursor-pointer"
+        className="w-7 h-7 rounded-full bg-[#060807] border border-[#13261a] hover:border-[#22c55e] flex items-center justify-center text-slate-200 hover:text-[#4ade80] transition-colors cursor-pointer"
         aria-label="Scroll to top of page"
         title="Scroll to top"
       >

@@ -36,7 +36,7 @@ const serviceHighlights: Record<string, { sla: string; guarantee: string }> = {
 
 export default function ServicesSection() {
   return (
-    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="services">
+    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="services">
       <ScrollWatermark text="CAPABILITIES" direction="left" speed={90} className="top-12 opacity-25" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
@@ -82,7 +82,7 @@ export default function ServicesSection() {
                   <div>
                     {/* Top Bar: Icon + Module Code */}
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-[#040705] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.18)] transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-[#060807] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.18)] transition-all">
                         <Icon className="w-6 h-6" />
                       </div>
                       <div className="flex flex-col items-end gap-1">
@@ -104,7 +104,7 @@ export default function ServicesSection() {
                     </p>
 
                     {/* SLA Pill */}
-                    <div className="mt-4 p-2.5 rounded-lg bg-[#040705] border border-[#13261a] flex items-center justify-between text-xs font-mono">
+                    <div className="mt-4 p-2.5 rounded-lg bg-[#060807] border border-[#13261a] flex items-center justify-between text-xs font-mono">
                       <span className="text-slate-200 flex items-center gap-1.5 font-medium">
                         <ShieldCheck className="w-3.5 h-3.5 text-[#22c55e]" />
                         <span>SLA TARGET:</span>

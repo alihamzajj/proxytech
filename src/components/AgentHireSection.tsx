@@ -60,7 +60,7 @@ Content-Type: application/json
   };
 
   return (
-    <ScrollSection className="py-20 bg-[#07080a] border-t border-[#1f242f] relative overflow-hidden" id="agent-hire">
+    <ScrollSection className="py-20 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="agent-hire">
       <ScrollWatermark text="AUTONOMOUS" direction="right" speed={85} className="top-10 opacity-25" />
 
       {/* Background ambient dark green glow */}
@@ -164,7 +164,7 @@ Content-Type: application/json
 
         {/* Code Editor Container */}
         <div className="rounded-2xl border border-[#13261a] crystal-card overflow-hidden shadow-2xl">
-          <div className="flex items-center justify-between px-5 py-3.5 bg-[#040705] border-b border-[#13261a]">
+          <div className="flex items-center justify-between px-5 py-3.5 bg-[#060807] border-b border-[#13261a]">
             <div className="flex items-center gap-2">
               <Terminal className="w-4 h-4 text-[#22c55e]" />
               <span className="font-mono text-xs text-white font-bold">AGENTS.md • Programmatic Intake Protocol Specification</span>
@@ -198,7 +198,7 @@ Content-Type: application/json
 
           {/* Test Live Response Panel */}
           {apiResponse && (
-            <div className="border-t border-[#13261a] bg-[#040705] p-5 sm:p-6">
+            <div className="border-t border-[#13261a] bg-[#060807] p-5 sm:p-6">
               <div className="flex items-center gap-2 text-xs font-mono text-[#22c55e] mb-2 font-bold">
                 <Sparkles className="w-4 h-4" />
                 <span>LIVE SERVER RESPONSE (HTTP 200 OK):</span>

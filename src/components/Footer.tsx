@@ -20,7 +20,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#040705] border-t border-[#13261a] text-neutral-400 text-xs">
+    <footer className="bg-[#060807] border-t border-[#13261a] text-neutral-400 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
         
         {/* Top 4-Column Grid + Newsletter */}

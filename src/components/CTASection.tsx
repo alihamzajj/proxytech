@@ -35,7 +35,7 @@ export default function CTASection({
   const opacity = useTransform(smoothProgress, [0, 0.8], [0.5, 1]);
 
   return (
-    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden">
+    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden">
       <ScrollWatermark text="DEPLOYMENT" direction="left" speed={90} className="top-8 opacity-25" />
 
       {/* Background radial phosphor glow */}

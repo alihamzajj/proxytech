@@ -46,11 +46,11 @@ export default function ScrollVelocityMarquee({
   return (
     <div
       ref={containerRef}
-      className={`py-4 sm:py-6 overflow-hidden select-none border-y border-[#13261a] bg-[#020403] relative ${className}`}
+      className={`py-4 sm:py-6 overflow-hidden select-none border-y border-[#13261a] bg-[#060807] relative ${className}`}
       aria-hidden="true"
     >
-      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#040705] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#040705] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#060807] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#060807] to-transparent z-10 pointer-events-none" />
 
       <motion.div
         style={{ x: xTransform }}

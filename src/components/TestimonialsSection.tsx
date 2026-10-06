@@ -15,7 +15,7 @@ const trustMetrics = [
 
 export default function TestimonialsSection() {
   return (
-    <ScrollSection className="py-24 bg-[#040705] border-t border-[#13261a] relative overflow-hidden" id="testimonials">
+    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="testimonials">
       <ScrollWatermark text="REPUTATION" direction="left" speed={90} className="top-12 opacity-25" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
