@@ -8,7 +8,6 @@ import {
   FolderGit2, 
   CreditCard, 
   Inbox, 
-  Database, 
   Plus, 
   Trash2, 
   ExternalLink, 
@@ -21,7 +20,6 @@ import {
   Layers, 
   DollarSign, 
   Clock, 
-  Copy, 
   Check, 
   ShieldCheck,
   RefreshCw,
@@ -52,7 +50,7 @@ const PRESET_IMAGES = [
 
 export default function AdminDashboardPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<'projects' | 'pricing' | 'leads' | 'database'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'pricing' | 'leads'>('projects');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
@@ -84,7 +82,6 @@ export default function AdminDashboardPage() {
 
   // Leads State
   const [leads, setLeads] = useState<Lead[]>([]);
-  const [copiedSql, setCopiedSql] = useState(false);
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
@@ -274,60 +271,6 @@ export default function AdminDashboardPage() {
     }
   };
 
-  const copySupabaseSQL = () => {
-    const sql = `-- ProxyTech Live Database Schema for Projects & Pricing
-CREATE TABLE IF NOT EXISTS projects (
-  id TEXT PRIMARY KEY,
-  slug TEXT UNIQUE NOT NULL,
-  title TEXT NOT NULL,
-  tagline TEXT,
-  category TEXT,
-  clientIndustry TEXT,
-  overview TEXT,
-  challenge TEXT,
-  solution TEXT,
-  technologies JSONB DEFAULT '[]',
-  metrics JSONB DEFAULT '[]',
-  timeline TEXT,
-  deliverables JSONB DEFAULT '[]',
-  image TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS pricing_plans (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  category TEXT,
-  tagline TEXT,
-  monthlyPrice JSONB,
-  yearlyPrice JSONB,
-  popular BOOLEAN DEFAULT false,
-  deliverables JSONB DEFAULT '[]',
-  support TEXT,
-  revisions TEXT,
-  developmentHours TEXT,
-  maintenanceIncluded BOOLEAN DEFAULT true,
-  seoAuditIncluded BOOLEAN DEFAULT false,
-  ctaText TEXT,
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- Enable Row Level Security (RLS)
-ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
-ALTER TABLE pricing_plans ENABLE ROW LEVEL SECURITY;
-
--- Allow Public Read & Full Owner Operations
-CREATE POLICY "Public Read Projects" ON projects FOR SELECT USING (true);
-CREATE POLICY "Allow All Projects" ON projects FOR ALL USING (true);
-
-CREATE POLICY "Public Read Pricing" ON pricing_plans FOR SELECT USING (true);
-CREATE POLICY "Allow All Pricing" ON pricing_plans FOR ALL USING (true);
-`;
-    navigator.clipboard.writeText(sql);
-    setCopiedSql(true);
-    setTimeout(() => setCopiedSql(false), 3000);
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#030604] text-white">
@@ -472,18 +415,6 @@ CREATE POLICY "Allow All Pricing" ON pricing_plans FOR ALL USING (true);
           >
             <Inbox className="w-4 h-4" />
             <span>Client Leads ({leads.length})</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('database')}
-            className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
-              activeTab === 'database'
-                ? 'border-[#22c55e] text-[#4ade80] bg-[#0c1610]'
-                : 'border-transparent text-neutral-400 hover:text-white'
-            }`}
-          >
-            <Database className="w-4 h-4" />
-            <span>Supabase Cloud Sync</span>
           </button>
         </div>
 
@@ -764,86 +695,6 @@ CREATE POLICY "Allow All Pricing" ON pricing_plans FOR ALL USING (true);
                 ))}
               </div>
             )}
-          </div>
-        )}
-
-        {/* TAB 4: DATABASE & CLOUD SYNC */}
-        {activeTab === 'database' && (
-          <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#060a07] border border-[#13261a] space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-2xl bg-[#0b160e] border border-[#22c55e]/30">
-                    <Database className="w-6 h-6 text-[#22c55e]" />
-                  </div>
-                  <div>
-                    <h2 className="text-lg font-bold text-white">Supabase Cloud Database Status</h2>
-                    <p className="text-xs text-neutral-400">Connected instance: <span className="font-mono text-[#4ade80]">ngrfvklgmwsbyaccympg.supabase.co</span></p>
-                  </div>
-                </div>
-
-                <span className="px-3 py-1 rounded-full bg-[#13261a] border border-[#22c55e]/30 text-xs font-mono text-[#4ade80]">
-                  Connected
-                </span>
-              </div>
-
-              <p className="text-xs text-neutral-300 leading-relaxed">
-                By default, your projects and pricing changes are stored instantly on your deployment server. To enable permanent, multi-device cloud replication across all team members, you can execute this 1-click table schema inside your Supabase project&apos;s SQL Editor.
-              </p>
-
-              {/* 1-Click SQL Block */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-neutral-400">Database Schema SQL:</span>
-                  <button
-                    onClick={copySupabaseSQL}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#0e1b12] hover:bg-[#162e1e] border border-[#22c55e]/30 text-xs font-mono text-[#4ade80] transition-colors cursor-pointer"
-                  >
-                    {copiedSql ? <Check className="w-3.5 h-3.5 text-[#22c55e]" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedSql ? 'Copied to Clipboard!' : 'Copy Schema SQL'}</span>
-                  </button>
-                </div>
-
-                <pre className="p-4 rounded-xl bg-[#040705] border border-[#102015] text-[11px] font-mono text-neutral-300 overflow-x-auto">
-{`-- Execute in Supabase SQL Editor:
-CREATE TABLE IF NOT EXISTS projects (
-  id TEXT PRIMARY KEY,
-  slug TEXT UNIQUE NOT NULL,
-  title TEXT NOT NULL,
-  tagline TEXT,
-  category TEXT,
-  clientIndustry TEXT,
-  overview TEXT,
-  challenge TEXT,
-  solution TEXT,
-  technologies JSONB DEFAULT '[]',
-  metrics JSONB DEFAULT '[]',
-  timeline TEXT,
-  deliverables JSONB DEFAULT '[]',
-  image TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS pricing_plans (
-  id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
-  category TEXT,
-  tagline TEXT,
-  monthlyPrice JSONB,
-  yearlyPrice JSONB,
-  popular BOOLEAN DEFAULT false,
-  deliverables JSONB DEFAULT '[]',
-  support TEXT,
-  revisions TEXT,
-  developmentHours TEXT,
-  maintenanceIncluded BOOLEAN DEFAULT true,
-  seoAuditIncluded BOOLEAN DEFAULT false,
-  ctaText TEXT,
-  updated_at TIMESTAMPTZ DEFAULT NOW()
-);`}
-                </pre>
-              </div>
-            </div>
           </div>
         )}
       </main>
