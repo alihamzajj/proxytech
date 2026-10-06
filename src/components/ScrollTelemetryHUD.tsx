@@ -1,14 +1,20 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, useScroll } from 'framer-motion';
 import { ArrowUp, Terminal } from 'lucide-react';
 
 export default function ScrollTelemetryHUD() {
+  const pathname = usePathname();
   const { scrollYProgress } = useScroll();
   const [percent, setPercent] = useState(0);
   const [activeSection, setActiveSection] = useState('HOME');
   const [visible, setVisible] = useState(false);
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on('change', (v) => {

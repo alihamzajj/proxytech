@@ -2,13 +2,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Mail, ArrowRight, Check, Activity } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, TwitterXIcon } from './SocialIcons';
 import ProxyTechLogo from './ProxyTechLogo';
 import { COMPANY_INFO, SERVICES } from '@/lib/data';
 
 export default function Footer() {
+  const pathname = usePathname();
   const [newsletterEmail, setNewsletterEmail] = useState('');
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
   const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success'>('idle');
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {

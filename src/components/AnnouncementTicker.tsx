@@ -1,6 +1,13 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+
 export default function AnnouncementTicker() {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
   const items = [
     "REMOTE WORLDWIDE & SAN FRANCISCO",
     "AVAILABLE FOR Q4 / Q1 PROJECT COMMISSIONS",
