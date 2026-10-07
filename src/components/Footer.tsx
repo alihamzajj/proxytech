@@ -11,11 +11,11 @@ import { COMPANY_INFO, SERVICES } from '@/lib/data';
 export default function Footer() {
   const pathname = usePathname();
   const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success'>('idle');
 
   if (pathname?.startsWith('/admin')) {
     return null;
   }
-  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success'>('idle');
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();

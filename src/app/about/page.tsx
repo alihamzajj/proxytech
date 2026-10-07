@@ -12,6 +12,30 @@ export const metadata: Metadata = {
   title: 'About ProxyTech | Mission, Principles & Engineering Philosophy',
   description:
     'Learn about ProxyTech, our founding philosophy, team values, and commitment to building resilient software for ambitious startups and businesses.',
+  keywords: [
+    'about ProxyTech',
+    'software agency mission',
+    'engineering philosophy',
+    'senior software engineers',
+    'software development team',
+    'tech startup agency',
+    'no junior developers',
+    'TypeScript engineering team',
+    'software agency values',
+    'custom software agency about',
+  ],
+  openGraph: {
+    title: 'About ProxyTech | Mission, Principles & Engineering Philosophy',
+    description:
+      'ProxyTech is built on architectural pragmatism, radical transparency, and zero technical debt tolerance. Meet the senior engineers behind every sprint.',
+    url: 'https://proxytech.dev/about',
+    type: 'website',
+  },
+  twitter: {
+    title: 'About ProxyTech | Mission, Principles & Engineering Philosophy',
+    description:
+      'ProxyTech is built on architectural pragmatism, radical transparency, and zero technical debt tolerance.',
+  },
   alternates: {
     canonical: 'https://proxytech.dev/about',
   },

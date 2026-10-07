@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import React from 'react';
 import Link from 'next/link';
 import { SERVICES } from '@/lib/data';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -19,6 +20,31 @@ export const metadata: Metadata = {
   title: 'Engineering & Digital Services',
   description:
     'Explore ProxyTech services: App Development, Web Development, UI/UX Design, Technical SEO, Digital Marketing, and Custom Software/SaaS Development.',
+  keywords: [
+    'software development services',
+    'app development services',
+    'web development services',
+    'UI UX design agency',
+    'technical SEO services',
+    'SaaS development company',
+    'custom software services',
+    'React Next.js development',
+    'mobile app development services',
+    'digital marketing agency',
+    'cloud software engineering',
+  ],
+  openGraph: {
+    title: 'Engineering & Digital Services | ProxyTech',
+    description:
+      'Full-stack software services: mobile apps, web platforms, SaaS architecture, UI/UX, technical SEO, and digital marketing. Senior engineers only.',
+    url: 'https://proxytech.dev/services',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Engineering & Digital Services | ProxyTech',
+    description:
+      'Full-stack software services: mobile apps, web platforms, SaaS architecture, UI/UX, technical SEO. Senior engineers only.',
+  },
   alternates: {
     canonical: 'https://proxytech.dev/services',
   },

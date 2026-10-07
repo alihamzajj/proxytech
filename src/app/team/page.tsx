@@ -7,6 +7,30 @@ export const metadata: Metadata = {
   title: 'Engineering Team & Leadership',
   description:
     'Meet the seasoned software engineers, cloud architects, and UI/UX directors behind ProxyTech. Senior talent only, zero outsourced junior teams.',
+  keywords: [
+    'software engineering team',
+    'senior developers',
+    'cloud architects',
+    'UI UX designers',
+    'full stack engineers',
+    'ProxyTech team',
+    'software agency leadership',
+    'principal engineers',
+    'tech team for hire',
+    'experienced developers',
+  ],
+  openGraph: {
+    title: 'Engineering Team & Leadership | ProxyTech',
+    description:
+      'Meet the principal engineers, cloud architects, and design directors at ProxyTech. Senior talent only — zero outsourced junior teams.',
+    url: 'https://proxytech.dev/team',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Engineering Team & Leadership | ProxyTech',
+    description:
+      'Meet the principal engineers, cloud architects, and design directors at ProxyTech. Senior talent only.',
+  },
   alternates: {
     canonical: 'https://proxytech.dev/team',
   },

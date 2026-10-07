@@ -9,12 +9,10 @@ import ProxyTechLogo from './ProxyTechLogo';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeSection, setActiveSection] = useState('home');
   const pathname = usePathname();
-
-  if (pathname?.startsWith('/admin')) {
-    return null;
-  }
+  const isAdminPage = pathname?.startsWith('/admin');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,6 +53,8 @@ export default function Navbar() {
 
     if (mobileMenuOpen) setMobileMenuOpen(false);
   };
+
+  if (isAdminPage) return null;
 
   return (
     <header

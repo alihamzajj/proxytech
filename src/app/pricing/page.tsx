@@ -10,6 +10,30 @@ export const metadata: Metadata = {
   title: 'Engineering Packages & Pricing',
   description:
     'Transparent monthly and yearly software engineering pods for startups and enterprises. Dedicated senior engineers, zero junior handoffs, 100% IP ownership.',
+  keywords: [
+    'software development pricing',
+    'software agency pricing',
+    'dedicated development team pricing',
+    'monthly software engineering retainer',
+    'SaaS development cost',
+    'web development packages',
+    'software engineering pod pricing',
+    'app development cost',
+    'enterprise software pricing',
+    'senior developer retainer',
+  ],
+  openGraph: {
+    title: 'Engineering Packages & Pricing | ProxyTech',
+    description:
+      'Transparent monthly engineering pods: Starter, Growth, Business, Enterprise. Dedicated senior engineers with 99.99% SLA and full IP ownership.',
+    url: 'https://proxytech.dev/pricing',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Engineering Packages & Pricing | ProxyTech',
+    description:
+      'Monthly engineering pods from Starter to Enterprise. Senior-only engineers, zero junior handoffs, 100% IP ownership.',
+  },
   alternates: {
     canonical: 'https://proxytech.dev/pricing',
   },

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import ServicesSection from '@/components/ServicesSection';
@@ -13,6 +14,43 @@ import CTASection from '@/components/CTASection';
 import { Shield, Cpu, Lock, Zap } from 'lucide-react';
 import { ScrollSection, ScrollWatermark, ScrollCard } from '@/components/ScrollAnimations';
 import ScrollVelocityMarquee from '@/components/ScrollVelocityMarquee';
+
+export const metadata: Metadata = {
+  title: 'ProxyTech | Software Development & Digital Engineering Agency',
+  description:
+    'ProxyTech is an elite software engineering agency. We build high-concurrency web apps, iOS/Android mobile apps, SaaS platforms, and AI-native digital products. Senior engineers only.',
+  keywords: [
+    'software development agency',
+    'custom software development',
+    'web app development',
+    'mobile app development agency',
+    'SaaS platform development',
+    'Next.js agency',
+    'React development company',
+    'senior engineers for hire',
+    'startup software development',
+    'software engineering studio',
+    'AI software development',
+    'full stack web development',
+    'TypeScript developers',
+    'cloud infrastructure engineering',
+  ],
+  openGraph: {
+    title: 'ProxyTech | Software Development & Digital Engineering Agency',
+    description:
+      'Engineered for Scale. Built for Impact. Custom web development, mobile applications, multi-tenant SaaS platforms, and technical growth — senior engineers only.',
+    url: 'https://proxytech.dev',
+    type: 'website',
+  },
+  twitter: {
+    title: 'ProxyTech | Software Development & Digital Engineering Agency',
+    description:
+      'Engineered for Scale. Built for Impact. Custom web apps, mobile apps, SaaS platforms — senior engineers, zero junior handoffs.',
+  },
+  alternates: {
+    canonical: 'https://proxytech.dev',
+  },
+};
 
 export default function HomePage() {
   const whyChooseUs = [

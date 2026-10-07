@@ -10,6 +10,30 @@ export const metadata: Metadata = {
   title: 'Contact ProxyTech | Start a Project or Request Proposal',
   description:
     'Contact ProxyTech for custom software development, mobile apps, SaaS engineering, and technical audits. Speak directly with senior architects.',
+  keywords: [
+    'contact software agency',
+    'hire software developers',
+    'request software proposal',
+    'custom software quote',
+    'start a software project',
+    'software RFP',
+    'hire senior engineers',
+    'tech project inquiry',
+    'software development contact',
+    'book developer call',
+  ],
+  openGraph: {
+    title: 'Contact ProxyTech | Start a Project or Request Proposal',
+    description:
+      'Submit your project brief to ProxyTech. Our senior engineering leads review every inquiry personally and respond within 24 business hours.',
+    url: 'https://proxytech.dev/contact',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Contact ProxyTech | Start a Project or Request Proposal',
+    description:
+      'Submit your project brief to ProxyTech. Senior engineering leads review every inquiry personally — 24h response SLA.',
+  },
   alternates: {
     canonical: 'https://proxytech.dev/contact',
   },
