@@ -39,13 +39,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${project.title} | Case Study | ProxyTech`,
     description: project.tagline,
+    keywords: [
+      project.title,
+      project.category,
+      project.clientIndustry,
+      ...project.technologies,
+      'software case study',
+      'engineering architecture',
+      'ProxyTech portfolio',
+    ],
     alternates: {
       canonical: `https://proxytech.dev/projects/${project.slug}`,
     },
     openGraph: {
       title: `${project.title} - ProxyTech Case Study`,
       description: project.tagline,
-      images: [{ url: project.image }],
+      url: `https://proxytech.dev/projects/${project.slug}`,
+      type: 'article',
+      images: [{ url: project.image, alt: project.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} | ProxyTech`,
+      description: project.tagline,
+      images: [project.image],
     },
   };
 }
@@ -75,13 +92,13 @@ export default async function ProjectDetailPage({ params }: Props) {
         {/* Hero Banner */}
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="px-3 py-1 rounded-full bg-[#13151b] border border-[#1f242f] text-xs font-mono text-[#22c55e]">
+            <span className="px-3 py-1 rounded-full crystal-badge text-xs font-mono text-[#22c55e]">
               {project.category}
             </span>
-            <span className="px-3 py-1 rounded-full bg-[#13151b] border border-[#1f242f] text-xs font-mono text-neutral-300">
+            <span className="px-3 py-1 rounded-full bg-[#060807] border border-[#13261a] text-xs font-mono text-neutral-300">
               Industry: {project.clientIndustry}
             </span>
-            <span className="px-3 py-1 rounded-full bg-[#13151b] border border-[#1f242f] text-xs font-mono text-neutral-400 flex items-center gap-1">
+            <span className="px-3 py-1 rounded-full bg-[#060807] border border-[#13261a] text-xs font-mono text-neutral-400 flex items-center gap-1">
               <Clock className="w-3.5 h-3.5 text-[#22c55e]" />
               <span>{project.timeline}</span>
             </span>
@@ -96,7 +113,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           </p>
 
           {/* Featured Image */}
-          <div className="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden border border-[#1f242f] shadow-2xl">
+          <div className="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden border border-[#13261a] shadow-2xl">
             <Image
               src={project.image}
               alt={project.title}
@@ -113,7 +130,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           {project.metrics.map((metric, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-xl bg-[#13151b] border border-[#1f242f] text-center space-y-1 group hover:border-[#22c55e]/50 transition-colors"
+              className="p-5 rounded-2xl crystal-card crystal-sheen border border-[#13261a] text-center space-y-1 group hover:border-[#22c55e]/50 transition-colors"
             >
               <div className="text-2xl sm:text-3xl font-mono font-bold text-[#22c55e]">
                 {metric.value}
@@ -128,7 +145,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         {/* Overview & Challenge */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
-          <div className="rounded-xl bg-[#13151b] border border-[#1f242f] p-6 sm:p-8 space-y-4">
+          <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
             <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5" />
               <span>// EXECUTIVE OVERVIEW</span>
@@ -139,7 +156,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             </p>
           </div>
 
-          <div className="rounded-xl bg-[#13151b] border border-[#1f242f] p-6 sm:p-8 space-y-4">
+          <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
             <div className="text-xs font-mono text-red-400 uppercase tracking-wider flex items-center gap-1.5">
               <span>// THE ARCHITECTURAL CHALLENGE</span>
             </div>
@@ -152,7 +169,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
 
         {/* Our Solution & Architecture */}
-        <div className="rounded-2xl bg-[#090a0d] border border-[#1f242f] p-6 sm:p-10 space-y-6">
+        <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-10 space-y-6">
           <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider flex items-center gap-2">
             <Terminal className="w-4 h-4" />
             <span>// PROXYTECH ARCHITECTURAL INTERVENTION</span>
@@ -164,7 +181,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             {project.solution}
           </p>
 
-          <div className="pt-4 border-t border-[#1f242f] space-y-3">
+          <div className="pt-4 border-t border-[#13261a] space-y-3">
             <h3 className="text-xs font-mono text-neutral-400 uppercase tracking-wider">
               Production Deliverables Shipped:
             </h3>
@@ -188,7 +205,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             {project.technologies.map((tech, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1.5 rounded-lg bg-[#13151b] border border-neutral-800 text-xs font-mono text-neutral-200"
+                className="px-3 py-1.5 rounded-lg bg-[#060807] border border-[#13261a] text-xs font-mono text-[#22c55e]"
               >
                 {tech}
               </span>
@@ -197,7 +214,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
 
         {/* Navigation to next case study */}
-        <div className="pt-8 border-t border-[#1f242f] flex items-center justify-between">
+        <div className="pt-8 border-t border-[#13261a] flex items-center justify-between">
           <Link
             href="/projects"
             className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-400 hover:text-white"

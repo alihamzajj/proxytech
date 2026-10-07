@@ -87,14 +87,14 @@ export default function ServicesPage() {
             return (
               <div
                 key={service.id}
-                className="rounded-2xl bg-[#13151b] border border-[#1f242f] hover:border-[#22c55e]/70 p-8 flex flex-col justify-between transition-all duration-300 group hover:shadow-[0_0_35px_rgba(34,197,94,0.14)]"
+                className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] hover:border-[#22c55e]/70 p-8 flex flex-col justify-between transition-all duration-300 group hover:shadow-[0_0_35px_rgba(34,197,94,0.18)]"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-[#0c0d10] border border-[#1f242f] group-hover:border-[#22c55e]/50 flex items-center justify-center text-[#22c55e] transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-[#060807] border border-[#13261a] group-hover:border-[#22c55e]/60 flex items-center justify-center text-[#22c55e] transition-colors shadow-[0_0_15px_rgba(34,197,94,0.15)]">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="font-mono text-xs text-neutral-400 bg-[#0c0d10] px-3 py-1 rounded-full border border-neutral-800">
+                    <span className="font-mono text-xs text-neutral-300 bg-[#060807] px-3 py-1 rounded-full border border-[#13261a]">
                       SPECS // 0{idx + 1}
                     </span>
                   </div>
@@ -108,7 +108,7 @@ export default function ServicesPage() {
                   </p>
 
                   {/* Problems Solved */}
-                  <div className="mt-6 pt-5 border-t border-[#1f242f] space-y-2.5">
+                  <div className="mt-6 pt-5 border-t border-[#13261a] space-y-2.5">
                     <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider">
                       Critical Bottlenecks Resolved:
                     </div>
@@ -125,7 +125,7 @@ export default function ServicesPage() {
                     {service.technologies.map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="text-[11px] font-mono px-2.5 py-1 rounded bg-[#0c0d10] text-[#22c55e] border border-neutral-800"
+                        className="text-[11px] font-mono px-2.5 py-1 rounded bg-[#060807] text-[#22c55e] border border-[#13261a]"
                       >
                         {tech}
                       </span>
@@ -134,13 +134,13 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Footer Link */}
-                <div className="mt-8 pt-5 border-t border-[#1f242f] flex items-center justify-between">
+                <div className="mt-8 pt-5 border-t border-[#13261a] flex items-center justify-between">
                   <span className="text-xs font-mono text-neutral-400">
                     Sprint Cycle: <strong className="text-neutral-200">{service.timeline}</strong>
                   </span>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0c0d10] border border-[#1f242f] group-hover:border-[#22c55e] text-xs font-mono font-semibold text-white group-hover:text-[#22c55e] transition-all"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#060807] border border-[#13261a] group-hover:border-[#22c55e] text-xs font-mono font-semibold text-white group-hover:text-[#22c55e] transition-all"
                   >
                     <span>Detailed Specification & Scope</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

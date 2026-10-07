@@ -52,6 +52,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${service.title} Services | ProxyTech`,
     description: service.shortDescription,
+    keywords: [
+      service.title,
+      `${service.title} agency`,
+      `${service.title} company`,
+      ...service.tags,
+      ...service.technologies,
+      'software development',
+      'ProxyTech services',
+    ],
     alternates: {
       canonical: `https://proxytech.dev/services/${service.slug}`,
     },
@@ -59,6 +68,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${service.title} | ProxyTech Engineering`,
       description: service.shortDescription,
       url: `https://proxytech.dev/services/${service.slug}`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${service.title} | ProxyTech Engineering`,
+      description: service.shortDescription,
     },
   };
 }
@@ -105,9 +120,9 @@ export default async function ServiceDetailPage({ params }: Props) {
         />
 
         {/* Hero Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-b border-[#1f242f] pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start border-b border-[#13261a] pb-12">
           <div className="lg:col-span-8 space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#13151b] border border-[#1f242f] text-xs font-mono text-[#22c55e]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-mono text-[#22c55e]">
               <Icon className="w-3.5 h-3.5" />
               <span>PRODUCTION SERVICE SPECIFICATION</span>
             </div>
@@ -123,7 +138,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href={`/contact?service=${encodeURIComponent(service.title)}`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#22c55e] text-[#0c0d10] font-mono text-xs font-semibold hover:bg-[#92fad6] hover:shadow-[0_0_20px_rgba(34,197,94,0.3)] transition-all"
+                className="crystal-btn-primary inline-flex items-center gap-2 px-6 py-3 font-mono text-xs font-semibold cursor-pointer"
               >
                 <span>Commission This Service</span>
                 <ArrowUpRight className="w-4 h-4" />
@@ -135,20 +150,20 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
           </div>
 
-          <div className="lg:col-span-4 rounded-xl bg-[#13151b] border border-[#1f242f] p-6 space-y-4">
+          <div className="lg:col-span-4 rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 space-y-4">
             <h3 className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
               Service Fast Facts
             </h3>
             <div className="space-y-3 text-xs font-mono text-neutral-300">
-              <div className="flex justify-between py-2 border-b border-neutral-800">
+              <div className="flex justify-between py-2 border-b border-[#13261a]">
                 <span className="text-neutral-500">Staffing Model:</span>
                 <span className="text-white">Senior Engineers Only</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-neutral-800">
+              <div className="flex justify-between py-2 border-b border-[#13261a]">
                 <span className="text-neutral-500">Source Ownership:</span>
                 <span className="text-[#22c55e]">100% Client Retained</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-neutral-800">
+              <div className="flex justify-between py-2 border-b border-[#13261a]">
                 <span className="text-neutral-500">Code Reviews:</span>
                 <span className="text-white">Continuous & Audited</span>
               </div>
@@ -164,7 +179,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
           {/* Problems Solved */}
-          <div className="rounded-xl bg-[#13151b] border border-[#1f242f] p-6 sm:p-8 space-y-4">
+          <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
             <div className="text-xs font-mono text-red-400 uppercase tracking-wider flex items-center gap-1.5">
               <span>// PAIN POINTS WE ELIMINATE</span>
             </div>
@@ -184,7 +199,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </div>
 
           {/* Deliverables */}
-          <div className="rounded-xl bg-[#13151b] border border-[#1f242f] p-6 sm:p-8 space-y-4">
+          <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
             <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" />
               <span>// PRODUCTION ASSETS PROVIDED</span>
@@ -207,7 +222,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         </div>
 
         {/* Technologies Stack & Benefits */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#090a0d] border border-[#1f242f] rounded-2xl p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center crystal-card crystal-sheen border border-[#13261a] rounded-2xl p-8">
           <div className="lg:col-span-6 space-y-4">
             <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
               // CORE STACK
@@ -222,7 +237,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               {service.technologies.map((tech, idx) => (
                 <div
                   key={idx}
-                  className="px-3 py-1.5 rounded-lg bg-[#13151b] border border-neutral-800 text-xs font-mono text-[#22c55e]"
+                  className="px-3 py-1.5 rounded-lg bg-[#060807] border border-[#13261a] text-xs font-mono text-[#22c55e]"
                 >
                   {tech}
                 </div>
@@ -230,7 +245,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             </div>
           </div>
 
-          <div className="lg:col-span-6 space-y-4 border-t lg:border-t-0 lg:border-l border-[#1f242f] pt-6 lg:pt-0 lg:pl-8">
+          <div className="lg:col-span-6 space-y-4 border-t lg:border-t-0 lg:border-l border-[#13261a] pt-6 lg:pt-0 lg:pl-8">
             <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
               // BUSINESS OUTCOMES
             </div>
@@ -261,7 +276,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {PROCESS_STEPS.map((step, idx) => (
-              <div key={idx} className="p-5 rounded-xl bg-[#13151b] border border-[#1f242f] space-y-2">
+              <div key={idx} className="p-5 rounded-2xl crystal-card crystal-sheen border border-[#13261a] space-y-2">
                 <span className="font-mono text-lg font-bold text-[#22c55e]">{step.step}</span>
                 <h3 className="text-sm font-bold text-white">{step.title}</h3>
                 <p className="text-xs text-neutral-400 font-sans leading-relaxed">{step.description}</p>
@@ -278,7 +293,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         />
 
         {/* Related Services */}
-        <div className="pt-8 border-t border-[#1f242f] space-y-6">
+        <div className="pt-8 border-t border-[#13261a] space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-bold text-white">Complementary Capabilities</h3>
             <Link href="/services" className="text-xs font-mono text-[#22c55e] hover:underline">
@@ -291,7 +306,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               <Link
                 key={rel.id}
                 href={`/services/${rel.slug}`}
-                className="p-5 rounded-xl bg-[#13151b] border border-[#1f242f] hover:border-[#22c55e] transition-all group block"
+                className="p-5 rounded-2xl crystal-card crystal-sheen border border-[#13261a] hover:border-[#22c55e]/70 transition-all group block"
               >
                 <h4 className="text-base font-bold text-white group-hover:text-[#22c55e] transition-colors">
                   {rel.title}

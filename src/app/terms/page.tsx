@@ -2,8 +2,22 @@ import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Terms & Conditions | ProxyTech',
-  description: 'Terms of Service and Master Services Agreement guidelines for ProxyTech Software Solutions.',
+  title: 'Terms of Service | ProxyTech Software Solutions',
+  description: 'Terms of Service and Master Services Agreement guidelines for ProxyTech Software Solutions. 100% IP ownership and transparent sprint cycles.',
+  keywords: ['terms of service', 'master services agreement', 'software contract', 'IP ownership', 'ProxyTech terms'],
+  alternates: {
+    canonical: 'https://proxytech.dev/terms',
+  },
+  openGraph: {
+    title: 'Terms of Service | ProxyTech',
+    description: 'Terms of Service and Master Services Agreement guidelines for ProxyTech Software Solutions.',
+    url: 'https://proxytech.dev/terms',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Terms of Service | ProxyTech',
+    description: 'Terms of Service and Master Services Agreement guidelines for ProxyTech Software Solutions.',
+  },
 };
 
 export default function TermsPage() {
@@ -12,7 +26,7 @@ export default function TermsPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <Breadcrumbs items={[{ label: 'Terms & Conditions' }]} />
 
-        <div className="rounded-2xl bg-[#13151b] border border-[#1f242f] p-8 sm:p-12 space-y-6 text-neutral-300 font-sans text-sm leading-relaxed">
+        <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-8 sm:p-12 space-y-6 text-neutral-300 font-sans text-sm leading-relaxed">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold text-white font-mono">Terms & Conditions</h1>
             <p className="text-xs font-mono text-neutral-400">Last updated: October 2026</p>

@@ -34,13 +34,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${member.name} - ${member.role} | ProxyTech`,
     description: member.bio,
+    keywords: [
+      member.name,
+      member.role,
+      ...member.skills,
+      'ProxyTech team',
+      'senior software engineer',
+      'leadership',
+    ],
     alternates: {
       canonical: `https://proxytech.dev/team/${member.slug}`,
     },
     openGraph: {
+      title: `${member.name} - ${member.role} | ProxyTech`,
+      description: member.bio,
+      url: `https://proxytech.dev/team/${member.slug}`,
+      type: 'profile',
+      images: [{ url: member.avatar, alt: member.name }],
+    },
+    twitter: {
+      card: 'summary',
       title: `${member.name} - ${member.role}`,
       description: member.bio,
-      images: [{ url: member.avatar }],
+      images: [member.avatar],
     },
   };
 }
@@ -89,9 +105,9 @@ export default async function TeamMemberPage({ params }: Props) {
         />
 
         {/* Member Profile Header */}
-        <div className="rounded-2xl bg-[#13151b] border border-[#1f242f] p-8 sm:p-10 space-y-8">
+        <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-8 sm:p-10 space-y-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#1f242f] shrink-0">
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#13261a] shrink-0">
               <Image
                 src={member.avatar}
                 alt={member.name}
@@ -103,7 +119,7 @@ export default async function TeamMemberPage({ params }: Props) {
             </div>
 
             <div className="space-y-2 flex-1">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-[#0c0d10] border border-neutral-800 text-[11px] font-mono text-[#22c55e]">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded crystal-badge text-[11px] font-mono text-[#22c55e]">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>{member.experienceYears} Years Production Experience</span>
               </div>
@@ -129,13 +145,13 @@ export default async function TeamMemberPage({ params }: Props) {
           </div>
 
           {/* Socials bar */}
-          <div className="flex items-center gap-3 pt-6 border-t border-[#1f242f]">
+          <div className="flex items-center gap-3 pt-6 border-t border-[#13261a]">
             {member.socials.github && (
               <a
                 href={member.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-[#0c0d10] border border-[#1f242f] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
+                className="p-2 rounded-lg bg-[#060807] border border-[#13261a] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
                 aria-label="GitHub"
               >
                 <GithubIcon className="w-4 h-4" />
@@ -146,7 +162,7 @@ export default async function TeamMemberPage({ params }: Props) {
                 href={member.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-[#0c0d10] border border-[#1f242f] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
+                className="p-2 rounded-lg bg-[#060807] border border-[#13261a] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon className="w-4 h-4" />
@@ -157,7 +173,7 @@ export default async function TeamMemberPage({ params }: Props) {
                 href={member.socials.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-[#0c0d10] border border-[#1f242f] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
+                className="p-2 rounded-lg bg-[#060807] border border-[#13261a] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
                 aria-label="Twitter"
               >
                 <TwitterXIcon className="w-4 h-4" />
@@ -165,7 +181,7 @@ export default async function TeamMemberPage({ params }: Props) {
             )}
             <a
               href={`mailto:${member.socials.email}`}
-              className="p-2 rounded-lg bg-[#0c0d10] border border-[#1f242f] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
+              className="p-2 rounded-lg bg-[#060807] border border-[#13261a] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
               aria-label="Email"
             >
               <Mail className="w-4 h-4" />
@@ -174,7 +190,7 @@ export default async function TeamMemberPage({ params }: Props) {
             <div className="ml-auto">
               <Link
                 href={`/contact?consultant=${encodeURIComponent(member.name)}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#22c55e] text-[#0c0d10] text-xs font-mono font-semibold hover:bg-[#92fad6] transition-all"
+                className="crystal-btn-primary inline-flex items-center gap-1.5 px-4 py-2 font-mono text-xs font-semibold cursor-pointer"
               >
                 <span>Request {member.name.split(' ')[0]} for Pod</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -186,14 +202,14 @@ export default async function TeamMemberPage({ params }: Props) {
         {/* Bio & Skills */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           
-          <div className="md:col-span-8 rounded-xl bg-[#13151b] border border-[#1f242f] p-6 sm:p-8 space-y-4">
+          <div className="md:col-span-8 rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
             <h2 className="text-xl font-bold text-white">Engineering Background</h2>
             <p className="text-sm text-neutral-300 leading-relaxed font-sans">
               {member.fullBio}
             </p>
           </div>
 
-          <div className="md:col-span-4 rounded-xl bg-[#13151b] border border-[#1f242f] p-6 space-y-4">
+          <div className="md:col-span-4 rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 space-y-4">
             <h3 className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
               Specialized Core Stack
             </h3>
@@ -201,7 +217,7 @@ export default async function TeamMemberPage({ params }: Props) {
               {member.skills.map((skill, idx) => (
                 <span
                   key={idx}
-                  className="px-2.5 py-1 rounded bg-[#0c0d10] border border-neutral-800 text-xs font-mono text-neutral-200"
+                  className="px-2.5 py-1 rounded bg-[#060807] border border-[#13261a] text-xs font-mono text-[#22c55e]"
                 >
                   {skill}
                 </span>
@@ -211,7 +227,7 @@ export default async function TeamMemberPage({ params }: Props) {
 
         </div>
 
-        <div className="pt-4 border-t border-[#1f242f]">
+        <div className="pt-4 border-t border-[#13261a]">
           <Link
             href="/team"
             className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-white"

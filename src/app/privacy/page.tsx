@@ -2,8 +2,22 @@ import type { Metadata } from 'next';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | ProxyTech',
-  description: 'Privacy Policy and client confidentiality terms for ProxyTech Software Solutions.',
+  title: 'Privacy Policy | ProxyTech Software Solutions',
+  description: 'Privacy Policy and client confidentiality terms for ProxyTech Software Solutions. Mutual NDA and data protection protocols.',
+  keywords: ['privacy policy', 'client confidentiality', 'software NDA', 'data protection', 'ProxyTech privacy'],
+  alternates: {
+    canonical: 'https://proxytech.dev/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy | ProxyTech',
+    description: 'Client confidentiality, NDA protocols, and data protection standards at ProxyTech.',
+    url: 'https://proxytech.dev/privacy',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Privacy Policy | ProxyTech',
+    description: 'Client confidentiality and data protection standards at ProxyTech.',
+  },
 };
 
 export default function PrivacyPage() {
@@ -12,7 +26,7 @@ export default function PrivacyPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <Breadcrumbs items={[{ label: 'Privacy Policy' }]} />
 
-        <div className="rounded-2xl bg-[#13151b] border border-[#1f242f] p-8 sm:p-12 space-y-6 text-neutral-300 font-sans text-sm leading-relaxed">
+        <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-8 sm:p-12 space-y-6 text-neutral-300 font-sans text-sm leading-relaxed">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold text-white font-mono">Privacy Policy</h1>
             <p className="text-xs font-mono text-neutral-400">Last updated: October 2026</p>
