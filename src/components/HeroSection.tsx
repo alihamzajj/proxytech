@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
-import AsciiSphere from './AsciiSphere';
+import LaptopMockup from './LaptopMockup';
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -29,8 +29,7 @@ export default function HeroSection() {
   const heroCardOpacity = useTransform(smoothProgress, [0, 0.8, 1], [1, 0.88, 0.6]);
   
   const sphereY = useTransform(smoothProgress, [0, 1], [0, 85]);
-  const sphereScale = useTransform(smoothProgress, [0, 1], [1, 1.15]);
-  const sphereRotate = useTransform(smoothProgress, [0, 1], [0, 16]);
+  const sphereScale = useTransform(smoothProgress, [0, 1], [1, 1.05]);
   const bgGlowY = useTransform(smoothProgress, [0, 1], [0, 140]);
 
   return (
@@ -65,9 +64,9 @@ export default function HeroSection() {
           <div className="absolute -top-24 -right-24 w-80 h-80 bg-[#22c55e]/15 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-[#22c55e]/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left Content Column */}
-            <div className="lg:col-span-8 space-y-6 sm:space-y-7">
+            <div className="lg:col-span-7 space-y-6 sm:space-y-7">
               {/* Status pill badge with live ping & crystal bevel */}
               <div className="flex flex-wrap items-center gap-3">
                 <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full crystal-badge text-xs font-mono">
@@ -153,8 +152,8 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Right Side: ASCII Graphic Visual with Parallax Float */}
-            <div className="lg:col-span-4 flex items-center justify-center">
+            {/* Right Side: High-Tech Developer Laptop Workstation */}
+            <div className="lg:col-span-5 flex items-center justify-center w-full">
               <motion.div
                 style={
                   shouldReduceMotion
@@ -162,12 +161,11 @@ export default function HeroSection() {
                     : {
                         y: sphereY,
                         scale: sphereScale,
-                        rotate: sphereRotate,
                       }
                 }
-                className="relative group transform-gpu"
+                className="w-full flex justify-center"
               >
-                <AsciiSphere className="p-4 sm:p-8" />
+                <LaptopMockup />
               </motion.div>
             </div>
           </div>
