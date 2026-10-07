@@ -6,9 +6,24 @@ import { supabase } from './supabase';
 
 const DATA_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'custom-store.json');
 
+export interface Lead {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  service: string;
+  budget: string;
+  message: string;
+  preferred_contact?: string;
+  created_at: string;
+  status?: 'new' | 'contacted' | 'closed';
+}
+
 interface StoreData {
   customProjects: ProjectCaseStudy[];
   pricingPlans: PricingPlan[];
+  leads: Lead[];
   updatedAt: string;
 }
 
@@ -16,6 +31,7 @@ function getInitialStore(): StoreData {
   return {
     customProjects: [],
     pricingPlans: DEFAULT_PRICING,
+    leads: [],
     updatedAt: new Date().toISOString(),
   };
 }
@@ -35,6 +51,7 @@ export function readLocalStore(): StoreData {
       memoryStore = {
         customProjects: Array.isArray(parsed.customProjects) ? parsed.customProjects : [],
         pricingPlans: Array.isArray(parsed.pricingPlans) && parsed.pricingPlans.length > 0 ? parsed.pricingPlans : DEFAULT_PRICING,
+        leads: Array.isArray(parsed.leads) ? parsed.leads : [],
         updatedAt: parsed.updatedAt || new Date().toISOString(),
       };
       return memoryStore;
@@ -215,3 +232,127 @@ export async function updatePricingPlans(plans: PricingPlan[]): Promise<PricingP
 
   return plans;
 }
+
+/**
+ * Save or record a new client lead / message
+ */
+export async function saveLead(submission: {
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  service: string;
+  budget: string;
+  message: string;
+  preferred_contact?: string;
+}): Promise<Lead> {
+  const leadId = `lead-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
+  const now = new Date().toISOString();
+
+  const lead: Lead = {
+    id: leadId,
+    name: submission.name,
+    email: submission.email,
+    phone: submission.phone || '',
+    company: submission.company || '',
+    service: submission.service || 'General Inquiry',
+    budget: submission.budget || '$10,000 - $25,000',
+    message: submission.message,
+    preferred_contact: submission.preferred_contact || 'email',
+    created_at: now,
+    status: 'new',
+  };
+
+  // 1. Attempt Supabase insert if client is available
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            name: lead.name,
+            email: lead.email,
+            phone: lead.phone || null,
+            company: lead.company || null,
+            service: lead.service,
+            budget: lead.budget,
+            message: lead.message,
+            preferred_contact: lead.preferred_contact,
+            created_at: lead.created_at,
+            status: 'new',
+          },
+        ])
+        .select();
+
+      if (!error && data && data.length > 0) {
+        lead.id = data[0].id || lead.id;
+        console.log('[data-store] Successfully saved lead to Supabase:', lead.id);
+      } else if (error) {
+        console.warn('[data-store] Supabase insert warning (saved to persistent backup):', error.message);
+      }
+    } catch (err) {
+      console.warn('[data-store] Supabase insert error:', err);
+    }
+  }
+
+  // 2. Always persist to local store as fail-safe guarantee
+  const store = readLocalStore();
+  if (!Array.isArray(store.leads)) {
+    store.leads = [];
+  }
+  store.leads.unshift(lead);
+  store.updatedAt = new Date().toISOString();
+  writeLocalStore(store);
+
+  return lead;
+}
+
+/**
+ * Fetch all client leads (merging Supabase + local persistent store)
+ */
+export async function getAllLeads(): Promise<Lead[]> {
+  const store = readLocalStore();
+  const localLeads = Array.isArray(store.leads) ? store.leads : [];
+
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!error && data && data.length > 0) {
+        // Merge Supabase leads with local leads without duplication
+        const existingIds = new Set(data.map((l: any) => l.id));
+        const nonDuplicateLocal = localLeads.filter((l) => !existingIds.has(l.id));
+        const combined = [...data, ...nonDuplicateLocal];
+        return combined.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      }
+    } catch (err) {
+      console.warn('[data-store] Supabase select error for leads:', err);
+    }
+  }
+
+  return localLeads;
+}
+
+/**
+ * Delete a lead by ID
+ */
+export async function deleteLead(id: string): Promise<boolean> {
+  if (supabase) {
+    try {
+      await supabase.from('contact_submissions').delete().eq('id', id);
+    } catch {
+      // Ignore
+    }
+  }
+
+  const store = readLocalStore();
+  store.leads = (store.leads || []).filter((l) => l.id !== id);
+  store.updatedAt = new Date().toISOString();
+  writeLocalStore(store);
+
+  return true;
+}
+

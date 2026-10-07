@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Send, CheckCircle2, AlertCircle, Loader2, Calendar, ShieldCheck, Clock, Lock } from 'lucide-react';
-import { submitContactLead } from '@/lib/supabase';
 import { SERVICES, COMPANY_INFO } from '@/lib/data';
 
 export default function ContactForm() {
@@ -52,11 +51,17 @@ export default function ContactForm() {
     setStatus({ type: 'idle', message: '' });
 
     try {
-      const res = await submitContactLead(formData);
-      if (res.success) {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      if (res.ok && (data.success || !data.error)) {
         setStatus({
           type: 'success',
-          message: res.message,
+          message: data.message || 'Your project brief has been received. Our senior engineering leads will review it and reply within 24 hours.',
         });
         setFormData({
           name: '',
@@ -71,11 +76,11 @@ export default function ContactForm() {
       } else {
         setStatus({
           type: 'error',
-          message: res.message,
+          message: data.error || data.message || 'Failed to submit inquiry',
         });
       }
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'An unexpected error occurred';
+      const msg = err instanceof Error ? err.message : 'An unexpected network error occurred';
       setStatus({
         type: 'error',
         message: msg,

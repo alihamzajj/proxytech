@@ -271,6 +271,44 @@ export default function AdminDashboardPage() {
     }
   };
 
+  // Refresh Leads
+  const [refreshingLeads, setRefreshingLeads] = useState(false);
+  const handleRefreshLeads = async () => {
+    setRefreshingLeads(true);
+    try {
+      const res = await fetch('/api/admin/leads');
+      const data = await res.json();
+      if (data.success) {
+        setLeads(data.leads || []);
+        showToast(`Loaded ${data.leads?.length || 0} client inquiries.`);
+      } else {
+        showToast(data.message || 'Failed to fetch inquiries', 'error');
+      }
+    } catch {
+      showToast('Network error refreshing inquiries', 'error');
+    } finally {
+      setRefreshingLeads(false);
+    }
+  };
+
+  // Delete Lead
+  const handleDeleteLead = async (id: string, name: string) => {
+    if (!confirm(`Are you sure you want to delete inquiry from "${name}"?`)) return;
+
+    try {
+      const res = await fetch(`/api/admin/leads?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) {
+        setLeads((prev) => prev.filter((l) => l.id !== id));
+        showToast(`Deleted inquiry from ${name}.`);
+      } else {
+        showToast(data.message || 'Failed to delete inquiry', 'error');
+      }
+    } catch {
+      showToast('Error deleting inquiry', 'error');
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#030604] text-white">
@@ -414,7 +452,14 @@ export default function AdminDashboardPage() {
             }`}
           >
             <Inbox className="w-4 h-4" />
-            <span>Client Leads ({leads.length})</span>
+            <span>Client Messages & Inquiries</span>
+            <span className={`px-2 py-0.5 text-xs rounded-full font-mono font-bold ${
+              leads.length > 0 
+                ? 'bg-[#22c55e]/20 text-[#4ade80] border border-[#22c55e]/50'
+                : 'bg-neutral-800 text-neutral-400'
+            }`}>
+              {leads.length}
+            </span>
           </button>
         </div>
 
@@ -637,19 +682,33 @@ export default function AdminDashboardPage() {
         {/* TAB 3: LEADS / CRM */}
         {activeTab === 'leads' && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-[#09120c] border border-[#14261b]">
               <div>
-                <h2 className="text-lg font-bold text-white">Incoming Client RFPs & Submissions</h2>
-                <p className="text-xs text-neutral-400">Captured through the website contact form and autonomous agent endpoints.</p>
+                <h2 className="text-base font-bold text-white flex items-center gap-2">
+                  <span>Client Messages & Inquiries</span>
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-[#22c55e]/20 text-[#4ade80] border border-[#22c55e]/40 font-mono">
+                    {leads.length} Total
+                  </span>
+                </h2>
+                <p className="text-xs text-neutral-400">Captured live from website contact forms and AI agent endpoints.</p>
               </div>
+
+              <button
+                onClick={handleRefreshLeads}
+                disabled={refreshingLeads}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0e1c12] hover:bg-[#162e1d] border border-[#1b3d25] text-neutral-200 hover:text-white text-xs font-mono transition-colors cursor-pointer shrink-0"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${refreshingLeads ? 'animate-spin text-[#4ade80]' : ''}`} />
+                <span>{refreshingLeads ? 'Refreshing...' : 'Refresh Messages'}</span>
+              </button>
             </div>
 
             {leads.length === 0 ? (
               <div className="p-12 text-center rounded-3xl bg-[#060907] border border-[#13261a] space-y-3">
                 <Inbox className="w-8 h-8 text-neutral-600 mx-auto" />
-                <h3 className="font-bold text-white text-base">No client submissions yet</h3>
+                <h3 className="font-bold text-white text-base">No client messages yet</h3>
                 <p className="text-xs text-neutral-400 max-w-sm mx-auto">
-                  When prospects submit the contact form on your website, their project details and contact information will appear here.
+                  When prospects submit the contact form or send a message on your website, their full contact details and project requirements will appear right here.
                 </p>
               </div>
             ) : (
@@ -657,39 +716,57 @@ export default function AdminDashboardPage() {
                 {leads.map((lead) => (
                   <div
                     key={lead.id}
-                    className="p-5 rounded-2xl bg-[#060a07] border border-[#13261a] space-y-3"
+                    className="p-5 rounded-2xl bg-[#060a07] border border-[#13261a] hover:border-[#1b3824] transition-all space-y-3 shadow-lg"
                   >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                      <div>
-                        <div className="flex items-center gap-2">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                      <div className="space-y-1">
+                        <div className="flex flex-wrap items-center gap-2">
                           <h3 className="font-bold text-white text-base">{lead.name}</h3>
                           {lead.company && (
                             <span className="text-xs text-neutral-400 font-mono">({lead.company})</span>
                           )}
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#102316] text-[#4ade80] border border-[#1b3b24]">
+                            {lead.service}
+                          </span>
                         </div>
-                        <p className="text-xs font-mono text-[#4ade80]">{lead.email}</p>
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono">
+                          <a href={`mailto:${lead.email}`} className="text-[#4ade80] hover:underline">
+                            {lead.email}
+                          </a>
+                          {lead.phone && (
+                            <span className="text-neutral-400">Tel: {lead.phone}</span>
+                          )}
+                          <span className="text-neutral-500">| Budget: <strong className="text-white">{lead.budget}</strong></span>
+                        </div>
                       </div>
 
-                      <div className="flex items-center gap-3">
-                        <span className="text-xs font-mono px-2.5 py-1 rounded bg-[#0c1810] border border-[#1b3b24] text-neutral-300">
-                          Budget: {lead.budget}
-                        </span>
+                      <div className="flex items-center gap-2 shrink-0">
                         <a
                           href={`mailto:${lead.email}?subject=ProxyTech Consultation - ${encodeURIComponent(lead.service)}`}
-                          className="px-3 py-1 rounded-lg bg-[#22c55e] hover:bg-[#16a34a] text-[#060807] font-semibold text-xs transition-colors"
+                          className="px-3.5 py-1.5 rounded-xl bg-[#22c55e] hover:bg-[#16a34a] text-[#060807] font-semibold text-xs transition-colors shadow-[0_0_12px_rgba(34,197,94,0.3)] inline-flex items-center gap-1.5"
                         >
-                          Reply Email
+                          <span>Reply Email</span>
                         </a>
+                        <button
+                          onClick={() => handleDeleteLead(lead.id, lead.name)}
+                          title="Delete message"
+                          className="p-1.5 rounded-xl bg-[#140e0e] hover:bg-[#2e1414] border border-[#3b1818] text-red-400 hover:text-red-300 transition-colors cursor-pointer"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-xl bg-[#09110c] border border-[#102216] text-xs text-neutral-300">
-                      <p className="font-mono text-[10px] text-neutral-500 uppercase mb-1">Requested Service: {lead.service}</p>
-                      <p className="leading-relaxed">{lead.message}</p>
+                    <div className="p-4 rounded-xl bg-[#09110c] border border-[#102216] text-xs text-neutral-300 font-sans leading-relaxed">
+                      <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider mb-1.5">
+                        Client Message / Project Brief:
+                      </div>
+                      <p className="whitespace-pre-wrap">{lead.message}</p>
                     </div>
 
-                    <div className="text-[10px] font-mono text-neutral-500">
-                      Submitted: {new Date(lead.created_at).toLocaleString()}
+                    <div className="flex items-center justify-between text-[10px] font-mono text-neutral-500 pt-1">
+                      <span>Submitted: {new Date(lead.created_at).toLocaleString()}</span>
+                      <span className="text-neutral-600">ID: {lead.id}</span>
                     </div>
                   </div>
                 ))}

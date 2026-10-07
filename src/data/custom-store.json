@@ -1,0 +1,105 @@
+{
+  "customProjects": [],
+  "pricingPlans": [
+    {
+      "id": "starter",
+      "name": "Starter",
+      "category": "Starter",
+      "tagline": "Ideal for early-stage startups and businesses launching their initial MVP or modernizing a single product.",
+      "monthlyPrice": 3450,
+      "yearlyPrice": 2850,
+      "popular": false,
+      "deliverables": [
+        "1 Dedicated Senior Full-Stack Engineer",
+        "Up to 80 Development Hours / Month",
+        "Bi-Weekly Production Sprint Releases",
+        "Next.js, React, or Mobile App development",
+        "Basic Supabase / PostgreSQL Setup",
+        "Source Code Ownership & GitHub Access",
+        "Automated CI/CD Pipeline Configuration"
+      ],
+      "support": "Async Slack Channel & Email (24h SLA)",
+      "revisions": "Unlimited Sprint Adjustments",
+      "developmentHours": "80 hrs / month",
+      "maintenanceIncluded": true,
+      "seoAuditIncluded": false,
+      "ctaText": "Start with Starter"
+    },
+    {
+      "id": "growth",
+      "name": "Growth",
+      "category": "Growth",
+      "tagline": "Accelerated development for scaling companies requiring continuous feature velocity and UI polish.",
+      "monthlyPrice": 5950,
+      "yearlyPrice": 4950,
+      "popular": true,
+      "deliverables": [
+        "2 Senior Engineers (Full-Stack + Mobile / Frontend)",
+        "Dedicated UI/UX Design Support (Figma)",
+        "Up to 160 Development Hours / Month",
+        "Weekly Production Sprint Releases",
+        "Full Technical SEO & Performance Audit",
+        "Stripe / Supabase / Auth & Database Systems",
+        "Direct Slack/Discord Workspace Integration",
+        "Weekly Architectural Strategy Calls"
+      ],
+      "support": "Dedicated Slack Channel (4h Response SLA)",
+      "revisions": "Unlimited Revisions & Backlog Prioritization",
+      "developmentHours": "160 hrs / month",
+      "maintenanceIncluded": true,
+      "seoAuditIncluded": true,
+      "ctaText": "Accelerate with Growth"
+    },
+    {
+      "id": "business",
+      "name": "Business",
+      "category": "Business",
+      "tagline": "A full multidisciplinary product pod for established companies replacing or augmenting internal teams.",
+      "monthlyPrice": 9800,
+      "yearlyPrice": 8200,
+      "popular": false,
+      "deliverables": [
+        "Full Product Pod: 3 Senior Engineers + 1 Lead UI/UX Designer + 1 PM",
+        "Up to 280 Development Hours / Month",
+        "Continuous Deployment & Staging Pipelines",
+        "Advanced Cloud Microservices (AWS / Supabase)",
+        "Comprehensive Security Hardening & Penetration Testing",
+        "Full Multi-Tenant SaaS Architecture Support",
+        "Conversion Rate Optimization & Analytics Setup",
+        "Daily Standups & Sprint Planning"
+      ],
+      "support": "Real-time Slack, Phone & Dedicated Project Manager",
+      "revisions": "Unlimited Real-Time Sprints",
+      "developmentHours": "280 hrs / month",
+      "maintenanceIncluded": true,
+      "seoAuditIncluded": true,
+      "ctaText": "Scale with Business Pod"
+    },
+    {
+      "id": "enterprise",
+      "name": "Enterprise",
+      "category": "Enterprise",
+      "tagline": "Custom engineering SLAs, high-concurrency systems, legacy modernization, and 24/7 dedicated mission control.",
+      "monthlyPrice": "Custom",
+      "yearlyPrice": "Custom",
+      "popular": false,
+      "deliverables": [
+        "Custom Scaled Engineering Squad (5+ Engineers & Architects)",
+        "Dedicated Enterprise Solution Architect & Staff Security Engineer",
+        "Guaranteed 99.99% Uptime SLA & 24/7/365 On-Call Emergency Pager",
+        "SOC2 / HIPAA / GDPR Compliance Readiness Support",
+        "Private VPC & Dedicated On-Premise Cloud Orchestration",
+        "Custom Master Services Agreement (MSA) & Custom Invoicing",
+        "Complete Knowledge Transfer & In-House Team Upskilling"
+      ],
+      "support": "24/7 Dedicated Emergency Escalation + Dedicated VP",
+      "revisions": "Full Custom Agile Framework",
+      "developmentHours": "Custom / Dedicated Squad",
+      "maintenanceIncluded": true,
+      "seoAuditIncluded": true,
+      "ctaText": "Request Custom Proposal"
+    }
+  ],
+  "leads": [],
+  "updatedAt": "2026-10-07T06:32:49.849Z"
+}
