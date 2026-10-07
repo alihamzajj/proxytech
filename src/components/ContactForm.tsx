@@ -16,7 +16,7 @@ export default function ContactForm() {
     phone: '',
     company: '',
     service: preselectedService || (preselectedPlan ? `Plan: ${preselectedPlan.toUpperCase()}` : SERVICES[0].title),
-    budget: '$10,000 - $25,000',
+    budget: 'Discuss on Discovery Call',
     message: '',
     preferred_contact: 'email',
   });
@@ -26,14 +26,6 @@ export default function ContactForm() {
     type: 'idle',
     message: '',
   });
-
-  const budgetOptions = [
-    '< $5,000 (Advisory / Architecture Audit)',
-    '$5,000 - $10,000 (Sprint Prototype / MVP Spec)',
-    '$10,000 - $25,000 (Full-Stack Feature / MVP Build)',
-    '$25,000 - $50,000 (High-Concurrency Cloud Platform)',
-    '$50,000+ (Dedicated Monthly Engineering Pod)',
-  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,7 +61,7 @@ export default function ContactForm() {
           phone: '',
           company: '',
           service: SERVICES[0].title,
-          budget: '$10,000 - $25,000',
+          budget: 'Discuss on Discovery Call',
           message: '',
           preferred_contact: 'email',
         });
@@ -194,45 +186,25 @@ export default function ContactForm() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {/* Service Required */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-mono text-white font-semibold block">
-              Core Discipline Needed
-            </label>
-            <select
-              value={formData.service}
-              onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-              className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
-            >
-              {SERVICES.map((s) => (
-                <option key={s.id} value={s.title}>
-                  {s.title}
-                </option>
-              ))}
-              <option value="Full Engineering Pod (Monthly)">Full Engineering Pod (Monthly)</option>
-              <option value="Technical Architecture Audit">Technical Architecture Audit</option>
-              <option value="Other Custom Software">Other Custom Software</option>
-            </select>
-          </div>
-
-          {/* Budget */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-mono text-white font-semibold block">
-              Target Capital Allocation
-            </label>
-            <select
-              value={formData.budget}
-              onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-              className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
-            >
-              {budgetOptions.map((opt, i) => (
-                <option key={i} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
-          </div>
+        {/* Service Required */}
+        <div className="space-y-1.5">
+          <label className="text-xs font-mono text-white font-semibold block">
+            Core Discipline Needed
+          </label>
+          <select
+            value={formData.service}
+            onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+            className="w-full bg-[#060807] border border-[#13261a] focus:border-[#22c55e] rounded-xl px-4 py-2.5 text-xs text-white outline-none font-mono transition-all focus:shadow-[0_0_15px_rgba(34,197,94,0.18)]"
+          >
+            {SERVICES.map((s) => (
+              <option key={s.id} value={s.title}>
+                {s.title}
+              </option>
+            ))}
+            <option value="Full Engineering Pod (Monthly)">Full Engineering Pod (Monthly)</option>
+            <option value="Technical Architecture Audit">Technical Architecture Audit</option>
+            <option value="Other Custom Software">Other Custom Software</option>
+          </select>
         </div>
 
         {/* Project Description */}
