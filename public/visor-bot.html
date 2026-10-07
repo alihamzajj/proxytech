@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor-Bot // Cursor-Reactive ASCII Mascot</title>
+  <style>
+    /* ==========================================================================
+       CONFIG & THEME VARIABLES
+       Customize color, background, and sizing here.
+       ========================================================================== */
+    :root {
+      --bot-color: #3dff8a;          /* Primary neon green glyph color */
+      --bot-bg: #030604;             /* Dark obsidian background */
+      --bot-glow: rgba(61, 255, 138, 0.25);
+      --bot-border: #13261a;
+      --font-family: "Courier New", Courier, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bot-bg);
+      color: var(--bot-color);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    /* Container holding the mascot card */
+    .visor-bot-card {
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, #06110a 0%, #030604 100%);
+      border: 1px solid var(--bot-border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 0 50px rgba(61, 255, 138, 0.08), inset 0 0 30px rgba(61, 255, 138, 0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      max-width: 380px;
+      width: 100%;
+    }
+
+    /* Top HUD header */
+    .visor-bot-hud {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      border-bottom: 1px solid var(--bot-border);
+      padding-bottom: 12px;
+    }
+
+    .hud-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hud-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--bot-color);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--bot-color);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    /* Canvas Wrapper */
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 32 / 30;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #020403;
+      border: 1px solid rgba(61, 255, 138, 0.15);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9);
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    /* Canvas element */
+    #visor-bot-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Scanline overlay for authentic CRT monitor effect */
+    .scanlines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0, 0, 0, 0.35) 50%,
+        rgba(0, 0, 0, 0.35)
+      );
+      background-size: 100% 4px;
+      opacity: 0.6;
+    }
+
+    /* Bottom Status Bar */
+    .visor-bot-status {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      opacity: 0.65;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- VISOR-BOT MASCOT COMPONENT -->
+  <div class="visor-bot-card">
+    <div class="visor-bot-hud">
+      <div class="hud-badge">
+        <span class="hud-dot"></span>
+        <span>VISOR-BOT // v2.4</span>
+      </div>
+      <span>AUTONOMOUS</span>
+    </div>
+
+    <div class="canvas-wrap" id="canvas-wrapper">
+      <canvas id="visor-bot-canvas"></canvas>
+      <div class="scanlines"></div>
+    </div>
+
+    <div class="visor-bot-status">
+      <span id="coords-display">TARGET: [00, 00]</span>
+      <span>STATUS: TRACKING</span>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * VISOR-BOT // Self-contained Cursor-Reactive ASCII Robot Mascot
+     * =========================================================================
+     * Customization note:
+     * - Color: change CONFIG.GLYPH_COLOR
+     * - Grid size: change CONFIG.COLS and CONFIG.ROWS (default 32x30, 10px cell)
+     * - Halo radius: change CONFIG.HALO_RADIUS (default 9 cells)
+     * =========================================================================
+     */
+    (function () {
+      const CONFIG = {
+        COLS: 32,             // 32 columns
+        ROWS: 30,             // 30 rows
+        CELL_SIZE: 10,        // 10px cell size -> 320x300 logical resolution
+        GLYPH_COLOR: '#3dff8a', // Neon green
+        FONT_FAMILY: '"Courier New", Courier, monospace',
+        HALO_RADIUS: 9,       // Ambient halo radius in cell units
+        IDLE_TIMEOUT_MS: 4000,// Seconds before figure-8 starts
+        BLINK_INTERVAL_MS: 4200,
+        BLINK_DURATION_MS: 150,
+      };
+
+      const canvas = document.getElementById('visor-bot-canvas');
+      const wrapper = document.getElementById('canvas-wrapper');
+      const coordsDisplay = document.getElementById('coords-display');
+      const ctx = canvas.getContext('2d');
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Virtual / Active Cursor Position in grid cell coordinates (centered from -16 to 16, -15 to 15)
+      let curX = 0;
+      let curY = 0;
+      let targetX = 0;
+      let targetY = 0;
+      let hasUserInteracted = false;
+      let lastMoveTime = performance.now();
+
+      // Eye center coordinates
+      const EYE_L = { x: -4.5, y: -2 };
+      const EYE_R = { x: 4.5, y: -2 };
+      const RX = 3.5;
+      const RY = 1.5;
+
+      // HiDPI Canvas Resizing
+      function resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const logicalW = CONFIG.COLS * CONFIG.CELL_SIZE;
+        const logicalH = CONFIG.ROWS * CONFIG.CELL_SIZE;
+
+        canvas.width = logicalW * dpr;
+        canvas.height = logicalH * dpr;
+
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+      }
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      // Cursor tracking (Pointer events for mouse + touch)
+      function updatePointer(e) {
+        const rect = wrapper.getBoundingClientRect();
+        const clientX = e.clientX ?? (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+        const clientY = e.clientY ?? (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+
+        // Normalize to canvas cell coordinates (-16 to +16, -15 to +15)
+        const normX = (clientX - rect.left) / rect.width;
+        const normY = (clientY - rect.top) / rect.height;
+
+        targetX = (normX - 0.5) * CONFIG.COLS;
+        targetY = (normY - 0.5) * CONFIG.ROWS;
+
+        hasUserInteracted = true;
+        lastMoveTime = performance.now();
+      }
+
+      window.addEventListener('pointermove', updatePointer, { passive: true });
+      window.addEventListener('pointerdown', updatePointer, { passive: true });
+
+      // Determine if cell coordinate is part of robot body
+      function isInsideRobot(x, y) {
+        // 1. Head: rectangle |x| <= 11, y from -9 to 9, with 45-deg corner cuts
+        if (Math.abs(x) <= 11 && y >= -9 && y <= 9) {
+          const cornerCut = (Math.abs(x) - 8) + (Math.abs(y) - 6);
+          if (Math.abs(x) >= 9 && Math.abs(y) >= 7 && cornerCut > 3.2) {
+            // Cut corner
+          } else {
+            return true;
+          }
+        }
+
+        // 2. Ear speakers: discs on each side |x| from 11 to 14, |y| < 4
+        if (Math.abs(x) >= 11 && Math.abs(x) <= 14 && Math.abs(y) < 4) {
+          const dx = Math.abs(x) - 12.5;
+          const dy = y / 3.5;
+          if (dx * dx + dy * dy <= 1.4) {
+            return true;
+          }
+        }
+
+        // 3. Twin antennas: at x = +/-5, y from -14 to -10
+        if (Math.abs(Math.abs(x) - 5) <= 0.6 && y >= -14 && y <= -10) {
+          return true;
+        }
+
+        return false;
+      }
+
+      // Main Render Loop
+      function render(time) {
+        // Smooth cursor interpolation
+        const lerpFactor = 0.12;
+        curX += (targetX - curX) * lerpFactor;
+        curY += (targetY - curY) * lerpFactor;
+
+        // Autonomous wandering figure-8 after 4s idle (unless prefersReducedMotion)
+        const idleTime = time - lastMoveTime;
+        if (!prefersReducedMotion && idleTime > CONFIG.IDLE_TIMEOUT_MS) {
+          const t = (idleTime - CONFIG.IDLE_TIMEOUT_MS) * 0.001;
+          targetX = 8 * Math.sin(t * 0.9);
+          targetY = 4.5 * Math.sin(t * 1.8);
+        }
+
+        // Update HUD display
+        if (coordsDisplay) {
+          const displayX = (curX >= 0 ? '+' : '') + Math.round(curX);
+          const displayY = (curY >= 0 ? '+' : '') + Math.round(curY);
+          coordsDisplay.textContent = `TARGET: [${displayX.padStart(3, ' ')}, ${displayY.padStart(3, ' ')}]`;
+        }
+
+        const logicalW = CONFIG.COLS * CONFIG.CELL_SIZE;
+        const logicalH = CONFIG.ROWS * CONFIG.CELL_SIZE;
+
+        // Clear canvas
+        ctx.clearRect(0, 0, logicalW, logicalH);
+
+        // Blinking state calculation
+        const blinkCycle = time % CONFIG.BLINK_INTERVAL_MS;
+        const isBlinking = !prefersReducedMotion && blinkCycle < CONFIG.BLINK_DURATION_MS;
+        const currentRy = isBlinking ? RY * 0.15 : RY;
+
+        // Antenna tip blink (every 0.5s)
+        const antennaTipActive = prefersReducedMotion || Math.floor(time / 500) % 2 === 0;
+
+        // Helper: calculate pupil positions
+        function getPupilCenter(eyeCenter) {
+          const dx = curX - eyeCenter.x;
+          const dy = curY - eyeCenter.y;
+          const dist = Math.hypot(dx, dy) || 1;
+
+          // Limit pupil travel within ellipse
+          const maxTx = RX - 1.5;
+          const maxTy = RY - 1.2;
+
+          const travelX = (dx / dist) * Math.min(Math.abs(dx) * 0.35, maxTx);
+          const travelY = (dy / dist) * Math.min(Math.abs(dy) * 0.12, maxTy);
+
+          return {
+            x: eyeCenter.x + travelX,
+            y: eyeCenter.y + travelY,
+          };
+        }
+
+        const pupilL = getPupilCenter(EYE_L);
+        const pupilR = getPupilCenter(EYE_R);
+
+        // Crosshair Lines through cursor cell
+        const curCol = Math.round(curX + 15.5);
+        const curRow = Math.round(curY + 14.5);
+
+        ctx.fillStyle = 'rgba(61, 255, 138, 0.10)';
+        // Horizontal line
+        ctx.fillRect(0, curRow * CONFIG.CELL_SIZE + 4.5, logicalW, 1);
+        // Vertical line
+        ctx.fillRect(curCol * CONFIG.CELL_SIZE + 4.5, 0, 1, logicalH);
+
+        // Iterate through all 32x30 cells
+        for (let row = 0; row < CONFIG.ROWS; row++) {
+          for (let col = 0; col < CONFIG.COLS; col++) {
+            // Cell coordinates centered on grid
+            const x = col - 15.5;
+            const y = row - 14.5;
+
+            // Compute distance to cursor & halo intensity
+            const dist = Math.hypot(x - curX, y - curY);
+            const haloIntensity = Math.max(0, 1 - dist / CONFIG.HALO_RADIUS);
+
+            // Antenna tip check (top cell of antenna at y = -14)
+            if (y <= -13.5 && Math.abs(Math.abs(x) - 5) <= 0.6) {
+              if (!antennaTipActive) continue;
+            }
+
+            const inRobot = isInsideRobot(x, y);
+
+            // Check if cell is in Visor: |x| <= 9.5, y from -4.5 to 0.5
+            const inVisor = Math.abs(x) <= 9.5 && y >= -4.5 && y <= 0.5;
+
+            // Check if cell is in Mouth grille: rows 4 to 7, |x| <= 5, alternating rows
+            const inMouthGrille = Math.abs(x) <= 5 && y >= 4 && y <= 7 && (row % 2 === 0);
+
+            // Check Left and Right Eye ellipses
+            const inEyeL = (((x - EYE_L.x) / RX) ** 2 + ((y - EYE_L.y) / currentRy) ** 2) <= 1.0;
+            const inEyeR = (((x - EYE_R.x) / RX) ** 2 + ((y - EYE_R.y) / currentRy) ** 2) <= 1.0;
+
+            // Check Pupils (radius 1.25)
+            const inPupilL = !isBlinking && (Math.hypot(x - pupilL.x, y - pupilL.y) <= 1.25);
+            const inPupilR = !isBlinking && (Math.hypot(x - pupilR.x, y - pupilR.y) <= 1.25);
+
+            let glyph = '';
+            let opacity = 0;
+            let intensity = 0;
+
+            if (inPupilL || inPupilR) {
+              // BRIGHT PUPIL
+              glyph = '#';
+              intensity = 1.0;
+              opacity = 1.0;
+            } else if (inEyeL || inEyeR) {
+              // EYE INTERIOR
+              glyph = '.';
+              intensity = 0.45;
+              opacity = 0.55 + 0.35 * haloIntensity;
+            } else if (inVisor) {
+              // DARK VISOR BAND (No glyphs except eyes)
+              continue;
+            } else if (inMouthGrille) {
+              // DARK MOUTH GRILLE (Alternating rows empty)
+              continue;
+            } else if (inRobot) {
+              // ROBOT BODY GLYPHS
+              intensity = 0.3 + 0.7 * haloIntensity;
+              if (intensity < 0.4) glyph = '+';
+              else if (intensity < 0.55) glyph = 'o';
+              else if (intensity < 0.8) glyph = '0';
+              else glyph = '#';
+
+              opacity = 0.3 + 0.7 * intensity;
+            } else {
+              // OUTSIDE ROBOT (AMBIENT HALO)
+              if (haloIntensity > 0.12) {
+                intensity = haloIntensity;
+                if (haloIntensity < 0.32) glyph = '-';
+                else if (haloIntensity < 0.58) glyph = '+';
+                else glyph = 'o';
+
+                opacity = haloIntensity * 0.75;
+              } else {
+                continue; // Transparent
+              }
+            }
+
+            // Draw Glyph centered in cell
+            const fontSize = 7 + intensity * 7; // Font size scales from 7px to 14px
+            ctx.font = `${fontSize}px ${CONFIG.FONT_FAMILY}`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = `rgba(61, 255, 138, ${opacity.toFixed(2)})`;
+
+            const cellCenterX = col * CONFIG.CELL_SIZE + CONFIG.CELL_SIZE / 2;
+            const cellCenterY = row * CONFIG.CELL_SIZE + CONFIG.CELL_SIZE / 2;
+
+            ctx.fillText(glyph, cellCenterX, cellCenterY);
+          }
+        }
+
+        requestAnimationFrame(render);
+      }
+
+      requestAnimationFrame(render);
+    })();
+  </script>
+</body>
+</html>
