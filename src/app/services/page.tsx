@@ -87,45 +87,45 @@ export default function ServicesPage() {
             return (
               <div
                 key={service.id}
-                className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] hover:border-[#22c55e]/70 p-8 flex flex-col justify-between transition-all duration-300 group hover:shadow-[0_0_35px_rgba(34,197,94,0.18)]"
+                className="rounded-2xl crystal-card crystal-sheen border border-[#1a2333] hover:border-[#10b981]/60 p-8 flex flex-col justify-between transition-all duration-300 group hover:shadow-[0_0_35px_rgba(16,185,129,0.18)] font-sans"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-[#060807] border border-[#13261a] group-hover:border-[#22c55e]/60 flex items-center justify-center text-[#22c55e] transition-colors shadow-[0_0_15px_rgba(34,197,94,0.15)]">
+                    <div className="w-12 h-12 rounded-xl bg-[#0d121c] border border-[#1a2333] group-hover:border-[#10b981]/60 flex items-center justify-center text-[#10b981] transition-colors shadow-[0_0_15px_rgba(16,185,129,0.15)]">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="font-mono text-xs text-neutral-300 bg-[#060807] px-3 py-1 rounded-full border border-[#13261a]">
-                      SPECS // 0{idx + 1}
+                    <span className="font-sans text-xs text-slate-300 bg-[#0d121c] px-3 py-1 rounded-full border border-[#1a2333] font-medium">
+                      Service 0{idx + 1}
                     </span>
                   </div>
 
-                  <h2 className="text-2xl font-bold text-white group-hover:text-[#22c55e] transition-colors">
+                  <h2 className="text-2xl font-bold text-white group-hover:text-[#34d399] transition-colors font-sans">
                     {service.title}
                   </h2>
 
-                  <p className="mt-3 text-sm text-neutral-300 leading-relaxed font-sans">
+                  <p className="mt-3 text-sm text-slate-300 leading-relaxed font-sans">
                     {service.fullDescription}
                   </p>
 
                   {/* Problems Solved */}
-                  <div className="mt-6 pt-5 border-t border-[#13261a] space-y-2.5">
-                    <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider">
+                  <div className="mt-6 pt-5 border-t border-[#1a2333] space-y-2.5 font-sans">
+                    <div className="text-xs uppercase tracking-wider text-white font-semibold">
                       Critical Bottlenecks Resolved:
                     </div>
                     {service.problemsSolved.slice(0, 3).map((prob, pIdx) => (
-                      <div key={pIdx} className="flex items-start gap-2.5 text-xs text-neutral-300">
-                        <CheckCircle2 className="w-4 h-4 text-[#22c55e] shrink-0 mt-0.5" />
+                      <div key={pIdx} className="flex items-start gap-2.5 text-xs text-slate-300">
+                        <CheckCircle2 className="w-4 h-4 text-[#10b981] shrink-0 mt-0.5" />
                         <span>{prob}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* Technologies tags */}
-                  <div className="mt-6 flex flex-wrap gap-2">
+                  <div className="mt-6 flex flex-wrap gap-2 font-sans">
                     {service.technologies.map((tech, tIdx) => (
                       <span
                         key={tIdx}
-                        className="text-[11px] font-mono px-2.5 py-1 rounded bg-[#060807] text-[#22c55e] border border-[#13261a]"
+                        className="text-[11px] font-sans px-2.5 py-1 rounded bg-[#0d121c] text-[#34d399] border border-[#1a2333] font-medium"
                       >
                         {tech}
                       </span>
@@ -134,15 +134,15 @@ export default function ServicesPage() {
                 </div>
 
                 {/* Footer Link */}
-                <div className="mt-8 pt-5 border-t border-[#13261a] flex items-center justify-between">
-                  <span className="text-xs font-mono text-neutral-400">
-                    Sprint Cycle: <strong className="text-neutral-200">{service.timeline}</strong>
+                <div className="mt-8 pt-5 border-t border-[#1a2333] flex items-center justify-between font-sans">
+                  <span className="text-xs text-slate-400">
+                    Sprint Cycle: <strong className="text-slate-200">{service.timeline}</strong>
                   </span>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#060807] border border-[#13261a] group-hover:border-[#22c55e] text-xs font-mono font-semibold text-white group-hover:text-[#22c55e] transition-all"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0d121c] border border-[#1a2333] group-hover:border-[#10b981] text-xs font-sans font-semibold text-white group-hover:text-[#34d399] transition-all"
                   >
-                    <span>Detailed Specification & Scope</span>
+                    <span>Detailed Specification &amp; Scope</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>

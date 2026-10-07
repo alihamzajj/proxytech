@@ -26,14 +26,14 @@ export default function TermsPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <Breadcrumbs items={[{ label: 'Terms & Conditions' }]} />
 
-        <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-8 sm:p-12 space-y-6 text-neutral-300 font-sans text-sm leading-relaxed">
+        <div className="rounded-2xl crystal-card crystal-sheen border border-[#1a2333] p-8 sm:p-12 space-y-6 text-slate-300 font-sans text-sm leading-relaxed">
           <div className="space-y-2">
-            <h1 className="text-3xl font-bold text-white font-mono">Terms & Conditions</h1>
-            <p className="text-xs font-mono text-neutral-400">Last updated: October 2026</p>
+            <h1 className="text-3xl font-bold text-white font-sans">Terms &amp; Conditions</h1>
+            <p className="text-xs font-sans text-slate-400">Last updated: October 2026</p>
           </div>
 
           <section className="space-y-2">
-            <h2 className="text-lg font-bold text-white font-mono">1. Scope of Engagement</h2>
+            <h2 className="text-lg font-bold text-white font-sans">1. Scope of Engagement</h2>
             <p>
               ProxyTech provides digital software engineering, cloud systems consulting, UI/UX design, and technical growth services. Specific deliverables, sprint commitments, and milestone targets are defined within each client Statement of Work (SOW) or monthly retainer agreement.
             </p>

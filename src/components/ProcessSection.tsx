@@ -111,17 +111,17 @@ export default function ProcessSection() {
         </div>
 
         {/* Bottom CTA Bar */}
-        <div className="p-6 rounded-2xl crystal-card crystal-sheen flex flex-col sm:flex-row items-center justify-between gap-4 border border-[#13261a]">
+        <div className="p-6 rounded-2xl crystal-card crystal-sheen flex flex-col sm:flex-row items-center justify-between gap-4 border border-[#1a2333] font-sans">
           <div className="flex items-center gap-3">
-            <span className="w-3 h-3 rounded-full bg-[#22c55e] animate-ping" />
+            <span className="w-3 h-3 rounded-full bg-[#10b981] animate-ping" />
             <div>
               <p className="text-sm font-bold text-white">Ready to scope your engineering roadmap?</p>
-              <p className="text-xs text-slate-200 font-sans">Principal engineers available for sprint onboarding this month.</p>
+              <p className="text-xs text-slate-300 font-sans">Principal engineers available for sprint onboarding this month.</p>
             </div>
           </div>
           <Link
             href="/contact"
-            className="crystal-btn-primary px-5 py-2.5 rounded-lg text-xs font-mono font-bold flex items-center gap-2 whitespace-nowrap"
+            className="crystal-btn-primary px-5 py-2.5 rounded-lg text-xs font-sans font-semibold flex items-center gap-2 whitespace-nowrap"
           >
             <span>Commission Architecture Review</span>
             <ArrowRight className="w-4 h-4" />
@@ -158,44 +158,44 @@ function ProcessStepCard({
   return (
     <motion.div
       style={shouldReduceMotion ? undefined : { y, scale, opacity }}
-      className="relative rounded-2xl crystal-card crystal-sheen p-6 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 transform-gpu"
+      className="relative rounded-2xl crystal-card crystal-sheen p-6 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 transform-gpu border border-[#1a2333]"
     >
       <div>
         {/* Step Code & Step Number */}
-        <div className="flex items-center justify-between mb-5">
-          <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2.5 py-1 rounded-md">
+        <div className="flex items-center justify-between mb-5 font-sans">
+          <span className="text-xs text-[#34d399] font-medium crystal-badge px-2.5 py-1 rounded-md">
             {step.code}
           </span>
-          <div className="w-10 h-10 rounded-xl bg-[#060807] border border-[#13261a] group-hover:border-[#22c55e]/60 flex items-center justify-center text-neutral-300 group-hover:text-[#4ade80] shadow-[0_0_15px_rgba(34,197,94,0.12)] transition-colors">
+          <div className="w-10 h-10 rounded-xl bg-[#090d15] border border-[#1a2333] group-hover:border-[#10b981]/50 flex items-center justify-center text-slate-300 group-hover:text-[#34d399] shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-colors">
             <Icon className="w-5 h-5" />
           </div>
         </div>
 
         {/* Step Index Watermark */}
-        <div className="font-mono text-3xl font-extrabold text-neutral-600/80 group-hover:text-[#22c55e]/60 transition-colors">
+        <div className="font-sans text-3xl font-extrabold text-slate-600/80 group-hover:text-[#34d399]/60 transition-colors">
           {step.step}
         </div>
 
-        <h3 className="text-lg font-bold text-white mt-1 group-hover:text-[#4ade80] transition-colors">
+        <h3 className="text-lg font-bold text-white mt-1 group-hover:text-[#34d399] transition-colors font-sans">
           {step.title}
         </h3>
 
-        <p className="mt-1 text-xs font-mono text-[#4ade80] font-semibold">
+        <p className="mt-1 text-xs font-sans text-[#34d399] font-medium">
           {step.tagline}
         </p>
 
-        <p className="mt-3 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
+        <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
           {step.description}
         </p>
 
         {/* Key Deliverables */}
-        <div className="mt-5 pt-4 border-t border-[#13261a] space-y-2">
-          <div className="text-xs font-mono uppercase tracking-wider text-white font-bold">
+        <div className="mt-5 pt-4 border-t border-[#1a2333] space-y-2 font-sans">
+          <div className="text-xs uppercase tracking-wider text-white font-semibold">
             Phase Gate Deliverables:
           </div>
           {step.deliverables.map((d, dIdx) => (
-            <div key={dIdx} className="flex items-center gap-2 text-xs text-slate-100">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0" />
+            <div key={dIdx} className="flex items-center gap-2 text-xs text-slate-300">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981] shrink-0" />
               <span>{d}</span>
             </div>
           ))}
@@ -203,12 +203,12 @@ function ProcessStepCard({
       </div>
 
       {/* Bottom Milestone Status */}
-      <div className="mt-6 pt-4 border-t border-[#13261a] flex items-center justify-between text-xs font-mono text-slate-300">
+      <div className="mt-6 pt-4 border-t border-[#1a2333] flex items-center justify-between text-xs font-sans text-slate-300">
         <div className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
+          <span className="w-2 h-2 rounded-full bg-[#10b981] shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
           <span className="text-white font-semibold">Milestone {step.step}</span>
         </div>
-        <span className="text-[#4ade80] font-bold">100% Deterministic</span>
+        <span className="text-[#34d399] font-semibold">100% Deterministic</span>
       </div>
     </motion.div>
   );

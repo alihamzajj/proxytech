@@ -278,16 +278,16 @@ export default function ContactForm() {
         </div>
 
         {/* Direct Calendly Alternative */}
-        <div className="pt-4 border-t border-[#13261a] text-center">
-          <p className="text-xs font-mono text-slate-300">
+        <div className="pt-4 border-t border-[#1a2333] text-center font-sans">
+          <p className="text-xs text-slate-400">
             Need an immediate architectural evaluation?{' '}
             <a
               href={COMPANY_INFO.socials.calendly}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#4ade80] hover:underline inline-flex items-center gap-1 font-bold"
+              className="text-[#34d399] hover:underline inline-flex items-center gap-1 font-semibold"
             >
-              <Calendar className="w-3.5 h-3.5" />
+              <Calendar className="w-3.5 h-3.5 text-[#10b981]" />
               <span>Book a 15-Minute Technical Discovery on Calendly ↗</span>
             </a>
           </p>

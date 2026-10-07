@@ -175,8 +175,8 @@ body {
 }
 
 .glow-text-mint {
-  color: #22c55e;
-  text-shadow: 0 0 20px rgba(34, 197, 94, 0.55);
+  color: #34d399;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
 }
 
 /* Continuous crystal ambient glint animation */
@@ -188,7 +188,7 @@ body {
   50% {
     opacity: 0.9;
     transform: scale(1.2) rotate(90deg);
-    filter: drop-shadow(0 0 10px rgba(74, 222, 128, 0.9));
+    filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.8));
   }
 }
 
@@ -221,7 +221,7 @@ body {
 }
 
 .bg-radial-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.12) 0%, rgba(16, 185, 129, 0.03) 45%, transparent 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.02) 45%, transparent 70%);
 }
 
 /* Code block highlight */
@@ -229,25 +229,25 @@ pre {
   font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* Custom scrollbar with crystal green track */
+/* Custom scrollbar with sleek obsidian track */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #060807;
+  background: #080b11;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #13261a;
+  background: #1a2333;
   border-radius: 4px;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #22c55e;
-  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  background: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
 }
 
 /* Lenis smooth scrolling rules */

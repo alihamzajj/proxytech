@@ -46,15 +46,15 @@ export default function ScrollVelocityMarquee({
   return (
     <div
       ref={containerRef}
-      className={`py-4 sm:py-6 overflow-hidden select-none border-y border-[#13261a] bg-[#060807] relative ${className}`}
+      className={`py-4 sm:py-6 overflow-hidden select-none border-y border-[#1a2333] bg-[#080b11] relative ${className}`}
       aria-hidden="true"
     >
-      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#060807] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#060807] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#080b11] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#080b11] to-transparent z-10 pointer-events-none" />
 
       <motion.div
         style={{ x: xTransform }}
-        className="whitespace-nowrap font-mono text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-widest text-[#22c55e]/70 flex items-center gap-6 uppercase"
+        className="whitespace-nowrap font-sans text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wider text-[#34d399]/60 flex items-center gap-6 uppercase"
       >
         <span>{repeatedText}</span>
       </motion.div>

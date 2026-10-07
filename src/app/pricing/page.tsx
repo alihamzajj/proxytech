@@ -72,40 +72,40 @@ export default function PricingPage() {
             <h2 className="text-2xl sm:text-3xl font-bold text-white">
               Plan Deliverables Matrix
             </h2>
-            <p className="text-xs sm:text-sm text-neutral-400 font-mono">
+            <p className="text-xs sm:text-sm text-slate-400 font-sans">
               Compare features, response times, and engineering depth side by side.
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-[#13261a] crystal-card bg-[#060807]/90">
-            <table className="w-full text-left text-xs font-mono">
+          <div className="overflow-x-auto rounded-2xl border border-[#1a2333] crystal-card bg-[#090d15]/90">
+            <table className="w-full text-left text-xs font-sans">
               <thead>
-                <tr className="border-b border-[#13261a] bg-[#0b140e] text-neutral-400">
+                <tr className="border-b border-[#1a2333] bg-[#0d121c] text-slate-400">
                   <th className="p-4 sm:p-5 text-white font-semibold">Feature / Metric</th>
                   <th className="p-4 sm:p-5 text-center text-white">Starter</th>
-                  <th className="p-4 sm:p-5 text-center text-[#22c55e] font-bold">Growth</th>
+                  <th className="p-4 sm:p-5 text-center text-[#34d399] font-bold">Growth</th>
                   <th className="p-4 sm:p-5 text-center text-white">Business</th>
                   <th className="p-4 sm:p-5 text-center text-white">Enterprise</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#13261a] text-neutral-300">
+              <tbody className="divide-y divide-[#1a2333] text-slate-300">
                 {comparisonFeatures.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-[#0c1610] transition-colors">
+                  <tr key={idx} className="hover:bg-[#121a29]/50 transition-colors">
                     <td className="p-4 sm:p-5 font-medium text-white">{row.name}</td>
                     
                     {/* Starter */}
                     <td className="p-4 sm:p-5 text-center">
                       {typeof row.starter === 'boolean' ? (
-                        row.starter ? <Check className="w-4 h-4 text-[#22c55e] mx-auto" /> : <X className="w-4 h-4 text-neutral-600 mx-auto" />
+                        row.starter ? <Check className="w-4 h-4 text-[#10b981] mx-auto" /> : <X className="w-4 h-4 text-slate-600 mx-auto" />
                       ) : (
                         row.starter
                       )}
                     </td>
 
                     {/* Growth */}
-                    <td className="p-4 sm:p-5 text-center bg-[#22c55e]/5 font-semibold text-[#22c55e]">
+                    <td className="p-4 sm:p-5 text-center bg-[#10b981]/10 font-semibold text-[#34d399]">
                       {typeof row.growth === 'boolean' ? (
-                        row.growth ? <Check className="w-4 h-4 text-[#22c55e] mx-auto" /> : <X className="w-4 h-4 text-neutral-600 mx-auto" />
+                        row.growth ? <Check className="w-4 h-4 text-[#10b981] mx-auto" /> : <X className="w-4 h-4 text-slate-600 mx-auto" />
                       ) : (
                         row.growth
                       )}
@@ -114,7 +114,7 @@ export default function PricingPage() {
                     {/* Business */}
                     <td className="p-4 sm:p-5 text-center">
                       {typeof row.business === 'boolean' ? (
-                        row.business ? <Check className="w-4 h-4 text-[#22c55e] mx-auto" /> : <X className="w-4 h-4 text-neutral-600 mx-auto" />
+                        row.business ? <Check className="w-4 h-4 text-[#10b981] mx-auto" /> : <X className="w-4 h-4 text-slate-600 mx-auto" />
                       ) : (
                         row.business
                       )}
@@ -123,7 +123,7 @@ export default function PricingPage() {
                     {/* Enterprise */}
                     <td className="p-4 sm:p-5 text-center">
                       {typeof row.enterprise === 'boolean' ? (
-                        row.enterprise ? <Check className="w-4 h-4 text-[#22c55e] mx-auto" /> : <X className="w-4 h-4 text-neutral-600 mx-auto" />
+                        row.enterprise ? <Check className="w-4 h-4 text-[#10b981] mx-auto" /> : <X className="w-4 h-4 text-slate-600 mx-auto" />
                       ) : (
                         row.enterprise
                       )}

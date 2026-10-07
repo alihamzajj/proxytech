@@ -72,42 +72,42 @@ export default function ContactPage() {
                 href={COMPANY_INFO.socials.calendly}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="crystal-btn-secondary inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl text-xs font-mono text-[#22c55e] hover:text-white transition-all font-semibold"
+                className="crystal-btn-secondary inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl text-xs font-sans text-[#34d399] hover:text-white transition-all font-semibold"
               >
                 <span>Open Calendly Scheduler ↗</span>
               </a>
             </div>
 
             {/* Direct Communication Channels */}
-            <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
-              <h3 className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
+            <div className="rounded-2xl crystal-card crystal-sheen border border-[#1a2333] p-6 sm:p-8 space-y-4 font-sans">
+              <h3 className="text-xs font-sans text-[#34d399] uppercase tracking-wider font-semibold">
                 Direct Channels
               </h3>
               
-              <div className="space-y-4 text-xs font-mono text-neutral-300">
+              <div className="space-y-4 text-xs font-sans text-slate-300">
                 <div className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-[#22c55e] shrink-0 mt-0.5" />
+                  <Mail className="w-4 h-4 text-[#10b981] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-neutral-500 block">General Inquiries & RFPs:</span>
-                    <a href={`mailto:${COMPANY_INFO.email}`} className="text-white hover:text-[#22c55e] transition-colors">
+                    <span className="text-slate-400 block">General Inquiries &amp; RFPs:</span>
+                    <a href={`mailto:${COMPANY_INFO.email}`} className="text-white hover:text-[#34d399] transition-colors font-medium">
                       {COMPANY_INFO.email}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 text-[#22c55e] shrink-0 mt-0.5" />
+                  <Phone className="w-4 h-4 text-[#10b981] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-neutral-500 block">Direct Telephone / Office:</span>
-                    <span className="text-white">{COMPANY_INFO.phone}</span>
+                    <span className="text-slate-400 block">Direct Telephone / Office:</span>
+                    <span className="text-white font-medium">{COMPANY_INFO.phone}</span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-[#22c55e] shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-[#10b981] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-neutral-500 block">Headquarters:</span>
-                    <span className="text-white">{COMPANY_INFO.address}</span>
+                    <span className="text-slate-400 block">Headquarters:</span>
+                    <span className="text-white font-medium">{COMPANY_INFO.address}</span>
                   </div>
                 </div>
               </div>

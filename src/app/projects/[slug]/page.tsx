@@ -92,28 +92,28 @@ export default async function ProjectDetailPage({ params }: Props) {
         {/* Hero Banner */}
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="px-3 py-1 rounded-full crystal-badge text-xs font-mono text-[#22c55e]">
+            <span className="px-3 py-1 rounded-full crystal-badge text-xs font-sans font-medium text-[#34d399]">
               {project.category}
             </span>
-            <span className="px-3 py-1 rounded-full bg-[#060807] border border-[#13261a] text-xs font-mono text-neutral-300">
+            <span className="px-3 py-1 rounded-full bg-[#0d121c] border border-[#1a2333] text-xs font-sans text-slate-300">
               Industry: {project.clientIndustry}
             </span>
-            <span className="px-3 py-1 rounded-full bg-[#060807] border border-[#13261a] text-xs font-mono text-neutral-400 flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5 text-[#22c55e]" />
+            <span className="px-3 py-1 rounded-full bg-[#0d121c] border border-[#1a2333] text-xs font-sans text-slate-400 flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5 text-[#10b981]" />
               <span>{project.timeline}</span>
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight font-sans">
             {project.title}
           </h1>
 
-          <p className="text-base sm:text-lg text-neutral-300 leading-relaxed font-mono">
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-sans">
             {project.tagline}
           </p>
 
           {/* Featured Image */}
-          <div className="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden border border-[#13261a] shadow-2xl">
+          <div className="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden border border-[#1a2333] shadow-2xl">
             <Image
               src={project.image}
               alt={project.title}
@@ -126,16 +126,16 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
 
         {/* Highlight Metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 font-sans">
           {project.metrics.map((metric, idx) => (
             <div
               key={idx}
-              className="p-5 rounded-2xl crystal-card crystal-sheen border border-[#13261a] text-center space-y-1 group hover:border-[#22c55e]/50 transition-colors"
+              className="p-5 rounded-2xl crystal-card crystal-sheen border border-[#1a2333] text-center space-y-1 group hover:border-[#10b981]/50 transition-colors"
             >
-              <div className="text-2xl sm:text-3xl font-mono font-bold text-[#22c55e]">
+              <div className="text-2xl sm:text-3xl font-sans font-bold text-[#34d399]">
                 {metric.value}
               </div>
-              <div className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider">
+              <div className="text-[11px] font-sans text-slate-400 uppercase tracking-wider font-medium">
                 {metric.label}
               </div>
             </div>
@@ -143,25 +143,25 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
 
         {/* Overview & Challenge */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-sans">
           
-          <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
-            <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5" />
-              <span>// EXECUTIVE OVERVIEW</span>
+          <div className="rounded-2xl crystal-card crystal-sheen border border-[#1a2333] p-6 sm:p-8 space-y-4">
+            <div className="text-xs font-sans text-[#34d399] uppercase tracking-wider flex items-center gap-1.5 font-semibold">
+              <Layers className="w-3.5 h-3.5 text-[#10b981]" />
+              <span>EXECUTIVE OVERVIEW</span>
             </div>
-            <h2 className="text-xl font-bold text-white">Project Scope & Context</h2>
-            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans">
+            <h2 className="text-xl font-bold text-white font-sans">Project Scope &amp; Context</h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
               {project.overview}
             </p>
           </div>
 
-          <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
-            <div className="text-xs font-mono text-red-400 uppercase tracking-wider flex items-center gap-1.5">
-              <span>// THE ARCHITECTURAL CHALLENGE</span>
+          <div className="rounded-2xl crystal-card crystal-sheen border border-[#1a2333] p-6 sm:p-8 space-y-4">
+            <div className="text-xs font-sans text-amber-400 uppercase tracking-wider flex items-center gap-1.5 font-semibold">
+              <span>THE ARCHITECTURAL CHALLENGE</span>
             </div>
-            <h2 className="text-xl font-bold text-white">The Engineering Bottleneck</h2>
-            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans">
+            <h2 className="text-xl font-bold text-white font-sans">The Engineering Bottleneck</h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
               {project.challenge}
             </p>
           </div>
@@ -169,26 +169,26 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
 
         {/* Our Solution & Architecture */}
-        <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-10 space-y-6">
-          <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider flex items-center gap-2">
-            <Terminal className="w-4 h-4" />
-            <span>// PROXYTECH ARCHITECTURAL INTERVENTION</span>
+        <div className="rounded-2xl crystal-card crystal-sheen border border-[#1a2333] p-6 sm:p-10 space-y-6 font-sans">
+          <div className="text-xs font-sans text-[#34d399] uppercase tracking-wider flex items-center gap-2 font-semibold">
+            <Terminal className="w-4 h-4 text-[#10b981]" />
+            <span>ARCHITECTURAL INTERVENTION</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Our Technical Solution & Architecture
+          <h2 className="text-2xl sm:text-3xl font-bold text-white font-sans">
+            Our Technical Solution &amp; Architecture
           </h2>
-          <p className="text-sm sm:text-base text-neutral-300 leading-relaxed font-sans">
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
             {project.solution}
           </p>
 
-          <div className="pt-4 border-t border-[#13261a] space-y-3">
-            <h3 className="text-xs font-mono text-neutral-400 uppercase tracking-wider">
+          <div className="pt-4 border-t border-[#1a2333] space-y-3">
+            <h3 className="text-xs font-sans text-slate-400 uppercase tracking-wider font-semibold">
               Production Deliverables Shipped:
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {project.deliverables.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs text-neutral-300">
-                  <CheckCircle2 className="w-4 h-4 text-[#22c55e] shrink-0 mt-0.5" />
+                <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
+                  <CheckCircle2 className="w-4 h-4 text-[#10b981] shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -197,15 +197,15 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
 
         {/* Tech Stack Used */}
-        <div className="space-y-4">
-          <h3 className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
-            // TECH STACK EMBEDDED
+        <div className="space-y-4 font-sans">
+          <h3 className="text-xs font-sans text-[#34d399] uppercase tracking-wider font-semibold">
+            TECH STACK EMBEDDED
           </h3>
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech, idx) => (
               <span
                 key={idx}
-                className="px-3 py-1.5 rounded-lg bg-[#060807] border border-[#13261a] text-xs font-mono text-[#22c55e]"
+                className="px-3 py-1.5 rounded-lg bg-[#0d121c] border border-[#1a2333] text-xs font-sans text-[#34d399] font-medium"
               >
                 {tech}
               </span>
@@ -214,10 +214,10 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
 
         {/* Navigation to next case study */}
-        <div className="pt-8 border-t border-[#13261a] flex items-center justify-between">
+        <div className="pt-8 border-t border-[#1a2333] flex items-center justify-between font-sans">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-400 hover:text-white"
+            className="inline-flex items-center gap-1.5 text-xs font-sans text-slate-400 hover:text-white font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>All Case Studies</span>
@@ -225,7 +225,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
           <Link
             href={`/projects/${nextProject.slug}`}
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-[#22c55e] hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-sans text-[#34d399] hover:underline font-medium"
           >
             <span>Next: {nextProject.title}</span>
             <ArrowUpRight className="w-4 h-4" />

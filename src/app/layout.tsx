@@ -154,7 +154,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
         />
       </head>
-      <body className="min-h-full flex flex-col text-[#f8fafc] selection:bg-[#22c55e] selection:text-[#060807] relative">
+      <body className="min-h-full flex flex-col text-[#f8fafc] selection:bg-[#10b981] selection:text-[#080b11] relative">
         <SmoothScrollProvider>
           <CrystalShineOverlay />
           <ScrollProgressBar />

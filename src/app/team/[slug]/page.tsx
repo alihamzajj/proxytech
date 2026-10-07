@@ -162,7 +162,7 @@ export default async function TeamMemberPage({ params }: Props) {
                 href={member.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-[#060807] border border-[#13261a] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
+                className="p-2 rounded-lg bg-[#0d121c] border border-[#1a2333] text-slate-300 hover:text-white hover:border-[#10b981] transition-colors"
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon className="w-4 h-4" />
@@ -173,7 +173,7 @@ export default async function TeamMemberPage({ params }: Props) {
                 href={member.socials.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-[#060807] border border-[#13261a] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
+                className="p-2 rounded-lg bg-[#0d121c] border border-[#1a2333] text-slate-300 hover:text-white hover:border-[#10b981] transition-colors"
                 aria-label="Twitter"
               >
                 <TwitterXIcon className="w-4 h-4" />
@@ -181,7 +181,7 @@ export default async function TeamMemberPage({ params }: Props) {
             )}
             <a
               href={`mailto:${member.socials.email}`}
-              className="p-2 rounded-lg bg-[#060807] border border-[#13261a] text-neutral-300 hover:text-white hover:border-[#22c55e] transition-colors"
+              className="p-2 rounded-lg bg-[#0d121c] border border-[#1a2333] text-slate-300 hover:text-white hover:border-[#10b981] transition-colors"
               aria-label="Email"
             >
               <Mail className="w-4 h-4" />
@@ -190,7 +190,7 @@ export default async function TeamMemberPage({ params }: Props) {
             <div className="ml-auto">
               <Link
                 href={`/contact?consultant=${encodeURIComponent(member.name)}`}
-                className="crystal-btn-primary inline-flex items-center gap-1.5 px-4 py-2 font-mono text-xs font-semibold cursor-pointer"
+                className="crystal-btn-primary inline-flex items-center gap-1.5 px-4 py-2 font-sans text-xs font-semibold cursor-pointer"
               >
                 <span>Request {member.name.split(' ')[0]} for Pod</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -200,24 +200,24 @@ export default async function TeamMemberPage({ params }: Props) {
         </div>
 
         {/* Bio & Skills */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 font-sans">
           
-          <div className="md:col-span-8 rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
-            <h2 className="text-xl font-bold text-white">Engineering Background</h2>
-            <p className="text-sm text-neutral-300 leading-relaxed font-sans">
+          <div className="md:col-span-8 rounded-2xl crystal-card crystal-sheen border border-[#1a2333] p-6 sm:p-8 space-y-4">
+            <h2 className="text-xl font-bold text-white font-sans">Engineering Background</h2>
+            <p className="text-sm text-slate-300 leading-relaxed font-sans">
               {member.fullBio}
             </p>
           </div>
 
-          <div className="md:col-span-4 rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 space-y-4">
-            <h3 className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
+          <div className="md:col-span-4 rounded-2xl crystal-card crystal-sheen border border-[#1a2333] p-6 space-y-4">
+            <h3 className="text-xs font-sans text-[#34d399] uppercase tracking-wider font-semibold">
               Specialized Core Stack
             </h3>
             <div className="flex flex-wrap gap-2">
               {member.skills.map((skill, idx) => (
                 <span
                   key={idx}
-                  className="px-2.5 py-1 rounded bg-[#060807] border border-[#13261a] text-xs font-mono text-[#22c55e]"
+                  className="px-2.5 py-1 rounded bg-[#0d121c] border border-[#1a2333] text-xs font-sans text-[#34d399] font-medium"
                 >
                   {skill}
                 </span>
@@ -227,10 +227,10 @@ export default async function TeamMemberPage({ params }: Props) {
 
         </div>
 
-        <div className="pt-4 border-t border-[#13261a]">
+        <div className="pt-4 border-t border-[#1a2333]">
           <Link
             href="/team"
-            className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-white"
+            className="inline-flex items-center gap-2 text-xs font-sans text-slate-400 hover:text-white font-medium"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Full Engineering Team</span>

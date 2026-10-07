@@ -26,14 +26,14 @@ export default function PrivacyPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <Breadcrumbs items={[{ label: 'Privacy Policy' }]} />
 
-        <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-8 sm:p-12 space-y-6 text-neutral-300 font-sans text-sm leading-relaxed">
+        <div className="rounded-2xl crystal-card crystal-sheen border border-[#1a2333] p-8 sm:p-12 space-y-6 text-slate-300 font-sans text-sm leading-relaxed">
           <div className="space-y-2">
-            <h1 className="text-3xl font-bold text-white font-mono">Privacy Policy</h1>
-            <p className="text-xs font-mono text-neutral-400">Last updated: October 2026</p>
+            <h1 className="text-3xl font-bold text-white font-sans">Privacy Policy</h1>
+            <p className="text-xs font-sans text-slate-400">Last updated: October 2026</p>
           </div>
 
           <section className="space-y-2">
-            <h2 className="text-lg font-bold text-white font-mono">1. Information We Collect</h2>
+            <h2 className="text-lg font-bold text-white font-sans">1. Information We Collect</h2>
             <p>
               ProxyTech collects information that you provide directly to us when requesting engineering proposals, filling out project inquiry forms, contacting us via email, or submitting project briefs via our agent API. This typically includes your name, email address, phone number, company name, and project specifications.
             </p>

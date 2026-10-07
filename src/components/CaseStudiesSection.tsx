@@ -29,22 +29,22 @@ export default function CaseStudiesSection() {
     : projectsList.filter((p) => p.category === activeCategory);
 
   return (
-    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="projects">
+    <ScrollSection className="py-24 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden" id="projects">
       <ScrollWatermark text="ARCHITECTURES" direction="left" speed={95} className="top-12 opacity-25" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10 font-sans">
         
         {/* Header and Category Pills */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#13261a]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#1a2333]">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-mono text-[#22c55e]">
-              <Cpu className="w-3.5 h-3.5 text-[#22c55e]" />
-              <span>// VERIFIED DEPLOYMENTS & BENCHMARKS</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-sans font-medium text-[#34d399]">
+              <Cpu className="w-3.5 h-3.5 text-[#10b981]" />
+              <span>FEATURED CASE STUDIES &amp; ARCHITECTURES</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-              Featured Engineering <span className="text-[#22c55e]">Architectures</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-sans">
+              Featured Engineering <span className="text-[#34d399]">Architectures</span>
             </h2>
-            <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-sans">
               Explore how we solved critical scalability bottlenecks, dropped P99 latencies below 40ms, and scaled platforms handling institutional financial flows.
             </p>
           </div>
@@ -56,10 +56,10 @@ export default function CaseStudiesSection() {
                 type="button"
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs font-mono transition-all cursor-pointer ${
+                className={`px-4 py-2 rounded-xl text-xs font-sans transition-all cursor-pointer ${
                   activeCategory === cat
-                    ? 'crystal-btn-primary font-bold shadow-[0_0_20px_rgba(34,197,94,0.3)]'
-                    : 'crystal-btn-secondary text-slate-200 hover:text-white'
+                    ? 'crystal-btn-primary font-semibold shadow-[0_0_20px_rgba(16,185,129,0.3)]'
+                    : 'crystal-btn-secondary text-slate-300 hover:text-white font-medium'
                 }`}
               >
                 {cat}
@@ -77,9 +77,9 @@ export default function CaseStudiesSection() {
               parallaxSpeed={40}
               className="h-full"
             >
-              <div className="h-full rounded-2xl crystal-card crystal-sheen overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 hover:border-[#22c55e]/60">
+              <div className="h-full rounded-2xl crystal-card crystal-sheen overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1 hover:border-[#10b981]/50 border border-[#1a2333]">
                 {/* Image banner with overlay */}
-                <div className="relative h-64 w-full overflow-hidden bg-[#060807] border-b border-[#13261a]">
+                <div className="relative h-64 w-full overflow-hidden bg-[#080b11] border-b border-[#1a2333]">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -87,34 +87,34 @@ export default function CaseStudiesSection() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#040705] via-[#040705]/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080b11] via-[#080b11]/50 to-transparent" />
                   
                   {/* Category & Industry Badge */}
                   <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="px-2.5 py-1 rounded-md bg-[#060807]/90 border border-[#13261a] text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
+                    <span className="px-2.5 py-1 rounded-md bg-[#090d15]/90 border border-[#1a2333] text-xs font-sans text-[#34d399] backdrop-blur-md font-medium">
                       {project.category}
                     </span>
-                    <span className="px-2.5 py-1 rounded-md bg-[#060807]/90 border border-[#13261a] text-xs font-mono text-slate-200 backdrop-blur-md font-medium">
+                    <span className="px-2.5 py-1 rounded-md bg-[#090d15]/90 border border-[#1a2333] text-xs font-sans text-slate-300 backdrop-blur-md font-medium">
                       {project.clientIndustry}
                     </span>
                   </div>
 
                   {/* Verified Production Pill */}
                   <div className="absolute top-4 right-4">
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#060807]/90 border border-[#22c55e]/40 text-xs font-mono text-[#4ade80] backdrop-blur-md font-bold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#090d15]/90 border border-[#10b981]/40 text-xs font-sans text-[#34d399] backdrop-blur-md font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
                       <span>IN PRODUCTION</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Card Body */}
-                <div className="p-6 sm:p-7 space-y-5 flex-1 flex flex-col justify-between">
+                <div className="p-6 sm:p-7 space-y-5 flex-1 flex flex-col justify-between font-sans">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#4ade80] transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#34d399] transition-colors">
                       {project.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-slate-100 leading-relaxed font-sans">
+                    <p className="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
                       {project.tagline}
                     </p>
                     
@@ -123,10 +123,10 @@ export default function CaseStudiesSection() {
                       {project.metrics.slice(0, 2).map((m, mIdx) => (
                         <div
                           key={mIdx}
-                          className="p-3 rounded-xl bg-[#060807] border border-[#13261a] flex flex-col justify-center space-y-1 group-hover:border-[#22c55e]/30 transition-colors"
+                          className="p-3 rounded-xl bg-[#090d15] border border-[#1a2333] flex flex-col justify-center space-y-1 group-hover:border-[#10b981]/30 transition-colors"
                         >
-                          <span className="text-xs font-mono text-slate-200 uppercase tracking-wider font-medium">{m.label}</span>
-                          <span className="text-lg font-mono font-extrabold text-[#4ade80]">{m.value}</span>
+                          <span className="text-xs text-slate-400 uppercase tracking-wider font-medium">{m.label}</span>
+                          <span className="text-lg font-bold text-[#34d399]">{m.value}</span>
                         </div>
                       ))}
                     </div>
@@ -136,7 +136,7 @@ export default function CaseStudiesSection() {
                       {project.technologies.slice(0, 5).map((tech, tIdx) => (
                         <span
                           key={tIdx}
-                          className="text-xs font-mono px-2.5 py-1 rounded crystal-badge text-slate-100 font-medium"
+                          className="text-xs font-sans px-2.5 py-1 rounded crystal-badge text-slate-300 font-medium"
                         >
                           {tech}
                         </span>
@@ -145,16 +145,16 @@ export default function CaseStudiesSection() {
                   </div>
 
                   {/* Footer Action */}
-                  <div className="pt-4 border-t border-[#13261a] flex items-center justify-between mt-4">
-                    <span className="text-xs font-mono text-slate-300 flex items-center gap-1.5">
-                      <TrendingUp className="w-3.5 h-3.5 text-[#22c55e]" />
-                      <span>Timeline: <strong className="text-white">{project.timeline}</strong></span>
+                  <div className="pt-4 border-t border-[#1a2333] flex items-center justify-between mt-4 font-sans">
+                    <span className="text-xs text-slate-400 flex items-center gap-1.5">
+                      <TrendingUp className="w-3.5 h-3.5 text-[#10b981]" />
+                      <span>Timeline: <strong className="text-white font-medium">{project.timeline}</strong></span>
                     </span>
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#4ade80] hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-sans font-medium text-[#34d399] hover:text-white transition-colors"
                     >
-                      <span>Read Architectural Breakdown</span>
+                      <span>Read Case Study Breakdown</span>
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </Link>
                   </div>
@@ -168,11 +168,11 @@ export default function CaseStudiesSection() {
         <div className="text-center pt-2">
           <Link
             href="/projects"
-            className="crystal-btn-secondary inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs font-mono font-bold text-white hover:text-[#22c55e] transition-all shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+            className="crystal-btn-secondary inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs font-sans font-semibold text-white hover:text-[#34d399] transition-all shadow-[0_0_20px_rgba(0,0,0,0.5)]"
           >
-            <Layers className="w-4 h-4 text-[#22c55e]" />
-            <span>Explore All Client Case Studies (Architecture & Code)</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#22c55e]" />
+            <Layers className="w-4 h-4 text-[#10b981]" />
+            <span>Explore All Client Case Studies</span>
+            <ArrowUpRight className="w-4 h-4 text-[#10b981]" />
           </Link>
         </div>
 

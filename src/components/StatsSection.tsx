@@ -74,19 +74,19 @@ export default function StatsSection() {
         </div>
 
         {/* Trusted By Client Strip */}
-        <div className="pt-6 border-t border-[#13261a]">
-          <div className="text-xs font-mono text-neutral-200 uppercase tracking-widest text-center mb-6 font-semibold">
+        <div className="pt-6 border-t border-[#1a2333]">
+          <div className="text-xs font-sans text-slate-400 uppercase tracking-widest text-center mb-6 font-semibold">
             TRUSTED BY PRODUCT LEADERS ACROSS CRITICAL INDUSTRIES
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {trustedIndustries.map((item, idx) => (
               <div
                 key={idx}
-                className="p-3.5 rounded-xl crystal-card crystal-sheen flex flex-col items-center justify-center text-center transition-all group"
+                className="p-3.5 rounded-xl crystal-card crystal-sheen flex flex-col items-center justify-center text-center transition-all group border border-[#1a2333]"
               >
-                <span className="font-bold text-xs text-white group-hover:text-[#4ade80] transition-colors">{item.name}</span>
-                <span className="text-[11px] text-slate-300 font-mono mt-0.5">{item.type}</span>
-                <span className="text-[10px] font-mono text-[#4ade80] font-semibold crystal-badge px-2.5 py-0.5 rounded-full mt-2">
+                <span className="font-bold text-xs text-white group-hover:text-[#34d399] transition-colors font-sans">{item.name}</span>
+                <span className="text-[11px] text-slate-400 font-sans mt-0.5">{item.type}</span>
+                <span className="text-[10px] font-sans text-[#34d399] font-semibold crystal-badge px-2.5 py-0.5 rounded-full mt-2">
                   {item.tag}
                 </span>
               </div>
@@ -117,20 +117,20 @@ function StatCardItem({
   return (
     <motion.div
       style={shouldReduceMotion ? undefined : { y, opacity, scale }}
-      className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group transform-gpu"
+      className="rounded-2xl crystal-card crystal-sheen p-6 sm:p-7 flex flex-col justify-between transition-all group transform-gpu border border-[#1a2333]"
     >
-      <div className="text-5xl sm:text-6xl font-mono font-bold text-[#22c55e] [text-shadow:0_0_25px_rgba(34,197,94,0.45)] tracking-tight group-hover:scale-105 transition-transform origin-left">
+      <div className="text-5xl sm:text-6xl font-sans font-extrabold text-[#34d399] [text-shadow:0_0_25px_rgba(16,185,129,0.35)] tracking-tight group-hover:scale-105 transition-transform origin-left">
         <AnimatedCounter
           value={stat.num}
           suffix={stat.suffix}
           decimals={stat.decimals}
         />
       </div>
-      <div className="mt-4 pt-4 border-t border-[#13261a] space-y-1">
+      <div className="mt-4 pt-4 border-t border-[#1a2333] space-y-1 font-sans">
         <div className="text-sm font-bold text-white">
           {stat.label}
         </div>
-        <div className="text-xs text-slate-200 leading-relaxed font-sans">
+        <div className="text-xs text-slate-300 leading-relaxed font-sans">
           {stat.desc}
         </div>
       </div>
