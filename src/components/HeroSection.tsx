@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
-import LaptopMockup from './LaptopMockup';
+import AsciiLaptop from './AsciiLaptop';
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -152,7 +152,7 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Right Side: High-Tech Developer Laptop Workstation */}
+            {/* Right Side: Animated ASCII Character Laptop Workstation */}
             <div className="lg:col-span-5 flex items-center justify-center w-full">
               <motion.div
                 style={
@@ -165,7 +165,7 @@ export default function HeroSection() {
                 }
                 className="w-full flex justify-center"
               >
-                <LaptopMockup />
+                <AsciiLaptop />
               </motion.div>
             </div>
           </div>
