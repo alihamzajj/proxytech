@@ -53,10 +53,10 @@ export default function PricingPage() {
             </p>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-[#1f242f] bg-[#13151b]">
+          <div className="overflow-x-auto rounded-2xl border border-[#13261a] crystal-card bg-[#060807]/90">
             <table className="w-full text-left text-xs font-mono">
               <thead>
-                <tr className="border-b border-[#1f242f] bg-[#0c0d10] text-neutral-400">
+                <tr className="border-b border-[#13261a] bg-[#0b140e] text-neutral-400">
                   <th className="p-4 sm:p-5 text-white font-semibold">Feature / Metric</th>
                   <th className="p-4 sm:p-5 text-center text-white">Starter</th>
                   <th className="p-4 sm:p-5 text-center text-[#22c55e] font-bold">Growth</th>
@@ -64,9 +64,9 @@ export default function PricingPage() {
                   <th className="p-4 sm:p-5 text-center text-white">Enterprise</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#1f242f]/80 text-neutral-300">
+              <tbody className="divide-y divide-[#13261a] text-neutral-300">
                 {comparisonFeatures.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-[#181b24] transition-colors">
+                  <tr key={idx} className="hover:bg-[#0c1610] transition-colors">
                     <td className="p-4 sm:p-5 font-medium text-white">{row.name}</td>
                     
                     {/* Starter */}

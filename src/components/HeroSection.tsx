@@ -109,7 +109,7 @@ export default function HeroSection() {
               {/* Action Buttons with crystal vitreous specular sheen */}
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="crystal-btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-mono text-sm tracking-wide cursor-pointer font-bold"
                 >
                   <span>Start a Project</span>
@@ -117,7 +117,7 @@ export default function HeroSection() {
                 </Link>
 
                 <Link
-                  href="#services"
+                  href="/services"
                   className="crystal-btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-mono text-sm tracking-wide cursor-pointer text-white font-semibold"
                 >
                   <span>Explore Services</span>

@@ -164,7 +164,7 @@ export default function ServicesSection() {
             <span>INSTITUTIONAL GUARANTEE: All codebases covered by mutual NDA, 100% IP ownership transfer, and automated CI/CD suites.</span>
           </div>
           <Link
-            href="/#contact"
+            href="/contact"
             className="text-[#4ade80] hover:underline font-bold whitespace-nowrap"
           >
             Request Custom SOW ↗

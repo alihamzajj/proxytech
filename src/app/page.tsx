@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import HeroSection from '@/components/HeroSection';
 import StatsSection from '@/components/StatsSection';
 import ServicesSection from '@/components/ServicesSection';
@@ -11,7 +10,6 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import AgentHireSection from '@/components/AgentHireSection';
 import FAQSection from '@/components/FAQSection';
 import CTASection from '@/components/CTASection';
-import ContactForm from '@/components/ContactForm';
 import { Shield, Cpu, Lock, Zap } from 'lucide-react';
 import { ScrollSection, ScrollWatermark, ScrollCard } from '@/components/ScrollAnimations';
 import ScrollVelocityMarquee from '@/components/ScrollVelocityMarquee';
@@ -159,31 +157,6 @@ export default function HomePage() {
 
       {/* 13. High-Converting Call to Action Banner */}
       <CTASection />
-
-      {/* 14. Integrated Contact Form Section with ScrollSection & Watermark */}
-      <ScrollSection id="contact" className="py-20 bg-[#060807] border-t border-[#13261a] relative overflow-hidden">
-        <ScrollWatermark text="COMMISSION" direction="right" speed={80} className="top-8 opacity-25" />
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
-          <div className="text-center space-y-3">
-            <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
-              // START A PROJECT
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-              Let&apos;s Build Something Extraordinary
-            </h2>
-            <p className="text-slate-100 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
-              Fill in your architectural requirements and timeline. Senior engineers review every submission within 24 hours.
-            </p>
-          </div>
-
-          <div className="rounded-3xl crystal-card crystal-sheen p-6 sm:p-10">
-            <Suspense fallback={<div className="p-12 text-center text-slate-200 font-mono text-xs">Loading inquiry form...</div>}>
-              <ContactForm />
-            </Suspense>
-          </div>
-        </div>
-      </ScrollSection>
     </div>
   );
 }

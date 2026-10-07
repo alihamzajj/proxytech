@@ -36,26 +36,26 @@ export default function ContactPage() {
           <div className="lg:col-span-5 space-y-6">
             
             {/* Book Intro Call Card */}
-            <div className="rounded-2xl bg-[#13151b] border border-[#1f242f] p-6 sm:p-8 space-y-4 hover:border-[#22c55e]/50 transition-colors">
-              <div className="w-10 h-10 rounded-lg bg-[#0c0d10] border border-neutral-800 flex items-center justify-center text-[#22c55e]">
+            <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4 hover:border-[#22c55e]/50 transition-colors">
+              <div className="w-10 h-10 rounded-lg bg-[#060807] border border-[#13261a] flex items-center justify-center text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)]">
                 <Calendar className="w-5 h-5" />
               </div>
               <h3 className="text-xl font-bold text-white">Book a Technical Discovery Call</h3>
-              <p className="text-xs sm:text-sm text-neutral-400 font-sans leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-sans leading-relaxed">
                 Prefer a live conversation? Schedule a 15-minute introductory video call directly on our engineering calendar.
               </p>
               <a
                 href={COMPANY_INFO.socials.calendly}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg bg-[#0c0d10] border border-[#1f242f] hover:border-[#22c55e] text-xs font-mono text-[#22c55e] hover:text-white transition-all font-semibold"
+                className="crystal-btn-secondary inline-flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl text-xs font-mono text-[#22c55e] hover:text-white transition-all font-semibold"
               >
                 <span>Open Calendly Scheduler ↗</span>
               </a>
             </div>
 
             {/* Direct Communication Channels */}
-            <div className="rounded-2xl bg-[#13151b] border border-[#1f242f] p-6 sm:p-8 space-y-4">
+            <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-6 sm:p-8 space-y-4">
               <h3 className="text-xs font-mono text-[#22c55e] uppercase tracking-wider">
                 Direct Channels
               </h3>

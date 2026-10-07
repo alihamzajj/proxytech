@@ -91,7 +91,7 @@ export default function FAQSection({
         <div className="p-4 rounded-xl crystal-card border border-[#13261a] text-center text-xs font-mono text-slate-200 font-medium flex items-center justify-center gap-2">
           <MessageSquare className="w-4 h-4 text-[#22c55e]" />
           <span>Have an architectural question not addressed here?</span>
-          <Link href="/#contact" className="text-[#4ade80] hover:underline font-bold">
+          <Link href="/contact" className="text-[#4ade80] hover:underline font-bold">
             Chat with an engineer ↗
           </Link>
         </div>

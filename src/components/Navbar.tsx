@@ -19,60 +19,20 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-
-      // Scroll-spy on home page
-      if (pathname === '/') {
-        const sections = ['home', 'services', 'projects', 'about', 'pricing', 'team', 'contact'];
-        const scrollPos = window.scrollY + 200;
-
-        for (const sec of sections) {
-          const el = document.getElementById(sec);
-          if (el) {
-            const top = el.offsetTop;
-            const height = el.offsetHeight;
-            if (scrollPos >= top && scrollPos < top + height) {
-              setActiveSection(sec);
-              break;
-            }
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]);
+  }, []);
 
   const navLinks = [
-    { name: 'Services', sectionId: 'services', fallbackHref: '/services' },
-    { name: 'Projects', sectionId: 'projects', fallbackHref: '/projects' },
-    { name: 'About', sectionId: 'about', fallbackHref: '/about' },
-    { name: 'Pricing', sectionId: 'pricing', fallbackHref: '/pricing' },
-    { name: 'Team', sectionId: 'team', fallbackHref: '/team' },
-    { name: 'Contact', sectionId: 'contact', fallbackHref: '/contact' },
+    { name: 'Services', href: '/services' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'About', href: '/about' },
+    { name: 'Pricing', href: '/pricing' },
+    { name: 'Team', href: '/team' },
+    { name: 'Contact', href: '/contact' },
   ];
-
-  // Smooth scroll handler without abrupt jumps or reloads
-  const scrollTo = (sectionId: string, e?: React.MouseEvent) => {
-    if (pathname === '/') {
-      if (e) e.preventDefault();
-      setMobileMenuOpen(false);
-
-      if (sectionId === 'home') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        window.history.pushState(null, '', '/');
-        return;
-      }
-
-      const el = document.getElementById(sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-        window.history.pushState(null, '', `#${sectionId}`);
-      }
-    } else {
-      setMobileMenuOpen(false);
-    }
-  };
 
   return (
     <header
@@ -87,7 +47,6 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            onClick={(e) => scrollTo('home', e)}
             className="group py-1 cursor-pointer"
             aria-label="ProxyTech Home"
           >
@@ -98,27 +57,24 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center gap-1 bg-[#080e0a]/85 backdrop-blur-md border border-[#1b3824] shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.18),0_0_20px_rgba(34,197,94,0.08)] px-3 py-1.5 rounded-full">
             <Link
               href="/"
-              onClick={(e) => scrollTo('home', e)}
-              className={`px-3 py-1 text-xs font-mono tracking-wide rounded-full transition-all ${
-                pathname === '/' && activeSection === 'home'
-                  ? 'text-[#22c55e] bg-[#22c55e]/15 shadow-[0_0_12px_rgba(34,197,94,0.3)]'
+              className={`px-3.5 py-1 text-xs font-mono tracking-wide rounded-full transition-all ${
+                pathname === '/'
+                  ? 'text-[#22c55e] bg-[#22c55e]/15 shadow-[0_0_12px_rgba(34,197,94,0.3)] font-semibold'
                   : 'text-neutral-300 hover:text-white hover:bg-white/5'
               }`}
             >
               Home
             </Link>
             {navLinks.map((link) => {
-              const isActive = pathname === '/' ? activeSection === link.sectionId : pathname.startsWith(link.fallbackHref);
-              const targetHref = pathname === '/' ? `#${link.sectionId}` : `/#${link.sectionId}`;
+              const isActive = pathname === link.href || pathname.startsWith(link.href + '/');
 
               return (
                 <Link
                   key={link.name}
-                  href={targetHref}
-                  onClick={(e) => scrollTo(link.sectionId, e)}
-                  className={`px-3 py-1 text-xs font-mono tracking-wide rounded-full transition-all ${
+                  href={link.href}
+                  className={`px-3.5 py-1 text-xs font-mono tracking-wide rounded-full transition-all ${
                     isActive
-                      ? 'text-[#22c55e] bg-[#22c55e]/15 shadow-[0_0_12px_rgba(34,197,94,0.3)]'
+                      ? 'text-[#22c55e] bg-[#22c55e]/15 shadow-[0_0_12px_rgba(34,197,94,0.3)] font-semibold'
                       : 'text-neutral-300 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -131,8 +87,7 @@ export default function Navbar() {
           {/* Right Action Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <Link
-              href={pathname === '/' ? '#agent-hire' : '/#agent-hire'}
-              onClick={(e) => scrollTo('agent-hire', e)}
+              href="/#agent-hire"
               className="crystal-badge inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono text-neutral-300 hover:text-[#22c55e] rounded-full transition-colors"
               title="Agent-Ready endpoint documentation"
             >
@@ -141,8 +96,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href={pathname === '/' ? '#contact' : '/contact'}
-              onClick={(e) => scrollTo('contact', e)}
+              href="/contact"
               className="crystal-btn-primary inline-flex items-center justify-center gap-1.5 text-xs font-mono tracking-wide px-4 py-2 font-bold cursor-pointer"
             >
               <span>Start a Project</span>
@@ -170,23 +124,23 @@ export default function Navbar() {
           <div className="flex flex-col space-y-1">
             <Link
               href="/"
-              onClick={(e) => scrollTo('home', e)}
+              onClick={() => setMobileMenuOpen(false)}
               className={`px-3 py-2 text-sm font-mono rounded-md ${
-                pathname === '/' && activeSection === 'home' ? 'text-[#22c55e] bg-[#0d160f]' : 'text-neutral-300'
+                pathname === '/' ? 'text-[#22c55e] bg-[#0d160f] font-semibold' : 'text-neutral-300'
               }`}
             >
               Home
             </Link>
             {navLinks.map((link) => {
-              const targetHref = pathname === '/' ? `#${link.sectionId}` : `/#${link.sectionId}`;
+              const isActive = pathname === link.href || pathname.startsWith(link.href + '/');
               return (
                 <Link
                   key={link.name}
-                  href={targetHref}
-                  onClick={(e) => scrollTo(link.sectionId, e)}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
                   className={`px-3 py-2 text-sm font-mono rounded-md ${
-                    activeSection === link.sectionId
-                      ? 'text-[#22c55e] bg-[#0d160f]'
+                    isActive
+                      ? 'text-[#22c55e] bg-[#0d160f] font-semibold'
                       : 'text-neutral-300 hover:bg-[#0d160f]'
                   }`}
                 >
@@ -198,16 +152,16 @@ export default function Navbar() {
 
           <div className="pt-3 border-t border-[#1f242f] flex flex-col gap-2">
             <Link
-              href={pathname === '/' ? '#agent-hire' : '/#agent-hire'}
-              onClick={(e) => scrollTo('agent-hire', e)}
+              href="/#agent-hire"
+              onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-center gap-2 py-2 text-xs font-mono text-neutral-400 border border-neutral-800 rounded-lg"
             >
               <Cpu className="w-4 h-4 text-[#22c55e]" />
               Agent-Ready Integration (API / AGENTS.md)
             </Link>
             <Link
-              href={pathname === '/' ? '#contact' : '/contact'}
-              onClick={(e) => scrollTo('contact', e)}
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
               className="crystal-btn-primary flex items-center justify-center gap-1.5 py-2.5 text-xs font-mono font-bold rounded-lg"
             >
               <span>Start a Project</span>

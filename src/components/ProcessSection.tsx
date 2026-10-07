@@ -120,7 +120,7 @@ export default function ProcessSection() {
             </div>
           </div>
           <Link
-            href="/#contact"
+            href="/contact"
             className="crystal-btn-primary px-5 py-2.5 rounded-lg text-xs font-mono font-bold flex items-center gap-2 whitespace-nowrap"
           >
             <span>Commission Architecture Review</span>

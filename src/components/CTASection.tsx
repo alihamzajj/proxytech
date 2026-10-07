@@ -63,7 +63,7 @@ export default function CTASection({
           {/* Action Buttons with crystal vitreous specular sheen */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="#contact"
+              href="/contact"
               className="crystal-btn-primary inline-flex items-center gap-2 px-7 py-4 font-mono text-xs tracking-wide font-bold cursor-pointer rounded-xl shadow-[0_0_25px_rgba(34,197,94,0.35)]"
             >
               <span>Submit Project RFP</span>

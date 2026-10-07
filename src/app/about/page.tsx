@@ -58,8 +58,8 @@ export default function AboutPage() {
 
         {/* Mission & Vision */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="rounded-xl bg-[#13151b] border border-[#1f242f] p-8 space-y-4">
-            <div className="w-10 h-10 rounded-lg bg-[#0c0d10] border border-neutral-800 flex items-center justify-center text-[#22c55e]">
+          <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-8 space-y-4">
+            <div className="w-10 h-10 rounded-lg bg-[#060807] border border-[#13261a] flex items-center justify-center text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)]">
               <Target className="w-5 h-5" />
             </div>
             <h2 className="text-xl font-bold text-white">Our Mission</h2>
@@ -68,8 +68,8 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="rounded-xl bg-[#13151b] border border-[#1f242f] p-8 space-y-4">
-            <div className="w-10 h-10 rounded-lg bg-[#0c0d10] border border-neutral-800 flex items-center justify-center text-[#22c55e]">
+          <div className="rounded-2xl crystal-card crystal-sheen border border-[#13261a] p-8 space-y-4">
+            <div className="w-10 h-10 rounded-lg bg-[#060807] border border-[#13261a] flex items-center justify-center text-[#22c55e] shadow-[0_0_15px_rgba(34,197,94,0.15)]">
               <Eye className="w-5 h-5" />
             </div>
             <h2 className="text-xl font-bold text-white">Our Vision</h2>
@@ -90,7 +90,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((v, idx) => (
-              <div key={idx} className="p-6 rounded-xl bg-[#13151b] border border-[#1f242f] hover:border-[#22c55e]/50 transition-all space-y-2">
+              <div key={idx} className="p-6 rounded-2xl crystal-card crystal-sheen border border-[#13261a] hover:border-[#22c55e]/50 transition-all space-y-2">
                 <span className="font-mono text-xs text-[#22c55e]">0{idx + 1}.</span>
                 <h3 className="text-base font-bold text-white">{v.title}</h3>
                 <p className="text-xs text-neutral-400 font-sans leading-relaxed">{v.desc}</p>
