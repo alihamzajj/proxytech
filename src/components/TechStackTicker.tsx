@@ -76,21 +76,21 @@ export default function TechStackTicker() {
   const currentCategory = techCategories.find((c) => c.id === activeTab) || techCategories[0];
 
   return (
-    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden">
-      <ScrollWatermark text="INFRASTRUCTURE" direction="left" speed={90} className="top-12 opacity-25" />
+    <ScrollSection className="py-24 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden">
+      <ScrollWatermark text="STACK" direction="left" speed={90} className="top-12 opacity-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-mono text-[#22c55e]">
-            <Sparkles className="w-3.5 h-3.5 text-[#22c55e]" />
-            <span>// ENTERPRISE-GRADE TECH STACK</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-sans text-[#34d399] font-medium">
+            <Sparkles className="w-3.5 h-3.5 text-[#10b981]" />
+            <span>ENTERPRISE TECHNOLOGY STACK</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Battle-Tested Architecture. <span className="text-[#22c55e]">Zero Technical Debt.</span>
+            Battle-Tested Architecture. <span className="text-[#34d399]">Zero Technical Debt.</span>
           </h2>
-          <p className="text-slate-100 text-sm max-w-2xl mx-auto leading-relaxed font-sans">
+          <p className="text-slate-300 text-sm max-w-2xl mx-auto leading-relaxed font-sans">
             Strict TypeScript contracts, deterministic cloud deployments, and sub-40ms edge performance selected for maximum operational stability.
           </p>
         </div>
@@ -104,10 +104,10 @@ export default function TechStackTicker() {
               <button
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono transition-all cursor-pointer ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-sans transition-all cursor-pointer ${
                   isActive
-                    ? 'crystal-btn-primary shadow-[0_0_20px_rgba(34,197,94,0.3)] font-bold'
-                    : 'crystal-btn-secondary text-slate-200 hover:text-white'
+                    ? 'crystal-btn-primary shadow-[0_0_15px_rgba(16,185,129,0.3)] font-semibold'
+                    : 'crystal-btn-secondary text-slate-300 hover:text-white font-medium'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />

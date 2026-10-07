@@ -68,48 +68,49 @@ export default function HeroSection() {
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6 sm:space-y-7">
               {/* Status pill badge with live ping & crystal bevel */}
+              {/* Status pill badge with live ping & crystal bevel */}
               <div className="flex flex-wrap items-center gap-3">
-                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full crystal-badge text-xs font-mono">
+                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full crystal-badge text-xs font-sans">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10b981] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10b981]"></span>
                   </span>
-                  <span className="text-[#22c55e] font-semibold tracking-wider">PROXYTECH_STUDIO</span>
+                  <span className="text-[#34d399] font-semibold tracking-wide">PROXYTECH STUDIO</span>
                   <span className="text-neutral-500">|</span>
-                  <span className="text-white font-medium tracking-wider">ACCEPTING Q4 / Q1 COMMISSIONS</span>
+                  <span className="text-slate-200 font-medium tracking-wide">BOOKING Q4 / Q1 COMMISSIONS</span>
                 </div>
 
-                <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#060807]/90 border border-[#13261a] text-xs font-mono text-neutral-200 font-medium">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
-                  <span>LATENCY: 14MS // EDG-SF1</span>
+                <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0d121c]/90 border border-[#1a2333] text-xs font-sans text-neutral-300 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+                  <span>99.98% CORE UPTIME SLA</span>
                 </div>
               </div>
 
               {/* Main Headline */}
               <div className="space-y-3">
                 <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
-                  Engineered for <span className="text-[#22c55e] drop-shadow-[0_0_25px_rgba(34,197,94,0.5)]">scale.</span>
+                  Engineered for <span className="text-[#34d399] drop-shadow-[0_0_25px_rgba(16,185,129,0.4)]">scale.</span>
                   <br />
                   Built for measurable business impact.
                 </h1>
 
-                {/* Technical terminal tag */}
-                <p className="text-xs sm:text-sm font-mono text-[#4ade80] uppercase tracking-widest flex items-center gap-2 font-semibold">
-                  <span className="text-[#22c55e] font-extrabold">&gt;</span>
-                  <span>$ GIT COMMIT -M &quot;PRODUCTION-GRADE CLOUD ARCHITECTURES&quot;</span>
-                </p>
+                {/* Refined service positioning tag */}
+                <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-sans font-medium text-[#34d399]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10b981]" />
+                  <span>Full-Cycle Product Engineering • Cloud Architecture • Dedicated Squads</span>
+                </div>
               </div>
 
               {/* High-Impact Technical agency positioning */}
-              <p className="text-base sm:text-lg text-slate-100 max-w-2xl leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-200 max-w-2xl leading-relaxed">
                 We architect and deploy mission-critical software systems, high-concurrency cloud infrastructure, and AI-native web platforms. Shipped with zero junior handoffs, sub-second latency, and institutional security.
               </p>
 
-              {/* Action Buttons with crystal vitreous specular sheen */}
+              {/* Action Buttons */}
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <Link
                   href="/contact"
-                  className="crystal-btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-mono text-sm tracking-wide cursor-pointer font-bold"
+                  className="crystal-btn-primary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-sans text-sm tracking-wide cursor-pointer font-semibold"
                 >
                   <span>Start a Project</span>
                   <ArrowUpRight className="w-4 h-4" />
@@ -117,36 +118,36 @@ export default function HeroSection() {
 
                 <Link
                   href="/services"
-                  className="crystal-btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-mono text-sm tracking-wide cursor-pointer text-white font-semibold"
+                  className="crystal-btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3.5 font-sans text-sm tracking-wide cursor-pointer text-white font-medium"
                 >
                   <span>Explore Services</span>
                 </Link>
 
                 <Link
                   href="#agent-hire"
-                  className="crystal-btn-secondary inline-flex items-center gap-2 px-4 py-3 text-xs font-mono text-[#4ade80] font-semibold"
+                  className="crystal-btn-secondary inline-flex items-center gap-2 px-4 py-3 text-xs font-sans text-[#34d399] font-medium"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
-                  <span>AGENT-READY • POST /api/hire ↗</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+                  <span>AI &amp; API Integrations ↗</span>
                 </Link>
               </div>
 
               {/* Sub-card engineering guarantees */}
-              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono text-slate-100 border-t border-[#13261a] font-medium">
+              <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-sans text-slate-300 border-t border-[#1a2333] font-medium">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981] shrink-0" />
                   <span>Zero junior handoffs</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981] shrink-0" />
                   <span>100% IP &amp; code ownership</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981] shrink-0" />
                   <span>99.98% SLA reliability</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981] shrink-0" />
                   <span>Sub-40ms edge response</span>
                 </div>
               </div>

@@ -226,38 +226,38 @@ export default function VisorBot({
   return (
     <div
       ref={wrapperRef}
-      className={`relative select-none flex flex-col items-center justify-center p-4 rounded-3xl bg-[#030604]/80 border border-[#13261a] shadow-[0_0_40px_rgba(61,255,138,0.08)] ${className}`}
+      className={`relative select-none flex flex-col items-center justify-center p-4 rounded-3xl bg-[#0d121c]/90 border border-[#1a2333] shadow-[0_0_40px_rgba(16,185,129,0.08)] ${className}`}
     >
       {/* Glow Backlight */}
-      <div className="absolute inset-0 bg-[#3dff8a]/10 rounded-full blur-3xl pointer-events-none transform scale-75" />
+      <div className="absolute inset-0 bg-[#10b981]/10 rounded-full blur-3xl pointer-events-none transform scale-75" />
 
       {/* Top Header Badge */}
-      <div className="w-full flex items-center justify-between text-[10px] font-mono text-[#3dff8a] pb-2 border-b border-[#13261a] opacity-80 mb-2">
+      <div className="w-full flex items-center justify-between text-xs font-sans text-[#34d399] pb-2.5 border-b border-[#1a2333] mb-2 font-medium">
         <span className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#3dff8a] animate-pulse" />
-          <span>VISOR-BOT // CYBER_MASCOT</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+          <span>Interactive Companion • Visor-Bot</span>
         </span>
-        <span>AUTONOMOUS</span>
+        <span className="text-neutral-400 text-[11px]">Ready</span>
       </div>
 
       {/* Canvas Wrap */}
-      <div className="relative w-full max-w-[320px] aspect-[32/30] rounded-xl overflow-hidden bg-[#020403] border border-[#1a3824] shadow-inner cursor-crosshair">
+      <div className="relative w-full max-w-[320px] aspect-[32/30] rounded-xl overflow-hidden bg-[#070a10] border border-[#1a2333] shadow-inner cursor-default">
         <canvas ref={canvasRef} className="block w-full h-full" />
-        {/* Subtle scanline overlay */}
+        {/* Subtle high-tech overlay */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-40"
+          className="absolute inset-0 pointer-events-none opacity-15"
           style={{
             backgroundImage:
-              'linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.4) 50%)',
+              'linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.3) 50%)',
             backgroundSize: '100% 4px',
           }}
         />
       </div>
 
       {/* Bottom Status */}
-      <div className="w-full flex justify-between items-center text-[9px] font-mono text-neutral-400 pt-2 border-t border-[#13261a] mt-2">
-        <span>STATUS: ACTIVE</span>
-        <span className="text-[#3dff8a]">TRACKING: CURSOR</span>
+      <div className="w-full flex justify-between items-center text-[10px] font-sans text-neutral-400 pt-2.5 border-t border-[#1a2333] mt-2 font-medium">
+        <span>Status: Active</span>
+        <span className="text-[#34d399]">Interactive Eye-Tracking</span>
       </div>
     </div>
   );

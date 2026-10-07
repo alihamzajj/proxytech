@@ -60,30 +60,25 @@ Content-Type: application/json
   };
 
   return (
-    <ScrollSection className="py-20 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="agent-hire">
-      <ScrollWatermark text="AUTONOMOUS" direction="right" speed={85} className="top-10 opacity-25" />
+    <ScrollSection className="py-20 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden" id="agent-hire">
+      <ScrollWatermark text="INTEGRATION" direction="right" speed={85} className="top-10 opacity-20" />
 
-      {/* Background ambient dark green glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#22c55e]/5 rounded-full blur-[140px] pointer-events-none" />
+      {/* Background ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#10b981]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
         
         {/* Main Agent Interface Hero Box */}
         <div className="rounded-3xl crystal-card crystal-sheen p-8 sm:p-12 relative overflow-hidden transition-all duration-300">
-          {/* Faint ASCII corner texture */}
-          <div className="absolute -top-3 -left-3 font-mono text-[10px] text-[#22c55e]/20 select-none pointer-events-none leading-none tracking-widest hidden md:block">
-            {`^..^..##@@\n#*###*@@\n*@***@@\n0000004+\n++++++\nIIIII`}
-          </div>
-
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             {/* Left Title and Subtitle */}
             <div className="space-y-4 max-w-2xl">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
-                This agency is also an <br className="hidden sm:inline" />
-                <span className="text-[#22c55e] [text-shadow:0_0_20px_rgba(34,197,94,0.45)]">interface for agents.</span>
+                AI &amp; Autonomous Agent <br className="hidden sm:inline" />
+                <span className="text-[#34d399] [text-shadow:0_0_20px_rgba(16,185,129,0.35)]">Commissioning Protocol</span>
               </h2>
-              <p className="text-sm sm:text-base text-slate-100 leading-relaxed font-sans">
-                Connect over MCP or REST so an agent can evaluate evidence, inspect services and availability, or submit a project brief — without having to interpret the visual interface.
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
+                Autonomous agents and systems (Claude, Cursor, Devin, ChatGPT) can submit project briefs directly through our programmatic API and Model Context Protocol (MCP) endpoint.
               </p>
             </div>
 

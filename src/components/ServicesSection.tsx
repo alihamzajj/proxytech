@@ -36,31 +36,31 @@ const serviceHighlights: Record<string, { sla: string; guarantee: string }> = {
 
 export default function ServicesSection() {
   return (
-    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="services">
-      <ScrollWatermark text="CAPABILITIES" direction="left" speed={90} className="top-12 opacity-25" />
+    <ScrollSection className="py-24 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden" id="services">
+      <ScrollWatermark text="SERVICES" direction="left" speed={90} className="top-12 opacity-20" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
         
         {/* Section Heading */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#13261a]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#1a2333]">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-mono text-[#22c55e]">
-              <Zap className="w-3.5 h-3.5 text-[#22c55e]" />
-              <span>// ARCHITECTURAL CAPABILITIES</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-sans text-[#34d399] font-medium">
+              <Zap className="w-3.5 h-3.5 text-[#10b981]" />
+              <span>CORE SERVICES &amp; CAPABILITIES</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-              Full-Spectrum Engineering & <span className="text-[#22c55e]">Cloud Systems</span>
+              Full-Spectrum Engineering &amp; <span className="text-[#34d399]">Digital Scale</span>
             </h2>
-            <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-sans">
               We operate as your dedicated principal technology partner. Every capability is executed by veteran staff engineers, designers, and systems architects focused on measurable business outcomes.
             </p>
           </div>
 
           <Link
             href="/services"
-            className="crystal-btn-secondary px-5 py-2.5 rounded-xl text-xs font-mono font-bold text-[#4ade80] hover:text-white flex items-center gap-2 self-start md:self-auto group"
+            className="crystal-btn-secondary px-5 py-2.5 rounded-xl text-xs font-sans font-semibold text-[#34d399] hover:text-white flex items-center gap-2 self-start md:self-auto group"
           >
-            <span>Explore All 6 Specifications</span>
+            <span>Explore All 6 Services</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -78,48 +78,48 @@ export default function ServicesSection() {
                 parallaxSpeed={35}
                 className="h-full"
               >
-                <div className="group h-full relative rounded-2xl crystal-card crystal-sheen p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#22c55e]/60">
+                <div className="group h-full relative rounded-2xl crystal-card crystal-sheen p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#10b981]/50">
                   <div>
-                    {/* Top Bar: Icon + Module Code */}
+                    {/* Top Bar: Icon + Service Code */}
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-[#060807] border border-[#13261a] group-hover:border-[#22c55e]/70 flex items-center justify-center text-[#22c55e] shadow-[0_0_20px_rgba(34,197,94,0.18)] transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-[#0d121c] border border-[#1a2333] group-hover:border-[#10b981]/70 flex items-center justify-center text-[#10b981] shadow-[0_0_20px_rgba(16,185,129,0.18)] transition-all">
                         <Icon className="w-6 h-6" />
                       </div>
                       <div className="flex flex-col items-end gap-1">
-                        <span className="font-mono text-xs text-[#4ade80] font-bold crystal-badge px-2.5 py-0.5 rounded-full">
-                          MOD-0{idx + 1}
+                        <span className="font-sans text-xs text-[#34d399] font-semibold crystal-badge px-2.5 py-0.5 rounded-full">
+                          Service 0{idx + 1}
                         </span>
-                        <span className="font-mono text-[10px] text-slate-300 font-semibold">
+                        <span className="font-sans text-[11px] text-slate-300 font-medium">
                           {highlight.guarantee}
                         </span>
                       </div>
                     </div>
 
                     {/* Title & Description */}
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#4ade80] transition-colors">
+                    <h3 className="text-xl font-bold text-white group-hover:text-[#34d399] transition-colors">
                       {service.title}
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm text-slate-100 leading-relaxed font-normal">
+                    <p className="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans font-normal">
                       {service.shortDescription}
                     </p>
 
-                    {/* SLA Pill */}
-                    <div className="mt-4 p-2.5 rounded-lg bg-[#060807] border border-[#13261a] flex items-center justify-between text-xs font-mono">
-                      <span className="text-slate-200 flex items-center gap-1.5 font-medium">
-                        <ShieldCheck className="w-3.5 h-3.5 text-[#22c55e]" />
-                        <span>SLA TARGET:</span>
+                    {/* Delivery Standard Pill */}
+                    <div className="mt-4 p-2.5 rounded-lg bg-[#0d121c] border border-[#1a2333] flex items-center justify-between text-xs font-sans">
+                      <span className="text-slate-300 flex items-center gap-1.5 font-medium">
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#10b981]" />
+                        <span>Delivery Standard:</span>
                       </span>
-                      <span className="text-[#4ade80] font-bold">{highlight.sla}</span>
+                      <span className="text-[#34d399] font-semibold">{highlight.sla}</span>
                     </div>
 
                     {/* Key Deliverables Bullet Preview */}
-                    <div className="mt-4 pt-4 border-t border-[#13261a] space-y-2">
-                      <div className="text-xs font-mono text-white uppercase tracking-wider font-bold">
-                        Core Architecture:
+                    <div className="mt-4 pt-4 border-t border-[#1a2333] space-y-2">
+                      <div className="text-xs font-sans text-slate-200 uppercase tracking-wider font-semibold">
+                        Key Deliverables:
                       </div>
                       {service.problemsSolved.slice(0, 2).map((item, i) => (
-                        <div key={i} className="flex items-start gap-2 text-xs text-slate-100">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#22c55e] shrink-0 mt-0.5" />
+                        <div key={i} className="flex items-start gap-2 text-xs text-slate-300 font-sans">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#10b981] shrink-0 mt-0.5" />
                           <span className="line-clamp-2">{item}</span>
                         </div>
                       ))}
@@ -130,7 +130,7 @@ export default function ServicesSection() {
                       {service.tags.slice(0, 3).map((tag, tIdx) => (
                         <span
                           key={tIdx}
-                          className="text-xs font-mono px-2.5 py-0.5 rounded crystal-badge text-slate-100 font-medium"
+                          className="text-xs font-sans px-2.5 py-0.5 rounded crystal-badge text-slate-300 font-medium"
                         >
                           {tag}
                         </span>
@@ -139,15 +139,15 @@ export default function ServicesSection() {
                   </div>
 
                   {/* Footer Action Link */}
-                  <div className="mt-6 pt-4 border-t border-[#13261a] flex items-center justify-between">
-                    <span className="text-xs font-mono text-slate-300">
-                      Cadence: <span className="text-white font-semibold">{service.timeline}</span>
+                  <div className="mt-6 pt-4 border-t border-[#1a2333] flex items-center justify-between">
+                    <span className="text-xs font-sans text-slate-300">
+                      Timeline: <span className="text-white font-medium">{service.timeline}</span>
                     </span>
                     <Link
                       href={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#4ade80] hover:text-white transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-[#34d399] hover:text-white transition-colors"
                     >
-                      <span>Review Specs</span>
+                      <span>Learn More</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
@@ -158,16 +158,16 @@ export default function ServicesSection() {
         </div>
 
         {/* Section Guarantee Footer */}
-        <div className="p-4 sm:p-6 rounded-2xl crystal-card crystal-sheen border border-[#13261a] flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-100 font-medium">
+        <div className="p-4 sm:p-6 rounded-2xl crystal-card crystal-sheen border border-[#1a2333] flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-sans text-slate-200 font-medium">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#22c55e]" />
-            <span>INSTITUTIONAL GUARANTEE: All codebases covered by mutual NDA, 100% IP ownership transfer, and automated CI/CD suites.</span>
+            <span className="w-2 h-2 rounded-full bg-[#10b981]" />
+            <span>AGENCY COMMITMENT: All client work covered by mutual NDA, 100% IP ownership transfer, and automated CI/CD suites.</span>
           </div>
           <Link
             href="/contact"
-            className="text-[#4ade80] hover:underline font-bold whitespace-nowrap"
+            className="text-[#34d399] hover:underline font-semibold whitespace-nowrap"
           >
-            Request Custom SOW ↗
+            Request Custom Scope ↗
           </Link>
         </div>
 

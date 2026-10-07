@@ -9,7 +9,7 @@ import { ScrollSection, ScrollWatermark } from './ScrollAnimations';
 const steps = [
   {
     step: '01',
-    code: 'PHASE_SPEC',
+    code: 'Discovery & Schema',
     title: 'Architecture & Schema Lock',
     tagline: 'Eliminate ambiguity before writing code.',
     description: 'We audit business constraints, design relational database models, define OpenAPI contracts, and map out cloud infrastructure with zero guesswork.',
@@ -18,7 +18,7 @@ const steps = [
   },
   {
     step: '02',
-    code: 'PHASE_SPRINT',
+    code: 'Sprint Cadence',
     title: 'High-Velocity Sprints',
     tagline: 'Testable production software every 7-14 days.',
     description: 'Rapid test-driven cycles led by senior engineers. You test live staging builds, review branch previews, and observe progress transparently in Slack and GitHub.',
@@ -27,7 +27,7 @@ const steps = [
   },
   {
     step: '03',
-    code: 'PHASE_HARDEN',
+    code: 'Security & QA',
     title: 'QA & Security Hardening',
     tagline: 'Stress-tested for institutional reliability.',
     description: 'Automated end-to-end regression suites, OWASP Top 10 vulnerability scans, P99 latency optimization, and multi-region database failover testing.',
@@ -36,7 +36,7 @@ const steps = [
   },
   {
     step: '04',
-    code: 'PHASE_DEPLOY',
+    code: 'Cutover & Release',
     title: 'Zero-Downtime Production Cutover',
     tagline: 'Seamless release with real-time telemetry.',
     description: 'DNS cutover orchestration, automated database migrations, real-time Sentry/Datadog telemetry setup, and direct operational handoff with 100% IP transfer.',
@@ -61,34 +61,34 @@ export default function ProcessSection() {
   });
 
   return (
-    <ScrollSection className="py-24 bg-[#060807] border-t border-[#13261a] relative overflow-hidden" id="process">
-      <ScrollWatermark text="EXECUTION" direction="right" speed={100} className="top-12 opacity-25" />
+    <ScrollSection className="py-24 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden" id="process">
+      <ScrollWatermark text="EXECUTION" direction="right" speed={100} className="top-12 opacity-20" />
 
       {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#22c55e]/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#10b981]/5 blur-[120px] pointer-events-none" />
 
       <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-mono text-[#22c55e]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#22c55e] animate-pulse" />
-            <span>// DETERMINISTIC EXECUTION FRAMEWORK</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full crystal-badge text-xs font-sans text-[#34d399] font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+            <span>HOW WE DELIVER EXCELLENCE</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-            From Architectural Blueprint to <span className="text-[#22c55e]">Production-Grade</span> Scale
+            From Architectural Blueprint to <span className="text-[#34d399]">Production Scale</span>
           </h2>
-          <p className="text-slate-100 text-sm sm:text-base leading-relaxed">
-            Predictable delivery, zero junior delegation. We combine high-velocity sprint cadence with institutional engineering rigor to take your mission-critical software live on schedule.
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-sans">
+            Predictable delivery, zero junior delegation. We combine high-velocity sprint cadence with institutional engineering rigor to take your software live on schedule.
           </p>
         </div>
 
         {/* Scroll Progress Connecting Beam (Desktop) */}
         {!shouldReduceMotion && (
-          <div className="hidden lg:block relative h-1 bg-[#13261a] rounded-full mx-6 -mb-10 overflow-hidden">
+          <div className="hidden lg:block relative h-1 bg-[#1a2333] rounded-full mx-6 -mb-10 overflow-hidden">
             <motion.div
               style={{ scaleX: smoothProgress }}
-              className="h-full bg-gradient-to-r from-[#22c55e] via-[#4ade80] to-[#22c55e] origin-left shadow-[0_0_12px_rgba(34,197,94,0.8)]"
+              className="h-full bg-gradient-to-r from-[#10b981] via-[#34d399] to-[#10b981] origin-left shadow-[0_0_12px_rgba(16,185,129,0.8)]"
             />
           </div>
         )}

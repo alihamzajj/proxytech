@@ -60,8 +60,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#060807]/85 backdrop-blur-xl border-b border-[#22c55e]/25 shadow-[0_8px_32px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.12)]'
-          : 'bg-[#060807]/65 backdrop-blur-md border-b border-[#13261a]/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]'
+          ? 'bg-[#080b11]/85 backdrop-blur-xl border-b border-[#1a2333]/80 shadow-[0_8px_32px_rgba(0,0,0,0.65)]'
+          : 'bg-[#080b11]/65 backdrop-blur-md border-b border-[#1a2333]/40'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,14 +76,14 @@ export default function Navbar() {
             <ProxyTechLogo />
           </Link>
 
-          {/* Desktop Nav Links in Crystalline Capsule */}
-          <nav className="hidden md:flex items-center gap-1 bg-[#080e0a]/85 backdrop-blur-md border border-[#1b3824] shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.18),0_0_20px_rgba(34,197,94,0.08)] px-3 py-1.5 rounded-full">
+          {/* Desktop Nav Links in Clean Capsule */}
+          <nav className="hidden md:flex items-center gap-1 bg-[#0d121c]/80 backdrop-blur-md border border-[#1a2333] shadow-[0_4px_20px_rgba(0,0,0,0.4)] px-3 py-1.5 rounded-full">
             <Link
               href="/"
               onClick={(e) => handleNavClick('/', e)}
-              className={`px-3.5 py-1 text-xs font-mono tracking-wide rounded-full transition-all ${
+              className={`px-3.5 py-1 text-xs font-sans font-medium tracking-wide rounded-full transition-all ${
                 pathname === '/'
-                  ? 'text-[#22c55e] bg-[#22c55e]/15 shadow-[0_0_12px_rgba(34,197,94,0.3)] font-semibold'
+                  ? 'text-[#34d399] bg-[#10b981]/15 font-semibold'
                   : 'text-neutral-300 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -97,9 +97,9 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(link.href, e)}
-                  className={`px-3.5 py-1 text-xs font-mono tracking-wide rounded-full transition-all ${
+                  className={`px-3.5 py-1 text-xs font-sans font-medium tracking-wide rounded-full transition-all ${
                     isActive
-                      ? 'text-[#22c55e] bg-[#22c55e]/15 shadow-[0_0_12px_rgba(34,197,94,0.3)] font-semibold'
+                      ? 'text-[#34d399] bg-[#10b981]/15 font-semibold'
                       : 'text-neutral-300 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -113,17 +113,17 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/#agent-hire"
-              className="crystal-badge inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono text-neutral-300 hover:text-[#22c55e] rounded-full transition-colors"
+              className="crystal-badge inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-sans font-medium text-neutral-300 hover:text-[#34d399] rounded-full transition-colors"
               title="Agent-Ready endpoint documentation"
             >
-              <Terminal className="w-3.5 h-3.5 text-[#22c55e]" />
-              <span>AGENT.md</span>
+              <Cpu className="w-3.5 h-3.5 text-[#10b981]" />
+              <span>Agent Protocol</span>
             </Link>
 
             <Link
               href="/contact"
               onClick={(e) => handleNavClick('/contact', e)}
-              className="crystal-btn-primary inline-flex items-center justify-center gap-1.5 text-xs font-mono tracking-wide px-4 py-2 font-bold cursor-pointer"
+              className="crystal-btn-primary inline-flex items-center justify-center gap-1.5 text-xs font-sans font-semibold tracking-wide px-4 py-2 cursor-pointer"
             >
               <span>Start a Project</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -146,13 +146,13 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#080d09] border-b border-[#13261a] px-4 pt-3 pb-6 space-y-3">
+        <div className="md:hidden bg-[#0d121c] border-b border-[#1a2333] px-4 pt-3 pb-6 space-y-3">
           <div className="flex flex-col space-y-1">
             <Link
               href="/"
               onClick={(e) => handleNavClick('/', e)}
-              className={`px-3 py-2 text-sm font-mono rounded-md ${
-                pathname === '/' ? 'text-[#22c55e] bg-[#0d160f] font-semibold' : 'text-neutral-300'
+              className={`px-3 py-2 text-sm font-sans rounded-md ${
+                pathname === '/' ? 'text-[#34d399] bg-[#10b981]/15 font-semibold' : 'text-neutral-300'
               }`}
             >
               Home
@@ -164,10 +164,10 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(link.href, e)}
-                  className={`px-3 py-2 text-sm font-mono rounded-md ${
+                  className={`px-3 py-2 text-sm font-sans rounded-md ${
                     isActive
-                      ? 'text-[#22c55e] bg-[#0d160f] font-semibold'
-                      : 'text-neutral-300 hover:bg-[#0d160f]'
+                      ? 'text-[#34d399] bg-[#10b981]/15 font-semibold'
+                      : 'text-neutral-300 hover:bg-[#121826]'
                   }`}
                 >
                   {link.name}
@@ -176,19 +176,19 @@ export default function Navbar() {
             })}
           </div>
 
-          <div className="pt-3 border-t border-[#1f242f] flex flex-col gap-2">
+          <div className="pt-3 border-t border-[#1a2333] flex flex-col gap-2">
             <Link
               href="/#agent-hire"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 py-2 text-xs font-mono text-neutral-400 border border-neutral-800 rounded-lg"
+              className="flex items-center justify-center gap-2 py-2 text-xs font-sans text-neutral-300 border border-[#1a2333] rounded-lg"
             >
-              <Cpu className="w-4 h-4 text-[#22c55e]" />
-              Agent-Ready Integration (API / AGENTS.md)
+              <Cpu className="w-4 h-4 text-[#10b981]" />
+              Agent &amp; API Integration Protocol
             </Link>
             <Link
               href="/contact"
               onClick={(e) => handleNavClick('/contact', e)}
-              className="crystal-btn-primary flex items-center justify-center gap-1.5 py-2.5 text-xs font-mono font-bold rounded-lg"
+              className="crystal-btn-primary flex items-center justify-center gap-1.5 py-2.5 text-xs font-sans font-semibold rounded-lg"
             >
               <span>Start a Project</span>
               <ArrowUpRight className="w-4 h-4" />

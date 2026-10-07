@@ -37,22 +37,22 @@ export default function StatsSection() {
   ];
 
   return (
-    <ScrollSection className="py-20 border-y border-[#13261a] bg-[#060807] relative overflow-hidden">
-      <ScrollWatermark text="TELEMETRY" direction="right" speed={80} className="top-8 opacity-25" />
+    <ScrollSection className="py-20 border-y border-[#1a2333] bg-[#080b11] relative overflow-hidden">
+      <ScrollWatermark text="METRICS" direction="right" speed={80} className="top-8 opacity-20" />
 
       <div ref={containerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <div className="text-xs font-mono text-[#22c55e] uppercase tracking-wider mb-1">
-              // PROOF IN NUMBERS
+            <div className="text-xs font-sans font-semibold text-[#34d399] uppercase tracking-wider mb-1">
+              PROVEN TRACK RECORD
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
               Institutional-grade reliability. Proven results.
             </h2>
           </div>
-          <p className="text-xs font-mono text-slate-200 max-w-sm">
-            Zero vanity metrics. Every metric backed by production telemetry and verified client deployments.
+          <p className="text-xs font-sans text-slate-300 max-w-sm leading-relaxed">
+            Zero vanity metrics. Every metric backed by production SLAs and verified client deployments.
           </p>
         </div>
 
