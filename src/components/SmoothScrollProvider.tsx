@@ -1,9 +1,40 @@
 'use client';
 
 import { useEffect, type ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 import Lenis from 'lenis';
 
 export default function SmoothScrollProvider({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+
+  // Scroll to top on every route change
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const timer = setTimeout(() => {
+      const lenis = (window as unknown as { __lenis?: Lenis }).__lenis;
+
+      if (window.location.hash) {
+        const el = document.querySelector(window.location.hash);
+        if (el) {
+          if (lenis) {
+            lenis.scrollTo(el as HTMLElement, { offset: -75, duration: 1.2 });
+          } else {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+          return;
+        }
+      }
+
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    }, 30);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
   useEffect(() => {
     // Respect accessibility preferences
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

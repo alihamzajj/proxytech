@@ -25,6 +25,23 @@ export default function Footer() {
     setTimeout(() => setNewsletterStatus('idle'), 4000);
   };
 
+  const scrollToTop = () => {
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (target: number, opts?: unknown) => void } }).__lenis;
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.0 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleNavClick = (href: string, e: React.MouseEvent) => {
+    const isCurrentPage = pathname === href || (href === '/' && pathname === '/');
+    if (isCurrentPage) {
+      e.preventDefault();
+      scrollToTop();
+    }
+  };
+
   return (
     <footer className="bg-[#060807] border-t border-[#13261a] text-neutral-400 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
@@ -34,7 +51,7 @@ export default function Footer() {
           
           {/* Column 1: Brand & Overview (2 cols wide on desktop) */}
           <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="inline-block group" aria-label="ProxyTech Home">
+            <Link href="/" onClick={(e) => handleNavClick('/', e)} className="inline-block group" aria-label="ProxyTech Home">
               <ProxyTechLogo />
             </Link>
 
@@ -89,13 +106,13 @@ export default function Footer() {
               Navigation
             </h4>
             <ul className="space-y-2 text-xs text-slate-200 font-medium">
-              <li><Link href="/" className="hover:text-[#4ade80] transition-colors">Home</Link></li>
-              <li><Link href="/services" className="hover:text-[#4ade80] transition-colors">Services Hub</Link></li>
-              <li><Link href="/pricing" className="hover:text-[#4ade80] transition-colors">Pricing & Pods</Link></li>
-              <li><Link href="/projects" className="hover:text-[#4ade80] transition-colors">Case Studies</Link></li>
-              <li><Link href="/about" className="hover:text-[#4ade80] transition-colors">About ProxyTech</Link></li>
-              <li><Link href="/team" className="hover:text-[#4ade80] transition-colors">Engineering Team</Link></li>
-              <li><Link href="/contact" className="hover:text-[#4ade80] transition-colors">Start Project / RFP</Link></li>
+              <li><Link href="/" onClick={(e) => handleNavClick('/', e)} className="hover:text-[#4ade80] transition-colors">Home</Link></li>
+              <li><Link href="/services" onClick={(e) => handleNavClick('/services', e)} className="hover:text-[#4ade80] transition-colors">Services Hub</Link></li>
+              <li><Link href="/pricing" onClick={(e) => handleNavClick('/pricing', e)} className="hover:text-[#4ade80] transition-colors">Pricing & Pods</Link></li>
+              <li><Link href="/projects" onClick={(e) => handleNavClick('/projects', e)} className="hover:text-[#4ade80] transition-colors">Case Studies</Link></li>
+              <li><Link href="/about" onClick={(e) => handleNavClick('/about', e)} className="hover:text-[#4ade80] transition-colors">About ProxyTech</Link></li>
+              <li><Link href="/team" onClick={(e) => handleNavClick('/team', e)} className="hover:text-[#4ade80] transition-colors">Engineering Team</Link></li>
+              <li><Link href="/contact" onClick={(e) => handleNavClick('/contact', e)} className="hover:text-[#4ade80] transition-colors">Start Project / RFP</Link></li>
               <li>
                 <Link href="/admin" className="text-neutral-400 hover:text-[#4ade80] transition-colors inline-flex items-center gap-1.5 pt-1">
                   <span>Owner Admin</span>

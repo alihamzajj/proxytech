@@ -34,6 +34,28 @@ export default function Navbar() {
     { name: 'Contact', href: '/contact' },
   ];
 
+  const scrollToTop = () => {
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (target: number, opts?: unknown) => void } }).__lenis;
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.0 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleNavClick = (href: string, e: React.MouseEvent) => {
+    const isCurrentPage = pathname === href || (href === '/' && pathname === '/');
+
+    if (isCurrentPage) {
+      e.preventDefault();
+      scrollToTop();
+      if (mobileMenuOpen) setMobileMenuOpen(false);
+      return;
+    }
+
+    if (mobileMenuOpen) setMobileMenuOpen(false);
+  };
+
   return (
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
@@ -47,6 +69,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
+            onClick={(e) => handleNavClick('/', e)}
             className="group py-1 cursor-pointer"
             aria-label="ProxyTech Home"
           >
@@ -57,6 +80,7 @@ export default function Navbar() {
           <nav className="hidden md:flex items-center gap-1 bg-[#080e0a]/85 backdrop-blur-md border border-[#1b3824] shadow-[inset_0_1px_1.5px_rgba(255,255,255,0.18),0_0_20px_rgba(34,197,94,0.08)] px-3 py-1.5 rounded-full">
             <Link
               href="/"
+              onClick={(e) => handleNavClick('/', e)}
               className={`px-3.5 py-1 text-xs font-mono tracking-wide rounded-full transition-all ${
                 pathname === '/'
                   ? 'text-[#22c55e] bg-[#22c55e]/15 shadow-[0_0_12px_rgba(34,197,94,0.3)] font-semibold'
@@ -72,6 +96,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => handleNavClick(link.href, e)}
                   className={`px-3.5 py-1 text-xs font-mono tracking-wide rounded-full transition-all ${
                     isActive
                       ? 'text-[#22c55e] bg-[#22c55e]/15 shadow-[0_0_12px_rgba(34,197,94,0.3)] font-semibold'
@@ -97,6 +122,7 @@ export default function Navbar() {
 
             <Link
               href="/contact"
+              onClick={(e) => handleNavClick('/contact', e)}
               className="crystal-btn-primary inline-flex items-center justify-center gap-1.5 text-xs font-mono tracking-wide px-4 py-2 font-bold cursor-pointer"
             >
               <span>Start a Project</span>
@@ -124,7 +150,7 @@ export default function Navbar() {
           <div className="flex flex-col space-y-1">
             <Link
               href="/"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleNavClick('/', e)}
               className={`px-3 py-2 text-sm font-mono rounded-md ${
                 pathname === '/' ? 'text-[#22c55e] bg-[#0d160f] font-semibold' : 'text-neutral-300'
               }`}
@@ -137,7 +163,7 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(link.href, e)}
                   className={`px-3 py-2 text-sm font-mono rounded-md ${
                     isActive
                       ? 'text-[#22c55e] bg-[#0d160f] font-semibold'
@@ -161,7 +187,7 @@ export default function Navbar() {
             </Link>
             <Link
               href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleNavClick('/contact', e)}
               className="crystal-btn-primary flex items-center justify-center gap-1.5 py-2.5 text-xs font-mono font-bold rounded-lg"
             >
               <span>Start a Project</span>
