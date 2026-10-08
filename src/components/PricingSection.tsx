@@ -28,10 +28,13 @@ export default function PricingSection({ isFullPage = false }: PricingSectionPro
   }, []);
 
   return (
-    <ScrollSection className={`py-24 ${isFullPage ? 'bg-transparent' : 'bg-[#080b11] border-t border-[#1a2333]'} relative overflow-hidden`} id="pricing">
-      <ScrollWatermark text="ENGAGEMENT" direction="right" speed={85} className="top-12 opacity-25" />
+    <ScrollSection
+      className={isFullPage ? "pt-2 pb-12 sm:pb-16 bg-transparent relative overflow-hidden" : "py-24 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden"}
+      id="pricing"
+    >
+      {!isFullPage && <ScrollWatermark text="ENGAGEMENT" direction="right" speed={85} className="top-12 opacity-25" />}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
+      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isFullPage ? 'space-y-8 sm:space-y-10' : 'space-y-14'} relative z-10`}>
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">

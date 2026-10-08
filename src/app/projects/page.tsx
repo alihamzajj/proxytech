@@ -38,15 +38,13 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen py-12 space-y-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        
+    <div className="min-h-screen pt-4 sm:pt-6 pb-16 space-y-4 sm:space-y-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Case Studies' }]} />
-
-        {/* Case Studies Full Hub */}
-        <CaseStudiesSection />
-
       </div>
+
+      {/* Case Studies Full Hub */}
+      <CaseStudiesSection isFullPage={true} />
 
       <CTASection
         headline="Have an architectural challenge like these?"

@@ -8,7 +8,11 @@ import { PROJECTS } from '@/lib/data';
 import { ProjectCaseStudy } from '@/lib/types';
 import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 
-export default function CaseStudiesSection() {
+interface CaseStudiesSectionProps {
+  isFullPage?: boolean;
+}
+
+export default function CaseStudiesSection({ isFullPage = false }: CaseStudiesSectionProps) {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [projectsList, setProjectsList] = useState<ProjectCaseStudy[]>(PROJECTS);
   const categories = ['All', 'SaaS', 'Mobile App', 'E-Commerce', 'AI & Automation'];
@@ -29,10 +33,13 @@ export default function CaseStudiesSection() {
     : projectsList.filter((p) => p.category === activeCategory);
 
   return (
-    <ScrollSection className="py-24 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden" id="projects">
-      <ScrollWatermark text="ARCHITECTURES" direction="left" speed={95} className="top-12 opacity-25" />
+    <ScrollSection
+      className={isFullPage ? "pt-2 pb-12 sm:pb-16 bg-transparent relative overflow-hidden" : "py-24 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden"}
+      id="projects"
+    >
+      {!isFullPage && <ScrollWatermark text="ARCHITECTURES" direction="left" speed={95} className="top-12 opacity-25" />}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10 font-sans">
+      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isFullPage ? 'space-y-8 sm:space-y-10' : 'space-y-14'} relative z-10 font-sans`}>
         
         {/* Header and Category Pills */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#1a2333]">
@@ -164,17 +171,19 @@ export default function CaseStudiesSection() {
           ))}
         </div>
 
-        {/* View All Projects link */}
-        <div className="text-center pt-2">
-          <Link
-            href="/projects"
-            className="crystal-btn-secondary inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs font-sans font-semibold text-white hover:text-[#34d399] transition-all shadow-[0_0_20px_rgba(0,0,0,0.5)]"
-          >
-            <Layers className="w-4 h-4 text-[#10b981]" />
-            <span>Explore All Client Case Studies</span>
-            <ArrowUpRight className="w-4 h-4 text-[#10b981]" />
-          </Link>
-        </div>
+        {/* View All Projects link (only on landing page) */}
+        {!isFullPage && (
+          <div className="text-center pt-2">
+            <Link
+              href="/projects"
+              className="crystal-btn-secondary inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-xs font-sans font-semibold text-white hover:text-[#34d399] transition-all shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+            >
+              <Layers className="w-4 h-4 text-[#10b981]" />
+              <span>Explore All Client Case Studies</span>
+              <ArrowUpRight className="w-4 h-4 text-[#10b981]" />
+            </Link>
+          </div>
+        )}
 
       </div>
     </ScrollSection>

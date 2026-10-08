@@ -55,13 +55,15 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen py-12 space-y-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        
+    <div className="min-h-screen pt-4 sm:pt-6 pb-16 space-y-4 sm:space-y-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumbs items={[{ label: 'Pricing & Pods' }]} />
+      </div>
 
-        {/* Pricing Cards with Toggle */}
-        <PricingSection isFullPage={true} />
+      {/* Pricing Cards with Toggle */}
+      <PricingSection isFullPage={true} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
         {/* Comparison Matrix Table */}
         <div className="pt-8 space-y-8">

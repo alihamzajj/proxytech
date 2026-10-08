@@ -10,16 +10,20 @@ import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 interface TeamSectionProps {
   limit?: number;
   showAllLink?: boolean;
+  isFullPage?: boolean;
 }
 
-export default function TeamSection({ limit, showAllLink = true }: TeamSectionProps) {
+export default function TeamSection({ limit, showAllLink = true, isFullPage = false }: TeamSectionProps) {
   const members = limit ? TEAM_MEMBERS.slice(0, limit) : TEAM_MEMBERS;
 
   return (
-    <ScrollSection className="py-24 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden" id="team">
-      <ScrollWatermark text="ARCHITECTS" direction="right" speed={85} className="top-12 opacity-25" />
+    <ScrollSection
+      className={isFullPage ? "pt-2 pb-12 sm:pb-16 bg-transparent relative overflow-hidden" : "py-24 bg-[#080b11] border-t border-[#1a2333] relative overflow-hidden"}
+      id="team"
+    >
+      {!isFullPage && <ScrollWatermark text="ARCHITECTS" direction="right" speed={85} className="top-12 opacity-25" />}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 relative z-10">
+      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isFullPage ? 'space-y-8 sm:space-y-10' : 'space-y-14'} relative z-10`}>
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-[#1a2333]">
