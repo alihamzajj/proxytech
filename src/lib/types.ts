@@ -31,6 +31,8 @@ export interface PricingPlan {
   ctaText: string;
 }
 
+export type EmployeeStatus = 'Active' | 'Available' | 'In Sprint' | 'On Leave' | 'Inactive';
+
 export interface TeamMember {
   id: string;
   slug: string;
@@ -49,6 +51,7 @@ export interface TeamMember {
   };
   projectsCount: number;
   avatar: string;
+  status?: EmployeeStatus;
 }
 
 export interface ProjectCaseStudy {

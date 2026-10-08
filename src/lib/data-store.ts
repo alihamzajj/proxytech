@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { PROJECTS as DEFAULT_PROJECTS, PRICING_PLANS as DEFAULT_PRICING } from './data';
-import { ProjectCaseStudy, PricingPlan } from './types';
+import { PROJECTS as DEFAULT_PROJECTS, PRICING_PLANS as DEFAULT_PRICING, TEAM_MEMBERS as DEFAULT_TEAM_MEMBERS } from './data';
+import { ProjectCaseStudy, PricingPlan, TeamMember, EmployeeStatus } from './types';
 import { supabase } from './supabase';
 
 const DATA_FILE_PATH = path.join(process.cwd(), 'src', 'data', 'custom-store.json');
@@ -24,6 +24,7 @@ interface StoreData {
   customProjects: ProjectCaseStudy[];
   pricingPlans: PricingPlan[];
   leads: Lead[];
+  teamMembers?: TeamMember[];
   updatedAt: string;
 }
 
@@ -32,6 +33,7 @@ function getInitialStore(): StoreData {
     customProjects: [],
     pricingPlans: DEFAULT_PRICING,
     leads: [],
+    teamMembers: DEFAULT_TEAM_MEMBERS.map((m) => ({ ...m, status: (m.status || 'Active') as EmployeeStatus })),
     updatedAt: new Date().toISOString(),
   };
 }
@@ -52,6 +54,9 @@ export function readLocalStore(): StoreData {
         customProjects: Array.isArray(parsed.customProjects) ? parsed.customProjects : [],
         pricingPlans: Array.isArray(parsed.pricingPlans) && parsed.pricingPlans.length > 0 ? parsed.pricingPlans : DEFAULT_PRICING,
         leads: Array.isArray(parsed.leads) ? parsed.leads : [],
+        teamMembers: Array.isArray(parsed.teamMembers) && parsed.teamMembers.length > 0
+          ? parsed.teamMembers
+          : DEFAULT_TEAM_MEMBERS.map((m) => ({ ...m, status: (m.status || 'Active') as EmployeeStatus })),
         updatedAt: parsed.updatedAt || new Date().toISOString(),
       };
       return memoryStore;
@@ -356,3 +361,152 @@ export async function deleteLead(id: string): Promise<boolean> {
   return true;
 }
 
+/**
+ * Fetch all team members (defaults + custom + updated statuses)
+ */
+export async function getAllTeamMembers(): Promise<TeamMember[]> {
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('team_members')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!error && data && data.length > 0) {
+        return data as TeamMember[];
+      }
+    } catch {
+      // Supabase table may not exist yet
+    }
+  }
+
+  const store = readLocalStore();
+  if (Array.isArray(store.teamMembers) && store.teamMembers.length > 0) {
+    return store.teamMembers;
+  }
+
+  const initialized = DEFAULT_TEAM_MEMBERS.map((m) => ({
+    ...m,
+    status: (m.status || 'Active') as EmployeeStatus,
+  }));
+  store.teamMembers = initialized;
+  writeLocalStore(store);
+  return initialized;
+}
+
+/**
+ * Fetch a single team member by slug
+ */
+export async function getTeamMemberBySlug(slug: string): Promise<TeamMember | null> {
+  const all = await getAllTeamMembers();
+  return all.find((m) => m.slug === slug) || null;
+}
+
+/**
+ * Save or update an employee/team member
+ */
+export async function saveTeamMember(member: Partial<TeamMember>): Promise<TeamMember> {
+  const all = await getAllTeamMembers();
+  const slug = member.slug || (member.name ? member.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') : `emp-${Date.now()}`);
+  const id = member.id || `emp-${Date.now()}`;
+
+  const cleanMember: TeamMember = {
+    id,
+    slug,
+    name: member.name || 'Team Member',
+    role: member.role || 'Senior Software Engineer',
+    bio: member.bio || 'Senior engineer specializing in high-performance cloud and web architectures.',
+    fullBio: member.fullBio || member.bio || 'Senior engineer specializing in high-performance cloud and web architectures.',
+    location: member.location || 'Remote Worldwide',
+    experienceYears: Number(member.experienceYears) || 5,
+    skills: Array.isArray(member.skills) 
+      ? member.skills 
+      : (typeof member.skills === 'string' 
+          ? (member.skills as string).split(',').map((s) => s.trim()).filter(Boolean) 
+          : ['Full-Stack Engineering']),
+    socials: {
+      github: member.socials?.github || '',
+      linkedin: member.socials?.linkedin || '',
+      twitter: member.socials?.twitter || '',
+      email: member.socials?.email || 'contact@proxytech.dev',
+    },
+    projectsCount: Number(member.projectsCount) || 12,
+    avatar: member.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80',
+    status: (member.status || 'Active') as EmployeeStatus,
+  };
+
+  if (supabase) {
+    try {
+      await supabase.from('team_members').upsert(cleanMember);
+    } catch {
+      // Supabase table may not exist yet
+    }
+  }
+
+  const store = readLocalStore();
+  const list = Array.isArray(store.teamMembers) && store.teamMembers.length > 0 ? store.teamMembers : [...all];
+  const existingIdx = list.findIndex((m) => m.id === cleanMember.id || m.slug === cleanMember.slug);
+
+  if (existingIdx >= 0) {
+    list[existingIdx] = cleanMember;
+  } else {
+    list.unshift(cleanMember);
+  }
+
+  store.teamMembers = list;
+  store.updatedAt = new Date().toISOString();
+  writeLocalStore(store);
+
+  return cleanMember;
+}
+
+/**
+ * Update an employee's status directly
+ */
+export async function updateTeamMemberStatus(idOrSlug: string, status: EmployeeStatus): Promise<TeamMember | null> {
+  const store = readLocalStore();
+  const all = await getAllTeamMembers();
+  const list = Array.isArray(store.teamMembers) && store.teamMembers.length > 0 ? store.teamMembers : [...all];
+
+  const target = list.find((m) => m.id === idOrSlug || m.slug === idOrSlug);
+  if (!target) return null;
+
+  target.status = status;
+
+  if (supabase) {
+    try {
+      await supabase.from('team_members').update({ status }).or(`id.eq.${idOrSlug},slug.eq.${idOrSlug}`);
+    } catch {
+      // Ignore
+    }
+  }
+
+  store.teamMembers = list;
+  store.updatedAt = new Date().toISOString();
+  writeLocalStore(store);
+
+  return target;
+}
+
+/**
+ * Delete an employee from the roster
+ */
+export async function deleteTeamMember(idOrSlug: string): Promise<boolean> {
+  if (supabase) {
+    try {
+      await supabase.from('team_members').delete().or(`id.eq.${idOrSlug},slug.eq.${idOrSlug}`);
+    } catch {
+      // Ignore
+    }
+  }
+
+  const store = readLocalStore();
+  const all = await getAllTeamMembers();
+  const list = Array.isArray(store.teamMembers) && store.teamMembers.length > 0 ? store.teamMembers : [...all];
+
+  store.teamMembers = list.filter((m) => m.id !== idOrSlug && m.slug !== idOrSlug);
+  store.updatedAt = new Date().toISOString();
+  writeLocalStore(store);
+
+  return true;
+}

@@ -1,10 +1,12 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, ArrowUpRight, ShieldCheck, UserCheck } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 import { TEAM_MEMBERS } from '@/lib/data';
+import { TeamMember, EmployeeStatus } from '@/lib/types';
 import { ScrollSection, ScrollWatermark, ScrollCard } from './ScrollAnimations';
 
 interface TeamSectionProps {
@@ -14,7 +16,55 @@ interface TeamSectionProps {
 }
 
 export default function TeamSection({ limit, showAllLink = true, isFullPage = false }: TeamSectionProps) {
-  const members = limit ? TEAM_MEMBERS.slice(0, limit) : TEAM_MEMBERS;
+  const [membersList, setMembersList] = useState<TeamMember[]>(TEAM_MEMBERS);
+
+  useEffect(() => {
+    fetch('/api/team')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && Array.isArray(data.members)) {
+          setMembersList(data.members);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const visibleMembers = membersList.filter((m) => m.status !== 'Inactive');
+  const members = limit ? visibleMembers.slice(0, limit) : visibleMembers;
+
+  const renderStatusBadge = (status?: EmployeeStatus) => {
+    const s = status || 'Active';
+    if (s === 'Available') {
+      return (
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-sans font-medium bg-cyan-950/80 border border-cyan-500/40 text-cyan-300">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          Available
+        </span>
+      );
+    }
+    if (s === 'In Sprint') {
+      return (
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-sans font-medium bg-amber-950/80 border border-amber-500/40 text-amber-300">
+          <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+          In Sprint
+        </span>
+      );
+    }
+    if (s === 'On Leave') {
+      return (
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-sans font-medium bg-slate-800/80 border border-slate-600/40 text-slate-300">
+          <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+          On Leave
+        </span>
+      );
+    }
+    return (
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-sans font-medium bg-[#10b981]/15 border border-[#10b981]/40 text-[#34d399]">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+        Active
+      </span>
+    );
+  };
 
   return (
     <ScrollSection
@@ -73,15 +123,18 @@ export default function TeamSection({ limit, showAllLink = true, isFullPage = fa
                         className="object-cover"
                       />
                     </div>
-                    <div>
-                      <h3 className="text-base font-bold text-white group-hover:text-[#34d399] transition-colors font-sans">
-                        <Link href={`/team/${member.slug}`}>
-                          {member.name}
-                        </Link>
-                      </h3>
-                      <p className="text-xs text-[#34d399] font-sans mt-0.5 font-medium">{member.role}</p>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <h3 className="text-base font-bold text-white group-hover:text-[#34d399] transition-colors font-sans truncate">
+                          <Link href={`/team/${member.slug}`}>
+                            {member.name}
+                          </Link>
+                        </h3>
+                        {renderStatusBadge(member.status)}
+                      </div>
+                      <p className="text-xs text-[#34d399] font-sans mt-0.5 font-medium truncate">{member.role}</p>
                       <div className="flex items-center gap-1.5 mt-1 text-xs font-sans text-slate-300 font-medium">
-                        <ShieldCheck className="w-3.5 h-3.5 text-[#10b981]" />
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#10b981] shrink-0" />
                         <span>{member.experienceYears} Years Exp • {member.projectsCount} Shipped</span>
                       </div>
                     </div>

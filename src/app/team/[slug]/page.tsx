@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { TEAM_MEMBERS, PROJECTS } from '@/lib/data';
+import { getAllTeamMembers, getTeamMemberBySlug } from '@/lib/data-store';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CTASection from '@/components/CTASection';
 import { 
@@ -19,13 +20,16 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
-  return TEAM_MEMBERS.map((m) => ({ slug: m.slug }));
+  const members = await getAllTeamMembers();
+  return members.map((m) => ({ slug: m.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const member = TEAM_MEMBERS.find((m) => m.slug === slug);
+  const member = await getTeamMemberBySlug(slug);
 
   if (!member) {
     return { title: 'Team Member Not Found' };
@@ -63,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TeamMemberPage({ params }: Props) {
   const { slug } = await params;
-  const member = TEAM_MEMBERS.find((m) => m.slug === slug);
+  const member = await getTeamMemberBySlug(slug);
 
   if (!member) {
     notFound();

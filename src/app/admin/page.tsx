@@ -23,10 +23,17 @@ import {
   Check, 
   ShieldCheck,
   RefreshCw,
-  X
+  X,
+  Users,
+  UserCheck,
+  Search,
+  Mail,
+  Edit2,
+  Briefcase,
+  MapPin
 } from 'lucide-react';
 import ProxyTechLogo from '@/components/ProxyTechLogo';
-import { ProjectCaseStudy, PricingPlan } from '@/lib/types';
+import { ProjectCaseStudy, PricingPlan, TeamMember, EmployeeStatus } from '@/lib/types';
 
 interface Lead {
   id: string;
@@ -48,9 +55,18 @@ const PRESET_IMAGES = [
   { name: 'SaaS Analytics', url: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&auto=format&fit=crop&q=80' },
 ];
 
+const PRESET_AVATARS = [
+  { name: 'Senior Architect', url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80' },
+  { name: 'VP Cloud Engineering', url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80' },
+  { name: 'Lead Architect', url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80' },
+  { name: 'Design Director', url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80' },
+  { name: 'Mobile Lead', url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=80' },
+  { name: 'Senior Developer', url: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500&auto=format&fit=crop&q=80' },
+];
+
 export default function AdminDashboardPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<'projects' | 'pricing' | 'leads'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'pricing' | 'leads' | 'team'>('projects');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
@@ -82,6 +98,32 @@ export default function AdminDashboardPage() {
 
   // Leads State
   const [leads, setLeads] = useState<Lead[]>([]);
+
+  // Team State
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false);
+  const [editingMember, setEditingMember] = useState<TeamMember | null>(null);
+  const [employeeFilterStatus, setEmployeeFilterStatus] = useState<string>('All');
+  const [employeeSearchQuery, setEmployeeSearchQuery] = useState<string>('');
+  const [savingEmployee, setSavingEmployee] = useState(false);
+  const [employeeForm, setEmployeeForm] = useState({
+    id: '',
+    slug: '',
+    name: '',
+    role: '',
+    status: 'Active' as EmployeeStatus,
+    bio: '',
+    fullBio: '',
+    location: 'Remote Worldwide',
+    experienceYears: 6,
+    skills: 'TypeScript, Next.js, PostgreSQL, Node.js',
+    email: 'developer@proxytech.dev',
+    github: '',
+    linkedin: '',
+    twitter: '',
+    projectsCount: 15,
+    avatar: PRESET_AVATARS[0].url,
+  });
 
   const showToast = (message: string, type: 'success' | 'error' = 'success') => {
     setToast({ message, type });
@@ -118,6 +160,13 @@ export default function AdminDashboardPage() {
         const leadsData = await leadsRes.json();
         if (leadsData.success) {
           setLeads(leadsData.leads || []);
+        }
+
+        // Fetch team
+        const teamRes = await fetch('/api/admin/team');
+        const teamData = await teamRes.json();
+        if (teamData.success && Array.isArray(teamData.members)) {
+          setTeamMembers(teamData.members);
         }
       } catch (err) {
         console.error('Failed to load admin data:', err);
@@ -309,6 +358,159 @@ export default function AdminDashboardPage() {
     }
   };
 
+  // Open Add Employee Modal
+  const openAddEmployeeModal = () => {
+    setEditingMember(null);
+    setEmployeeForm({
+      id: '',
+      slug: '',
+      name: '',
+      role: '',
+      status: 'Active',
+      bio: '',
+      fullBio: '',
+      location: 'Remote Worldwide',
+      experienceYears: 6,
+      skills: 'TypeScript, Next.js, PostgreSQL, Node.js',
+      email: 'developer@proxytech.dev',
+      github: '',
+      linkedin: '',
+      twitter: '',
+      projectsCount: 15,
+      avatar: PRESET_AVATARS[0].url,
+    });
+    setIsAddEmployeeOpen(true);
+  };
+
+  // Open Edit Employee Modal
+  const openEditEmployeeModal = (member: TeamMember) => {
+    setEditingMember(member);
+    setEmployeeForm({
+      id: member.id,
+      slug: member.slug,
+      name: member.name,
+      role: member.role,
+      status: (member.status || 'Active') as EmployeeStatus,
+      bio: member.bio,
+      fullBio: member.fullBio || member.bio,
+      location: member.location || 'Remote Worldwide',
+      experienceYears: member.experienceYears || 5,
+      skills: Array.isArray(member.skills) ? member.skills.join(', ') : '',
+      email: member.socials.email || 'developer@proxytech.dev',
+      github: member.socials.github || '',
+      linkedin: member.socials.linkedin || '',
+      twitter: member.socials.twitter || '',
+      projectsCount: member.projectsCount || 10,
+      avatar: member.avatar || PRESET_AVATARS[0].url,
+    });
+    setIsAddEmployeeOpen(true);
+  };
+
+  // Add / Update Employee Submit
+  const handleAddOrUpdateEmployee = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSavingEmployee(true);
+
+    try {
+      const skillsArray = employeeForm.skills.split(',').map((s) => s.trim()).filter(Boolean);
+      const isEditing = Boolean(editingMember);
+
+      const payload: Partial<TeamMember> = {
+        id: employeeForm.id || (isEditing ? editingMember!.id : `emp-${Date.now()}`),
+        slug: employeeForm.slug || employeeForm.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+        name: employeeForm.name.trim(),
+        role: employeeForm.role.trim(),
+        status: employeeForm.status,
+        bio: employeeForm.bio.trim(),
+        fullBio: employeeForm.fullBio.trim() || employeeForm.bio.trim(),
+        location: employeeForm.location.trim(),
+        experienceYears: Number(employeeForm.experienceYears) || 5,
+        skills: skillsArray,
+        socials: {
+          email: employeeForm.email.trim(),
+          github: employeeForm.github.trim(),
+          linkedin: employeeForm.linkedin.trim(),
+          twitter: employeeForm.twitter.trim(),
+        },
+        projectsCount: Number(employeeForm.projectsCount) || 12,
+        avatar: employeeForm.avatar.trim() || PRESET_AVATARS[0].url,
+      };
+
+      const res = await fetch('/api/admin/team', {
+        method: isEditing ? 'PUT' : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Failed to save employee');
+      }
+
+      const savedMember: TeamMember = data.member;
+      setTeamMembers((prev) => {
+        const idx = prev.findIndex((m) => m.id === savedMember.id || m.slug === savedMember.slug);
+        if (idx >= 0) {
+          const updated = [...prev];
+          updated[idx] = savedMember;
+          return updated;
+        }
+        return [savedMember, ...prev];
+      });
+
+      setIsAddEmployeeOpen(false);
+      showToast(
+        isEditing
+          ? `Updated "${savedMember.name}"! Changes are now live on the website.`
+          : `Added "${savedMember.name}" to team! New member is now visible on the website.`
+      );
+    } catch (err: unknown) {
+      showToast(err instanceof Error ? err.message : 'Error saving employee', 'error');
+    } finally {
+      setSavingEmployee(false);
+    }
+  };
+
+  // Quick Status Toggle on Employee Card
+  const handleQuickStatusChange = async (idOrSlug: string, newStatus: EmployeeStatus) => {
+    try {
+      const res = await fetch('/api/admin/team', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: idOrSlug, status: newStatus }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setTeamMembers((prev) =>
+          prev.map((m) => (m.id === idOrSlug || m.slug === idOrSlug ? { ...m, status: newStatus } : m))
+        );
+        showToast(`Employee status changed to "${newStatus}". Live site updated!`);
+      } else {
+        showToast(data.message || 'Failed to update status', 'error');
+      }
+    } catch {
+      showToast('Network error updating status', 'error');
+    }
+  };
+
+  // Delete Employee
+  const handleDeleteEmployee = async (idOrSlug: string, name: string) => {
+    if (!confirm(`Are you sure you want to remove "${name}" from the ProxyTech team roster?`)) return;
+
+    try {
+      const res = await fetch(`/api/admin/team?id=${encodeURIComponent(idOrSlug)}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) {
+        setTeamMembers((prev) => prev.filter((m) => m.id !== idOrSlug && m.slug !== idOrSlug));
+        showToast(`Removed "${name}" from team roster. Live site updated!`);
+      } else {
+        showToast(data.message || 'Failed to delete employee', 'error');
+      }
+    } catch {
+      showToast('Error removing employee', 'error');
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#030604] text-white">
@@ -414,6 +616,16 @@ export default function AdminDashboardPage() {
                 <span>Save All Pricing Changes</span>
               </button>
             )}
+
+            {activeTab === 'team' && (
+              <button
+                onClick={openAddEmployeeModal}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#22c55e] hover:bg-[#16a34a] text-[#060807] font-semibold text-sm transition-all duration-200 shadow-[0_0_20px_rgba(34,197,94,0.3)] cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Add New Employee</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -441,6 +653,21 @@ export default function AdminDashboardPage() {
           >
             <CreditCard className="w-4 h-4" />
             <span>Packages & Pricing ({pricingPlans.length})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('team')}
+            className={`flex items-center gap-2 px-5 py-3 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
+              activeTab === 'team'
+                ? 'border-[#22c55e] text-[#4ade80] bg-[#0c1610]'
+                : 'border-transparent text-neutral-400 hover:text-white'
+            }`}
+          >
+            <Users className="w-4 h-4" />
+            <span>Team & Employees</span>
+            <span className="px-2 py-0.5 text-xs rounded-full font-mono font-bold bg-[#22c55e]/20 text-[#4ade80] border border-[#22c55e]/50">
+              {teamMembers.length}
+            </span>
           </button>
 
           <button
@@ -774,6 +1001,225 @@ export default function AdminDashboardPage() {
             )}
           </div>
         )}
+
+        {/* TAB 4: TEAM & EMPLOYEES */}
+        {activeTab === 'team' && (
+          <div className="space-y-6">
+            {/* Header & Quick Action */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-lg font-bold text-white">Engineering Pod & Employee Roster</h2>
+                <p className="text-xs text-neutral-400">
+                  Manage team architects and staff. When you add, edit, or delete an employee, changes sync to the live website instantly.
+                </p>
+              </div>
+
+              <button
+                onClick={openAddEmployeeModal}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#22c55e] hover:bg-[#16a34a] text-[#060807] font-semibold text-xs transition-all duration-200 shadow-[0_0_20px_rgba(34,197,94,0.3)] cursor-pointer self-start sm:self-auto"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Add Employee</span>
+              </button>
+            </div>
+
+            {/* Quick Metrics Bar */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="p-4 rounded-2xl bg-[#060a07] border border-[#14261b]">
+                <div className="text-[11px] font-mono text-neutral-400">Total Employees</div>
+                <div className="text-2xl font-extrabold text-white mt-1">{teamMembers.length}</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#060a07] border border-[#14261b]">
+                <div className="text-[11px] font-mono text-[#4ade80]">Active Pod Members</div>
+                <div className="text-2xl font-extrabold text-[#4ade80] mt-1">
+                  {teamMembers.filter((m) => (m.status || 'Active') === 'Active').length}
+                </div>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#060a07] border border-[#14261b]">
+                <div className="text-[11px] font-mono text-cyan-400">Available for Hire</div>
+                <div className="text-2xl font-extrabold text-cyan-400 mt-1">
+                  {teamMembers.filter((m) => m.status === 'Available').length}
+                </div>
+              </div>
+              <div className="p-4 rounded-2xl bg-[#060a07] border border-[#14261b]">
+                <div className="text-[11px] font-mono text-amber-400">In Client Sprint</div>
+                <div className="text-2xl font-extrabold text-amber-400 mt-1">
+                  {teamMembers.filter((m) => m.status === 'In Sprint').length}
+                </div>
+              </div>
+            </div>
+
+            {/* Search & Status Filter Bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-2xl bg-[#060a07] border border-[#14261b]">
+              <div className="relative flex-1 max-w-sm">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500" />
+                <input
+                  type="text"
+                  placeholder="Search by name, role, skill..."
+                  value={employeeSearchQuery}
+                  onChange={(e) => setEmployeeSearchQuery(e.target.value)}
+                  className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-[#09110c] border border-[#16271c] text-xs text-white placeholder-neutral-500 focus:border-[#22c55e] focus:outline-none"
+                />
+              </div>
+
+              {/* Status Filters */}
+              <div className="flex flex-wrap items-center gap-1.5 overflow-x-auto">
+                {['All', 'Active', 'Available', 'In Sprint', 'On Leave', 'Inactive'].map((st) => (
+                  <button
+                    type="button"
+                    key={st}
+                    onClick={() => setEmployeeFilterStatus(st)}
+                    className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                      employeeFilterStatus === st
+                        ? 'bg-[#22c55e]/20 text-[#4ade80] border border-[#22c55e]/50'
+                        : 'bg-[#09110c] text-neutral-400 hover:text-white border border-[#16271c]'
+                    }`}
+                  >
+                    {st}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Employee Cards Grid */}
+            {teamMembers.length === 0 ? (
+              <div className="text-center py-16 rounded-3xl bg-[#060a07] border border-[#14261b] space-y-3">
+                <Users className="w-10 h-10 text-neutral-600 mx-auto" />
+                <h3 className="text-base font-bold text-white">No Employees in Roster</h3>
+                <p className="text-xs text-neutral-400">Click below to add your first team architect.</p>
+                <button
+                  onClick={openAddEmployeeModal}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#22c55e] text-[#060807] text-xs font-semibold cursor-pointer"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Add First Employee</span>
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {teamMembers
+                  .filter((member) => {
+                    if (employeeFilterStatus !== 'All') {
+                      const memberStatus = member.status || 'Active';
+                      if (memberStatus !== employeeFilterStatus) return false;
+                    }
+                    if (employeeSearchQuery.trim()) {
+                      const q = employeeSearchQuery.toLowerCase();
+                      const matchName = member.name.toLowerCase().includes(q);
+                      const matchRole = member.role.toLowerCase().includes(q);
+                      const matchSkills = member.skills?.some((s) => s.toLowerCase().includes(q));
+                      return matchName || matchRole || matchSkills;
+                    }
+                    return true;
+                  })
+                  .map((member) => (
+                    <div
+                      key={member.id}
+                      className="rounded-2xl bg-[#060a07] border border-[#14261b] hover:border-[#22c55e]/40 p-5 flex flex-col justify-between transition-all group"
+                    >
+                      <div className="space-y-4">
+                        {/* Header: Avatar, Name, Role */}
+                        <div className="flex items-start gap-3.5">
+                          <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-[#1a3824] shrink-0">
+                            <Image
+                              src={member.avatar}
+                              alt={member.name}
+                              fill
+                              sizes="56px"
+                              className="object-cover"
+                            />
+                          </div>
+
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-bold text-white text-base leading-snug truncate group-hover:text-[#4ade80] transition-colors">
+                              <Link href={`/team/${member.slug}`} target="_blank">
+                                {member.name}
+                              </Link>
+                            </h3>
+                            <p className="text-xs text-[#4ade80] font-medium truncate mt-0.5">{member.role}</p>
+                            <div className="flex items-center gap-2 text-[11px] text-neutral-400 mt-1">
+                              <MapPin className="w-3 h-3 text-neutral-500 shrink-0" />
+                              <span className="truncate">{member.location}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Interactive Status Changer (User requested direct status change) */}
+                        <div className="p-2 rounded-xl bg-[#09110c] border border-[#14261b] flex items-center justify-between gap-2">
+                          <span className="text-[11px] font-mono text-neutral-400 flex items-center gap-1.5 shrink-0">
+                            <span className={`w-2 h-2 rounded-full ${
+                              member.status === 'Available' ? 'bg-cyan-400 animate-pulse' :
+                              member.status === 'In Sprint' ? 'bg-amber-400' :
+                              member.status === 'On Leave' ? 'bg-slate-400' :
+                              member.status === 'Inactive' ? 'bg-red-400' : 'bg-[#22c55e] animate-pulse'
+                            }`} />
+                            Status:
+                          </span>
+                          <select
+                            value={member.status || 'Active'}
+                            onChange={(e) => handleQuickStatusChange(member.id, e.target.value as EmployeeStatus)}
+                            className="text-xs font-semibold px-2 py-1 rounded-lg bg-[#060a07] border border-[#1a3824] text-white focus:border-[#22c55e] focus:outline-none cursor-pointer"
+                          >
+                            <option value="Active">🟢 Active</option>
+                            <option value="Available">🔵 Available for Hire</option>
+                            <option value="In Sprint">🟡 In Client Sprint</option>
+                            <option value="On Leave">⚪ On Leave</option>
+                            <option value="Inactive">🔴 Inactive (Hidden)</option>
+                          </select>
+                        </div>
+
+                        {/* Bio */}
+                        <p className="text-xs text-neutral-300 line-clamp-3 leading-relaxed">
+                          {member.bio}
+                        </p>
+
+                        {/* Skills */}
+                        <div className="flex flex-wrap gap-1.5">
+                          {member.skills?.slice(0, 4).map((s, idx) => (
+                            <span
+                              key={idx}
+                              className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#0b160f] border border-[#163320] text-neutral-300"
+                            >
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Card Footer: Socials & Actions */}
+                      <div className="pt-4 mt-4 border-t border-[#13261a] flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[11px] font-mono text-neutral-500">
+                            {member.experienceYears}y exp • {member.projectsCount} shipped
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => openEditEmployeeModal(member)}
+                            className="p-1.5 rounded-lg bg-[#0c140e] hover:bg-[#16271c] border border-[#1b3824] text-neutral-300 hover:text-white transition-colors cursor-pointer"
+                            title="Edit Employee Profile"
+                          >
+                            <Edit2 className="w-3.5 h-3.5" />
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteEmployee(member.id, member.name)}
+                            className="p-1.5 rounded-lg bg-red-950/20 hover:bg-red-900/40 border border-red-900/40 text-red-400 hover:text-red-300 transition-colors cursor-pointer"
+                            title="Remove Employee"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
+          </div>
+        )}
       </main>
 
       {/* MODAL: ADD NEW PROJECT */}
@@ -1015,6 +1461,244 @@ export default function AdminDashboardPage() {
                     <>
                       <Check className="w-3.5 h-3.5" />
                       <span>Publish to Live Website</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL: ADD / EDIT EMPLOYEE */}
+      {isAddEmployeeOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
+          <div className="w-full max-w-2xl my-8 p-6 sm:p-8 rounded-3xl bg-[#060907] border border-[#1a3824] shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between pb-4 border-b border-[#14261b]">
+              <div>
+                <span className="text-xs font-mono text-[#4ade80] uppercase">
+                  {editingMember ? 'Update Profile' : 'Team Pod Management'}
+                </span>
+                <h2 className="text-xl font-bold text-white">
+                  {editingMember ? `Edit Employee: ${editingMember.name}` : 'Add New Employee to Team'}
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsAddEmployeeOpen(false)}
+                className="p-2 rounded-xl bg-[#0c140e] hover:bg-[#16271c] text-neutral-400 hover:text-white transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleAddOrUpdateEmployee} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-neutral-300">Full Name *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Liam Vance"
+                    value={employeeForm.name}
+                    onChange={(e) => setEmployeeForm((prev) => ({ ...prev, name: e.target.value }))}
+                    className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-sm text-white focus:border-[#22c55e] focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-neutral-300">Job Title / Role *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Principal Cloud & Distributed Architect"
+                    value={employeeForm.role}
+                    onChange={(e) => setEmployeeForm((prev) => ({ ...prev, role: e.target.value }))}
+                    className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-sm text-white focus:border-[#22c55e] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-neutral-300">Status *</label>
+                  <select
+                    value={employeeForm.status}
+                    onChange={(e) => setEmployeeForm((prev) => ({ ...prev, status: e.target.value as EmployeeStatus }))}
+                    className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-sm text-white focus:border-[#22c55e] focus:outline-none cursor-pointer"
+                  >
+                    <option value="Active">🟢 Active (Visible)</option>
+                    <option value="Available">🔵 Available for Hire</option>
+                    <option value="In Sprint">🟡 In Client Sprint</option>
+                    <option value="On Leave">⚪ On Leave</option>
+                    <option value="Inactive">🔴 Inactive (Hidden from Site)</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-neutral-300">Years Experience</label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="40"
+                    value={employeeForm.experienceYears}
+                    onChange={(e) => setEmployeeForm((prev) => ({ ...prev, experienceYears: Number(e.target.value) }))}
+                    className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-sm text-white focus:border-[#22c55e] focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-neutral-300">Shipped Projects</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={employeeForm.projectsCount}
+                    onChange={(e) => setEmployeeForm((prev) => ({ ...prev, projectsCount: Number(e.target.value) }))}
+                    className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-sm text-white focus:border-[#22c55e] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-neutral-300">Location</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. San Francisco, CA (Remote)"
+                    value={employeeForm.location}
+                    onChange={(e) => setEmployeeForm((prev) => ({ ...prev, location: e.target.value }))}
+                    className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-sm text-white focus:border-[#22c55e] focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-neutral-300">Email Address *</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="e.g. tariq@proxytech.dev"
+                    value={employeeForm.email}
+                    onChange={(e) => setEmployeeForm((prev) => ({ ...prev, email: e.target.value }))}
+                    className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-sm text-white focus:border-[#22c55e] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Skills */}
+              <div className="space-y-1">
+                <label className="text-xs font-mono text-neutral-300">Skills (comma separated) *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. TypeScript, Next.js, PostgreSQL, Docker, AWS"
+                  value={employeeForm.skills}
+                  onChange={(e) => setEmployeeForm((prev) => ({ ...prev, skills: e.target.value }))}
+                  className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-sm text-white focus:border-[#22c55e] focus:outline-none"
+                />
+              </div>
+
+              {/* Avatar Selector */}
+              <div className="space-y-2">
+                <label className="text-xs font-mono text-neutral-300">Avatar Image (Select preset or enter URL)</label>
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                  {PRESET_AVATARS.map((av) => (
+                    <button
+                      type="button"
+                      key={av.name}
+                      onClick={() => setEmployeeForm((prev) => ({ ...prev, avatar: av.url }))}
+                      className={`relative aspect-square rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
+                        employeeForm.avatar === av.url ? 'border-[#22c55e] ring-2 ring-[#22c55e]/50' : 'border-[#193322] hover:border-neutral-500'
+                      }`}
+                    >
+                      <Image src={av.url} alt={av.name} fill sizes="60px" className="object-cover" />
+                    </button>
+                  ))}
+                </div>
+                <input
+                  type="url"
+                  placeholder="Or paste custom image URL..."
+                  value={employeeForm.avatar}
+                  onChange={(e) => setEmployeeForm((prev) => ({ ...prev, avatar: e.target.value }))}
+                  className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-xs text-white focus:border-[#22c55e] focus:outline-none"
+                />
+              </div>
+
+              {/* Social Profiles */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-neutral-300">LinkedIn Profile URL</label>
+                  <input
+                    type="url"
+                    placeholder="https://linkedin.com/in/username"
+                    value={employeeForm.linkedin}
+                    onChange={(e) => setEmployeeForm((prev) => ({ ...prev, linkedin: e.target.value }))}
+                    className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-xs text-white focus:border-[#22c55e] focus:outline-none"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-mono text-neutral-300">GitHub Profile URL</label>
+                  <input
+                    type="url"
+                    placeholder="https://github.com/username"
+                    value={employeeForm.github}
+                    onChange={(e) => setEmployeeForm((prev) => ({ ...prev, github: e.target.value }))}
+                    className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-xs text-white focus:border-[#22c55e] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Bios */}
+              <div className="space-y-1">
+                <label className="text-xs font-mono text-neutral-300">Short Bio (Displayed on cards) *</label>
+                <textarea
+                  rows={2}
+                  required
+                  placeholder="1-2 sentences summarizing engineering focus..."
+                  value={employeeForm.bio}
+                  onChange={(e) => setEmployeeForm((prev) => ({ ...prev, bio: e.target.value }))}
+                  className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-xs text-white focus:border-[#22c55e] focus:outline-none"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-xs font-mono text-neutral-300">Full Bio (Profile detail page)</label>
+                <textarea
+                  rows={3}
+                  placeholder="Detailed background, former leadership positions, and achievements..."
+                  value={employeeForm.fullBio}
+                  onChange={(e) => setEmployeeForm((prev) => ({ ...prev, fullBio: e.target.value }))}
+                  className="w-full p-2.5 rounded-xl bg-[#09110c] border border-[#193322] text-xs text-white focus:border-[#22c55e] focus:outline-none"
+                />
+              </div>
+
+              {/* Submit Buttons */}
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#14261b]">
+                <button
+                  type="button"
+                  onClick={() => setIsAddEmployeeOpen(false)}
+                  className="px-4 py-2.5 rounded-xl bg-[#0c140e] hover:bg-[#16271c] text-xs text-neutral-300 font-medium transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  disabled={savingEmployee}
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#22c55e] hover:bg-[#16a34a] text-[#060807] font-semibold text-xs transition-all duration-200 shadow-[0_0_20px_rgba(34,197,94,0.3)] disabled:opacity-50 cursor-pointer"
+                >
+                  {savingEmployee ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Saving Employee...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>{editingMember ? 'Save Profile Changes' : 'Add Employee & Sync Live'}</span>
                     </>
                   )}
                 </button>
